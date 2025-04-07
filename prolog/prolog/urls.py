@@ -4,6 +4,6 @@ from works.views import WorksAPIView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('works/', include('works.urls')),
-    path('api/v1/works/', WorksAPIView.as_view()),
+    path('helthcheck/', include('works.urls')),
+    path('api/v1/works/', include('works.urls')),
 ]

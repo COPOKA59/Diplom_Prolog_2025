@@ -1,6 +1,7 @@
 from django.urls import path
-from . import views
+from works.views import WorksAPIView
 
 urlpatterns = [
-    path('', views.works, name='works'),
+    path('', WorksAPIView.as_view(), name='works'),
+    path('<int:pk>/', WorksAPIView.as_view(), name='work'),
 ]
