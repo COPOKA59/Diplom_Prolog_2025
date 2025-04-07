@@ -1,8 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import MainPage from '@/pages/MainPage.vue';
-import StoryCardsPage from '@/pages/StoryCardsPage.vue';
-import StoryPage from '@/pages/StoryPage.vue';
-import StoryChapterPage from '@/pages/StoryChapterPage.vue';
+import MainPage from '@/modules/core/pages/MainPage.vue';
+import StoryCardsPage from '@/modules/works/pages/StoryCardsPage.vue';
+import StoryPage from '@/modules/works/pages/StoryPage.vue';
+import StoryChapterPage from '@/modules/works/pages/StoryChapterPage.vue';
+import AdvancedSearchPage from '@/modules/core/pages/AdvancedSearchPage.vue';
 
 const routes = [
   {
@@ -26,6 +27,11 @@ const routes = [
     name: 'StoryChapterPage',
     component: StoryChapterPage,
     props: true,
+  },
+  {
+    path: '/search',
+    name: 'AdvancedSearchPage',
+    component: AdvancedSearchPage,
   },
 ];
 

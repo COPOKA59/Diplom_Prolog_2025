@@ -2,14 +2,14 @@
     <Toolbar>
     <template #start>
       <RouterLink to="/" class="header-title">
-        <h1>Name</h1>
+        <h1>Пролог</h1>
       </RouterLink>
     </template>
 
     <template #end>
-      <Button label="Login" severity="primary" variant="outlined"/>
+      <Button label="Войти" severity="primary" variant="outlined"/>
       <!-- <Button label="Sign up" severity="secondary" /> -->
-      <Button label="Sign up" severity="primary" />
+      <Button class="sign-up-button" label="Зарегистрироваться" severity="primary"/>
     </template>
   </Toolbar>
 </template>
@@ -46,5 +46,11 @@ import Button from 'primevue/button';
 }
 .header-title h1 {
   margin: 0;
+}
+
+.sign-up-button {
+  @media (max-width: 600px) {
+    display: none;
+  }
 }
 </style>

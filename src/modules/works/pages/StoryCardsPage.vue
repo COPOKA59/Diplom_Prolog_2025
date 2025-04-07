@@ -38,8 +38,9 @@
 
 <script setup>
 import MainLayout from '@/layouts/MainLayout.vue';
-import StoryCard from '@/components/StoryCard.vue';
+import StoryCard from '@/modules/works/components/StoryCard.vue';
 import { Paginator } from 'primevue';
+import { VContainer } from "vuetify/lib/components/index.mjs";
 
 import { ref, computed } from 'vue';
 import { works } from '@/services/stories';
@@ -56,14 +57,6 @@ function onPageChange(event) {
   first.value = event.first;
   rows.value = event.rows;
 }
-
-/* const data = ref([]);
-const fetchData = () => {
-  return works;
-};
-onMounted(() => {
-  data.value = fetchData(); 
-}); */
 
 </script>
 
@@ -82,11 +75,10 @@ onMounted(() => {
   justify-content: center;
   gap: 40px;
   margin: 40px auto; /* This will add vertical and horizontal margins */
-  max-width: 960px !important;
-  width: 960px;
+  max-width: 960px;
   padding: 0 20px;
   /* Ensures padding and borders are included in the width */
-  /* box-sizing: border-box;  */
+  box-sizing: border-box; 
 }
 /* .container {
   display: grid;

@@ -67,11 +67,11 @@
             <p-row>
                 <Card class="bottom-inner-card-v2">
                     <template #content>
-                        <p>
-                            <b>Жанры:</b> {{ genres }}
+                        <p class="comma-sep">
+                            <b>Жанры:</b> <span v-for="genre in genres"> {{ genre }}</span>
                         </p>
-                        <p>
-                            <b>Отношения:</b> {{ relationships }}
+                        <p class="comma-sep">
+                            <b>Отношения:</b> <span v-for="ship in relationships"> {{ ship }}</span>
                         </p>
                         <p>
                             <span class="tags">
@@ -96,7 +96,6 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
 import { Card, Divider, Tag, Chip} from 'primevue';
 
 const props = defineProps({
@@ -195,6 +194,9 @@ const props = defineProps({
     aspect-ratio: 2 / 3;
     object-fit: cover;
 }
+.img-col {
+    background: linear-gradient(135deg, rgba(65, 75, 91, 0.5) 31%, rgba(0, 0, 0, 0.5) 100%);
+}
 
 .read-work-label {
     background-color: var(--main-blue-color);
@@ -227,6 +229,9 @@ const props = defineProps({
 }
 .bottom-inner-card-v2 p {
     margin-top: auto;
+}
+.bottom-inner-card-v2 .comma-sep span:not(:last-child)::after {
+    content: ", ";
 }
 .tags {
     display: inline-flex;

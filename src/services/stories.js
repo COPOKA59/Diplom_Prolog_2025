@@ -1,16 +1,4 @@
-const chapters = [
-  {
-    id: 1,
-    number: 1,
-    title: "Aenean congue velit euismod sem congue molestie",
-    date: new Date("2025-03-21"),
-    notes_before: "Donec volutpat pellentesque diam, vitae vestibulum neque commodo at. \
-                  Vivamus tristique enim quis magna tempor, sit amet vulputate nibh sagittis. \
-                  Morbi vitae metus viverra, bibendum mi vel, imperdiet ipsum.",
-    notes_after: "Vivamus tristique enim quis magna tempor, sit amet vulputate nibh sagittis. \
-                  Morbi vitae metus viverra, bibendum mi vel, imperdiet ipsum.",
-    comments: [],
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt tellus ligula, non laoreet purus sagittis et. \
+const default_text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt tellus ligula, non laoreet purus sagittis et. \
       Aenean dapibus sed augue nec hendrerit. Integer vehicula tincidunt vulputate. Nullam facilisis feugiat accumsan. Maecenas sit amet \
       dapibus nisl. Nam purus risus, facilisis in maximus nec, ultrices in nisi. Nam interdum viverra massa. Vestibulum in dolor massa. \
       Phasellus eu maximus justo. Aenean congue velit euismod sem congue molestie. Fusce felis justo, venenatis sit amet nulla id, placerat \
@@ -36,6 +24,19 @@ const chapters = [
       Suspendisse vitae mi eget lacus ullamcorper elementum a et mauris. Pellentesque vel tellus a nulla placerat malesuada. Duis at arcu \
       at velit viverra tincidunt. Sed luctus luctus velit, sed pellentesque magna tincidunt sit amet. Phasellus non hendrerit sem. Phasellus \
       congue mi in erat blandit venenatis. Vivamus id leo magna."
+const chapters = [
+  {
+    id: 1,
+    number: 1,
+    title: "Aenean congue velit euismod sem congue molestie",
+    date: new Date("2025-03-21"),
+    notes_before: "Donec volutpat pellentesque diam, vitae vestibulum neque commodo at. \
+                  Vivamus tristique enim quis magna tempor, sit amet vulputate nibh sagittis. \
+                  Morbi vitae metus viverra, bibendum mi vel, imperdiet ipsum.",
+    notes_after: "Vivamus tristique enim quis magna tempor, sit amet vulputate nibh sagittis. \
+                  Morbi vitae metus viverra, bibendum mi vel, imperdiet ipsum.",
+    comments: [],
+    text: default_text
   },
   {
     id: 2,
@@ -131,16 +132,25 @@ const chapters = [
     text: "Lorem",
   },
   {
-    id: 5,
-    number: 5,
-    title: "Praesent pretium purus",
-    date: new Date("2025-03-25"),
-    notes_before: null,
-    notes_after: null,
-    comments: [],
-    text: "Lorem",
+    id: 5, number: 5, title: "Praesent pretium purus", date: new Date("2025-03-25"),
+    notes_before: null, notes_after: null, comments: [], text: "Lorem",
   },
 ]
+
+for (let i = 6; i < 31; i++) {
+  chapters.push(
+    {
+      id: i, number: i, title: "Praesent pretium purus", date: new Date("2025-03-25"),
+      notes_before: "Duis imperdiet magna ut bibendum vestibulum. Duis malesuada \
+                  neque eget justo ultricies, a dapibus risus aliquam. Praesent \
+                  pretium purus tempor nisi rutrum imperdiet.", 
+      notes_after: "Nullam elementum ac massa sed tristique. \
+                    Mauris ultricies nunc non nibh aliquam tristique.", 
+      comments: [], text: default_text,
+    }
+  )
+}
+
 export const works = [
     { id: 1,
       title: "Возвращение в Оксфорд",
@@ -150,8 +160,8 @@ export const works = [
       rating: "NC-17",
       direction: "слэш",
       size: "миди",
-      genres: "Детектив, Драма, Повседневность",
-      relationships: "персонаж 1 / персонаж 2, персонаж 3 / персонаж 4",
+      genres: ["Детектив", "Драма", "Повседневность"],
+      relationships: ["персонаж 1 / персонаж 2", "персонаж 3 / персонаж 4"],
       tags: ["Попаданчество", "Путешествия", "Студенты", "Амнезия", "Повествование от первого лица", "Счастливый конец"],
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec elit ut risus luctus hendrerit. \
                       Cras sed feugiat mi. Mauris dictum libero sit amet condimentum luctus. Nulla accumsan leo efficitur, \
@@ -196,8 +206,8 @@ export const works = [
       rating: "NC-17",
       direction: "слэш",
       size: "миди",
-      genres: "Детектив, Драма, Повседневность",
-      relationships: "персонаж 1 / персонаж 2, персонаж 3 / персонаж 4",
+      genres: ["Детектив", "Драма", "Повседневность"],
+      relationships: ["персонаж 1 / персонаж 2", "персонаж 3 / персонаж 4"],
       tags: ["Попаданчество", "Путешествия", "Студенты", "Амнезия", "Повествование от первого лица", "Счастливый конец"],
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec elit ut risus luctus hendrerit. \
                       Cras sed feugiat mi. Mauris dictum libero sit amet condimentum luctus. Nulla accumsan leo efficitur, \
@@ -220,8 +230,8 @@ export const works = [
       rating: "NC-17",
       direction: "слэш",
       size: "миди",
-      genres: "Детектив, Драма, Повседневность",
-      relationships: "персонаж 1 / персонаж 2, персонаж 3 / персонаж 4",
+      genres: ["Детектив", "Драма", "Повседневность"],
+      relationships: ["персонаж 1 / персонаж 2", "персонаж 3 / персонаж 4"],
       tags: ["AU - кофейня", "Попаданчество", "Путешествия", "Студенты", "Амнезия", "Повествование от первого лица", "Счастливый конец"],
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec elit ut risus luctus hendrerit. \
                       Cras sed feugiat mi. Mauris dictum libero sit amet condimentum luctus. Nulla accumsan leo efficitur, \
@@ -237,8 +247,8 @@ export const works = [
       interdum leo.",
     },
     {  id: 4,
-      title: "4",
-      author: "",
+      title: "Осенняя хандра",
+      author: "eclipsa2001",
       fandom: "",
       last_update: "",
       rating: "",
@@ -248,34 +258,50 @@ export const works = [
       relationships: "",
       tags: [],
       description: "",
-      img_url: "",
+      img_url: "https://images.unsplash.com/photo-1633331585737-1f400d0ab96f?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3\
+                &ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       read: false,
       chapters: [],
       text: "",
     },
-    {  id: 5, title: "5", author: "", fandom: "", last_update: "", rating: "",
+    {  id: 5, title: "Dark Academia", author: "eclipsa2001", fandom: "", last_update: "", rating: "",
       direction: "", size: "", genres: "", relationships: "", tags: [],
-      description: "", img_url: "", read: false, chapters: [], text: "",
+      description: "", 
+      img_url: "https://images.unsplash.com/photo-1600189261935-a7666a7ef306?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3\
+                &ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 
+      read: false, chapters: [], text: "",
     },
     {  id: 6, title: "6", author: "", fandom: "", last_update: "", rating: "",
       direction: "", size: "", genres: "", relationships: "", tags: [],
-      description: "", img_url: "", read: false, chapters: [], text: "",
+      description: "", 
+      img_url: "https://images.unsplash.com/photo-1520262494112-9fe481d36ec3?q=80&w=1974\
+                &auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by\
+                1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 
+      read: false, chapters: [], text: "",
     },
     {  id: 7, title: "7", author: "", fandom: "", last_update: "", rating: "",
       direction: "", size: "", genres: "", relationships: "", tags: [],
-      description: "", img_url: "", read: false, chapters: [], text: "",
+      description: "", 
+      img_url: "https://m.media-amazon.com/images/I/71l9WWa-rXL._AC_UF1000,1000_QL80_.jpg", 
+      read: false, chapters: [], text: "",
     },
     {  id: 8, title: "8", author: "", fandom: "", last_update: "", rating: "",
       direction: "", size: "", genres: "", relationships: "", tags: [],
-      description: "", img_url: "", read: false, chapters: [], text: "",
+      description: "", 
+      img_url: "https://m.media-amazon.com/images/I/71l9WWa-rXL._AC_UF1000,1000_QL80_.jpg", 
+      read: false, chapters: [], text: "",
     },
     {  id: 9, title: "9", author: "", fandom: "", last_update: "", rating: "",
       direction: "", size: "", genres: "", relationships: "", tags: [],
-      description: "", img_url: "", read: false, chapters: [], text: "",
+      description: "", 
+      img_url: "https://m.media-amazon.com/images/I/71l9WWa-rXL._AC_UF1000,1000_QL80_.jpg", 
+      read: false, chapters: [], text: "",
     },
     {  id: 10, title: "10", author: "", fandom: "", last_update: "", rating: "",
       direction: "", size: "", genres: "", relationships: "", tags: [],
-      description: "", img_url: "", read: false, chapters: [], text: "",
+      description: "", 
+      img_url: "https://m.media-amazon.com/images/I/71l9WWa-rXL._AC_UF1000,1000_QL80_.jpg", 
+      read: false, chapters: [], text: "",
     },
     {  id: 11, title: "11", author: "", fandom: "", last_update: "", rating: "",
       direction: "", size: "", genres: "", relationships: "", tags: [],

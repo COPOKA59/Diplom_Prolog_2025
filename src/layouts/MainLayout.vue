@@ -1,14 +1,17 @@
 <!-- src/layouts/MainLayout.vue -->
 <template>
-    <v-app>
-      <Header />
+    <!-- <v-app>
+      <TheHeader />
   
       <v-main>
         <slot></slot>
       </v-main>
-    </v-app>
+    </v-app> -->
+
+    <TheHeader />
+    <slot></slot>
 </template>
 
 <script setup>
-import Header from '@/components/Header.vue';
+import TheHeader from '@/modules/core/components/TheHeader.vue';
 </script>

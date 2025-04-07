@@ -67,7 +67,58 @@ const MyPreset2 = definePreset(Aura, {
                     950: '{secondary.500}'
                 },
             }
-        }
+        },
+    },
+    components: {
+        inputtext: {
+            border: {
+                color: getCssVar('--main-light-color'),
+            },
+            hover: {
+                border: {
+                    color: getCssVar('--main-light-color'),
+                },
+            }
+        },
+        divider: {
+            border: {
+                color: getCssVar('--main-light-color'),
+            }
+        },
+        radiobutton: {
+            border: {
+                color: getCssVar('--main-light-color'),
+            },
+            hover: {
+                border: {
+                    color: '{primary.500}',
+                },
+            },
+            checked: {
+                border: {
+                    color: getCssVar('--main-light-color'),
+                },
+                background: getCssVar('--main-light-color'),
+                
+            },
+        },
+        checkbox: {
+            border: {
+                // color: '{primary.500}',
+                color: getCssVar('--main-light-color'),
+            },
+            hover: {
+                border: {
+                    color: '{primary.500}',
+                },
+            },
+            checked: {
+                hover: {
+                    background: '{primary.500}',
+                },
+                background: getCssVar('--main-light-color'),
+            }
+        },
     }
 })
 
