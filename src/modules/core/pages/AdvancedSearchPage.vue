@@ -1,5 +1,5 @@
 <template>
-    <MainLayout>
+    <MainContainerLayout>
         <v-container>
             <Panel>
                 <template #header> 
@@ -10,7 +10,7 @@
                     <!-- <h2>Расширенный поиск</h2> -->
 
                     <v-form>
-                        <v-row class="d-flex flex-column flex-sm-row">
+                        <v-row>
                             <v-col cols="auto" lg="2" md="2" sm="12" class="input-label"> 
                                 <label>Название</label>
                             </v-col>
@@ -19,7 +19,7 @@
                             </v-col>
                         </v-row>
 
-                        <v-row class="d-flex flex-column flex-sm-row">
+                        <v-row>
                             <v-col cols="auto" lg="2" md="2" sm="12" class="input-label">
                                 <label>Автор</label>
                             </v-col>
@@ -28,13 +28,10 @@
                             </v-col>
                         </v-row>
 
-                        <v-row class="d-flex flex-column flex-sm-row">
+                        <v-row>
                             <v-col cols="auto" lg="2" md="2" sm="12" class="input-label">
                                 <label>Дата</label>
                             </v-col>
-                            <!-- <v-col cols="auto" lg="10" md="10" sm="12" class="advanced-search-input">
-                                <DatePicker id="input-work-date" :minDate="minDate" :maxDate="maxDate"/>
-                            </v-col> -->
                             <v-col cols="auto" lg="10" md="10" sm="12" class="advanced-search-input">
                                 <div style="display: flex; gap: 60px;">
                                     <div>
@@ -76,7 +73,7 @@
 
                                     <div v-if="selectedType === 'fandom'">
                                         <label class="input-label">Фандом</label>
-                                        <InputText id="input-fandom"/>
+                                        <InputText id="input-fandom" fluid/>
                                     </div>
                                 </RadioButtonGroup>
                             </v-col>
@@ -141,6 +138,43 @@
                         </v-row>
 
 
+                        <v-row>
+                            <v-col cols="auto" lg="2" md="2" sm="12" class="input-label"> 
+                                <label>Жанры</label>
+                            </v-col>
+                            <v-col cols="auto" lg="10" md="10" sm="12" class="advanced-search-input"> 
+                                <InputText id="input-genres"/>
+                            </v-col>
+                        </v-row>
+
+                        <v-row>
+                            <v-col cols="auto" lg="2" md="2" sm="12" class="input-label"> 
+                                <label>Персонажи</label>
+                            </v-col>
+                            <v-col cols="auto" lg="10" md="10" sm="12" class="advanced-search-input"> 
+                                <InputText id="input-characters"/>
+                            </v-col>
+                        </v-row>
+
+                        <v-row>
+                            <v-col cols="auto" lg="2" md="2" sm="12" class="input-label"> 
+                                <label>Отношения</label>
+                            </v-col>
+                            <v-col cols="auto" lg="10" md="10" sm="12" class="advanced-search-input"> 
+                                <InputText id="input-relationships"/>
+                            </v-col>
+                        </v-row>
+
+                        <v-row>
+                            <v-col cols="auto" lg="2" md="2" sm="12" class="input-label"> 
+                                <label>Теги</label>
+                            </v-col>
+                            <v-col cols="auto" lg="10" md="10" sm="12" class="advanced-search-input"> 
+                                <InputText id="input-tags"/>
+                            </v-col>
+                        </v-row>
+
+
                         <Divider/>
 
 
@@ -173,6 +207,25 @@
                             </v-col>
                         </v-row>
 
+                        <v-row>
+                            <v-col cols="auto" lg="2" md="2" sm="12"> 
+                                <label>Статус</label>
+                            </v-col>
+                            <v-col cols="auto" lg="10" md="10" sm="12" class="advanced-search-btns"> 
+                                <CheckboxGroup>
+                                    <div>
+                                        <Checkbox inputId="work-status-in-progress" value="in-progress"/>
+                                        <label for="work-status-in-progress"> в процессе </label>
+                                    </div>
+                                    
+                                    <div>
+                                        <Checkbox inputId="work-status-complete" value="complete"/>
+                                        <label for="work-status-complete"> завершено </label>
+                                    </div>
+                                </CheckboxGroup>
+                            </v-col>
+                        </v-row>
+
                         <v-row class="search-button">
                             <Button severity="primary">Найти</Button>
                         </v-row>
@@ -182,11 +235,12 @@
 
             </Panel>
         </v-container>
-    </MainLayout>
+    </MainContainerLayout>
 </template>
 
 <script setup>
 import MainLayout from "@/layouts/MainLayout.vue";
+import MainContainerLayout from "@/layouts/MainContainerLayout.vue";
 import { Panel, Divider, Button, InputText, DatePicker, 
         RadioButton, RadioButtonGroup, Checkbox, CheckboxGroup } from "primevue";
 import { VContainer, VCol, VRow, VForm } from "vuetify/lib/components/index.mjs";
@@ -216,6 +270,10 @@ const maxDate = new Date();
     gap: 20px;
 }
 .advanced-search-btns .p-radiobutton-group div {
+    display: flex;
+    gap: 10px;
+}
+.advanced-search-btns .p-radiobutton-group div .v-row {
     display: flex;
     gap: 10px;
 }

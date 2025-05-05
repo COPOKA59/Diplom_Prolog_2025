@@ -7,9 +7,11 @@
     </template>
 
     <template #end>
-      <Button label="Войти" severity="primary" variant="outlined"/>
+      <Button label="Войти" severity="primary" variant="outlined" 
+              @click="$router.push({ name: 'LoginPage' })"/>
       <!-- <Button label="Sign up" severity="secondary" /> -->
-      <Button class="sign-up-button" label="Зарегистрироваться" severity="primary"/>
+      <Button class="sign-up-button" label="Зарегистрироваться" severity="primary"
+              @click="$router.push({ name: 'LoginPage' })"/>
     </template>
   </Toolbar>
 </template>
@@ -46,6 +48,9 @@ import Button from 'primevue/button';
 }
 .header-title h1 {
   margin: 0;
+}
+.header-title h1:hover {
+  text-decoration: underline;
 }
 
 .sign-up-button {

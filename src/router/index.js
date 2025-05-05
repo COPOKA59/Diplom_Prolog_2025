@@ -4,12 +4,18 @@ import StoryCardsPage from '@/modules/works/pages/StoryCardsPage.vue';
 import StoryPage from '@/modules/works/pages/StoryPage.vue';
 import StoryChapterPage from '@/modules/works/pages/StoryChapterPage.vue';
 import AdvancedSearchPage from '@/modules/core/pages/AdvancedSearchPage.vue';
+import LoginPage from '@/modules/user/pages/LoginPage.vue';
 
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: MainPage,
+  },
+  {
+    path: '/login',
+    name: 'LoginPage',
+    component: LoginPage,
   },
   {
     path: '/stories',

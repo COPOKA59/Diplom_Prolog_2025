@@ -1,4 +1,3 @@
-<!-- src/layouts/MainLayout.vue -->
 <template>
     <!-- <v-app>
       <TheHeader />
@@ -10,8 +9,10 @@
 
     <TheHeader />
     <slot></slot>
+
 </template>
 
 <script setup>
 import TheHeader from '@/modules/core/components/TheHeader.vue';
+// import { VApp, VMain } from 'vuetify/lib/components/index.mjs';
 </script>

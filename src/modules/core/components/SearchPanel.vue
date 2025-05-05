@@ -12,16 +12,6 @@
     </Toolbar>
 </template>
 
-<!-- <template>
-    <VToolbar density="compact" class="search-panel" height="160">
-        <InputText placeholder="Поиск" />
-        <Button label="Фандомы"/>
-        <Button label="Жанры"/>
-        <Button label="Авторы"/>
-        <Button label="Расширенный поиск"/>
-    </VToolbar>
-</template> -->
-
 <script setup>
 import { Toolbar, IconField, InputIcon, InputText, Button } from 'primevue';
 import { VToolbar } from 'vuetify/lib/components/index.mjs';

@@ -11,7 +11,11 @@ import { createVuetify } from 'vuetify';
 // import { MyPreset } from './themes/theme';
 import { MyPreset2 } from './themes/theme2';
 
-const vuetify = createVuetify();
+const vuetify = createVuetify({
+    theme: { 
+        disable: true 
+    }
+});
 
 const app = createApp(App);
 app.use(PrimeVue, {

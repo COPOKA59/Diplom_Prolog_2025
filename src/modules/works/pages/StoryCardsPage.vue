@@ -1,5 +1,5 @@
 <template>
-  <MainLayout>
+  <MainContainerLayout>
     <v-container fluid class="container">
       <Paginator
         class="story-paginator"
@@ -33,11 +33,12 @@
         @page="onPageChange"
       />
     </v-container>
-  </MainLayout>
+  </MainContainerLayout>
 </template>
 
 <script setup>
 import MainLayout from '@/layouts/MainLayout.vue';
+import MainContainerLayout from '@/layouts/MainContainerLayout.vue';
 import StoryCard from '@/modules/works/components/StoryCard.vue';
 import { Paginator } from 'primevue';
 import { VContainer } from "vuetify/lib/components/index.mjs";
@@ -74,7 +75,7 @@ function onPageChange(event) {
   display: grid;
   justify-content: center;
   gap: 40px;
-  margin: 40px auto; /* This will add vertical and horizontal margins */
+  /* margin: 40px auto; */
   max-width: 960px;
   padding: 0 20px;
   /* Ensures padding and borders are included in the width */

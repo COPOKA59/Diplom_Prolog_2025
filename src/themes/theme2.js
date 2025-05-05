@@ -78,7 +78,17 @@ const MyPreset2 = definePreset(Aura, {
                 border: {
                     color: getCssVar('--main-light-color'),
                 },
+            },
+            css: ({ dt }) => `
+            .p-inputtext.login-input {
+            background: #CCCCCC;
+            border: 1px solid grey;
+            color: var(--main-dark-color)
             }
+            .p-inputtext.login-input:hover {
+            border: 1px solid var(--main-dark-color);
+            }
+            `,
         },
         divider: {
             border: {
@@ -104,7 +114,6 @@ const MyPreset2 = definePreset(Aura, {
         },
         checkbox: {
             border: {
-                // color: '{primary.500}',
                 color: getCssVar('--main-light-color'),
             },
             hover: {
@@ -119,6 +128,21 @@ const MyPreset2 = definePreset(Aura, {
                 background: getCssVar('--main-light-color'),
             }
         },
+        button: {
+            css: ({ dt }) => `
+            .p-button.p-button-outlined.p-button-primary {
+            outline: 4px solid var(--main-blue-color);
+            outline-offset: -4px;
+            color: var(--main-light-color);
+            }
+            .p-button.p-button-primary {
+            color: var(--main-light-color);
+            }
+            .p-button.p-button-primary:hover {
+            color: var(--main-light-color);
+            }
+            `,
+        }
     }
 })
 
