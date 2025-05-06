@@ -7,11 +7,14 @@
     </template>
 
     <template #end>
-      <Button label="Войти" severity="primary" variant="outlined" 
+      <!-- <Button label="Войти" severity="primary" variant="outlined" 
               @click="$router.push({ name: 'LoginPage' })"/>
-      <!-- <Button label="Sign up" severity="secondary" /> -->
       <Button class="sign-up-button" label="Зарегистрироваться" severity="primary"
-              @click="$router.push({ name: 'LoginPage' })"/>
+              @click="$router.push({ name: 'LoginPage' })"/> -->
+      <Button label="Войти" severity="primary" variant="outlined" 
+              @click="goToLogin(false)"/>
+      <Button class="sign-up-button" label="Зарегистрироваться" severity="primary"
+              @click="goToLogin(true)"/>
     </template>
   </Toolbar>
 </template>
@@ -19,7 +22,14 @@
 <script setup>
 import Toolbar from 'primevue/toolbar';
 import Button from 'primevue/button';
+import { useRouter } from 'vue-router'; // Import useRouter
 
+const router = useRouter();
+
+const goToLogin = (isNewUser) => {
+  localStorage.setItem('isNewUser', isNewUser);
+  router.push({ name: 'LoginPage' });
+};
 </script>
 
 <style scoped>

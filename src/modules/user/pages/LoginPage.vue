@@ -7,7 +7,8 @@
         </div>
         <v-row>
             <v-col cols="auto" lg="6" md="6" sm="12" style="margin: 30px auto;">
-                <LoginForm/>
+                <!-- <LoginForm/> -->
+                <component :is="currentForm" @switch-form="toggleForm" />
             </v-col>
         </v-row>
         
@@ -17,7 +18,17 @@
 <script setup>
 import { VContainer, VRow, VCol, VApp, VMain } from 'vuetify/lib/components/index.mjs';
 import LoginForm from '../components/LoginForm.vue';
-import { onBeforeMount, onBeforeUnmount } from "vue";
+import RegisterForm from '../components/RegisterForm.vue';
+import { ref, computed, onBeforeMount, onBeforeUnmount } from "vue";
+
+// const isNewUser = ref(true);
+const isNewUser = ref(localStorage.getItem('isNewUser') === 'true');
+const currentForm = computed(() => {
+  return isNewUser.value ? RegisterForm : LoginForm;
+});
+const toggleForm = () => {
+    isNewUser.value = !isNewUser.value;
+};
 
 onBeforeMount(() => {
   document.body.style.paddingTop = 0;
@@ -25,6 +36,9 @@ onBeforeMount(() => {
 onBeforeUnmount(() => {
   document.body.style.paddingTop = "var(--header-height)";
 });
+
+
+
 </script>
 
 <style scoped>

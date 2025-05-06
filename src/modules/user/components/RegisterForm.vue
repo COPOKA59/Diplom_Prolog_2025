@@ -2,26 +2,23 @@
     <Card class="login-card">
         <template #title>
             <div class="login-title">
-                <span>С возвращением</span>
+                <span>Добро пожаловать</span>
             </div>
         </template>
 
         <template #content>
             <v-container>
                 <v-form>
-                <!-- <v-row style="display: grid;">
-                    <label>Имя</label>
-                    <InputText/>
-                </v-row>
-
-                <v-row style="display: grid;">
-                    <label>Пароль</label>
-                    <InputText/>
-                </v-row> -->
-
                 <v-row>
                     <v-col>
                         <label>Имя</label>
+                        <InputText class="login-input"/>
+                    </v-col>
+                </v-row>
+
+                <v-row>
+                    <v-col>
+                        <label>E-mail</label>
                         <InputText class="login-input"/>
                     </v-col>
                 </v-row>
@@ -33,23 +30,24 @@
                     </v-col>
                 </v-row>
 
+                <v-row>
+                    <v-col>
+                        <label>Повторите пароль</label>
+                        <InputText class="login-input"/>
+                    </v-col>
+                </v-row>
+
 
                 <v-row style="margin-top: 20px;">
-                    <Button severity="primary" style="margin:auto;">Войти</Button>
+                    <Button severity="primary" style="margin:auto;">Зарегистрироваться</Button>
                 </v-row>
                 <v-row>
                     <Button variant="link" class="login-button" style="margin:auto;"
-                    @click="switchToRegister">
-                        Зарегистрироваться
+                    @click="switchToLogin">
+                        Войти
                     </Button>
                 </v-row>
 
-                <!-- <v-row>
-                    <div style="display: grid; width: 100%; margin-top: 10px;">
-                        <Button severity="primary" style="margin:auto;">Войти</Button>
-                        <Button variant="link" class="login-button" style="margin:auto;">Зарегистрироваться</Button>
-                    </div>
-                </v-row> -->
                 </v-form>
             </v-container>
         </template>
@@ -62,10 +60,9 @@ import { Card, InputText, Button } from 'primevue';
 import { defineEmits } from 'vue';
 
 const emit = defineEmits();
-const switchToRegister = () => {
+const switchToLogin = () => {
   emit('switch-form');
 };
-
 </script>
 
 <style scoped>
