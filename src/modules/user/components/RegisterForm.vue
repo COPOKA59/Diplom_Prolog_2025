@@ -57,7 +57,6 @@
 <script setup>
 import { VContainer, VRow, VCol, VForm } from 'vuetify/lib/components/index.mjs';
 import { Card, InputText, Button } from 'primevue';
-import { defineEmits } from 'vue';
 
 const emit = defineEmits();
 const switchToLogin = () => {

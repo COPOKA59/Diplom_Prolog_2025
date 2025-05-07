@@ -5,6 +5,7 @@ import StoryPage from '@/modules/works/pages/StoryPage.vue';
 import StoryChapterPage from '@/modules/works/pages/StoryChapterPage.vue';
 import AdvancedSearchPage from '@/modules/core/pages/AdvancedSearchPage.vue';
 import LoginPage from '@/modules/user/pages/LoginPage.vue';
+import Profile from '@/modules/user/pages/Profile.vue';
 
 const routes = [
   {
@@ -16,6 +17,11 @@ const routes = [
     path: '/login',
     name: 'LoginPage',
     component: LoginPage,
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
   },
   {
     path: '/stories',

@@ -21,7 +21,6 @@ import LoginForm from '../components/LoginForm.vue';
 import RegisterForm from '../components/RegisterForm.vue';
 import { ref, computed, onBeforeMount, onBeforeUnmount } from "vue";
 
-// const isNewUser = ref(true);
 const isNewUser = ref(localStorage.getItem('isNewUser') === 'true');
 const currentForm = computed(() => {
   return isNewUser.value ? RegisterForm : LoginForm;
@@ -36,8 +35,6 @@ onBeforeMount(() => {
 onBeforeUnmount(() => {
   document.body.style.paddingTop = "var(--header-height)";
 });
-
-
 
 </script>
 

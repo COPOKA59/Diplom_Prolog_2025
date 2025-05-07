@@ -134,7 +134,7 @@ const MyPreset2 = definePreset(Aura, {
             outline: 4px solid var(--main-blue-color);
             outline-offset: -4px;
             color: var(--main-light-color);
-            }
+            } 
             .p-button.p-button-primary {
             color: var(--main-light-color);
             }
