@@ -6,6 +6,7 @@ import StoryChapterPage from '@/modules/works/pages/StoryChapterPage.vue';
 import AdvancedSearchPage from '@/modules/core/pages/AdvancedSearchPage.vue';
 import LoginPage from '@/modules/user/pages/LoginPage.vue';
 import Profile from '@/modules/user/pages/Profile.vue';
+import Settings from '@/modules/user/pages/Settings.vue';
 
 const routes = [
   {
@@ -24,18 +25,23 @@ const routes = [
     component: Profile,
   },
   {
-    path: '/stories',
+    path: '/settings',
+    name: 'Settings',
+    component: Settings,
+  },
+  {
+    path: '/works',
     name: 'Stories',
     component: StoryCardsPage,
   },
   {
-    path: '/stories/:id',
+    path: '/works/:id',
     name: 'StoryPage',
     component: StoryPage,
     props: true,
   },
   {
-    path: '/stories/:id/chapter/:chapter_id',
+    path: '/works/:id/chapter/:chapter_id',
     name: 'StoryChapterPage',
     component: StoryChapterPage,
     props: true,

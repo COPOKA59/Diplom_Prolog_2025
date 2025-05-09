@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 
 .vscode/
+
+# Other directories and files
+OLD/

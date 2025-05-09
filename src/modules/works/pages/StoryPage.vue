@@ -28,7 +28,6 @@
             :chapter_title="chapter.title"
             :published="chapter.date"/>
       </div>
-      <!-- <Paginator class="story-paginator" :rows="10" :totalRecords="120"/> -->
       <Paginator
         class="story-paginator"
         :first="first"
@@ -43,8 +42,7 @@
 
 <script setup>
 import MainLayout from '@/layouts/MainLayout.vue';
-import StoryCard from '@/modules/works/components/StoryCard.vue';
-import StoryCardReading from '@/modules/works/components/StoryCardReading.vue';
+import StoryCardReading from '../components/StoryCardReading.vue';
 import ChapterCard from '@/modules/works/components/ChapterCard.vue';
 import { Paginator } from 'primevue';
 

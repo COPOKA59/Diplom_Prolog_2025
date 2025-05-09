@@ -37,9 +37,8 @@
 </template>
 
 <script setup>
-import MainLayout from '@/layouts/MainLayout.vue';
 import MainContainerLayout from '@/layouts/MainContainerLayout.vue';
-import StoryCard from '@/modules/works/components/StoryCard.vue';
+import StoryCard from '../components/StoryCard.vue';
 import { Paginator } from 'primevue';
 import { VContainer } from "vuetify/lib/components/index.mjs";
 

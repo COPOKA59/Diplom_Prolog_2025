@@ -74,8 +74,7 @@
   
 <script setup>
 import MainLayout from '@/layouts/MainLayout.vue';
-import StoryCard from '@/modules/works/components/StoryCard.vue';
-import StoryCardReading from '@/modules/works/components/StoryCardReading.vue';
+import StoryCardReading from '../components/StoryCardReading.vue';
 import { Card, Divider, Button, ButtonGroup } from 'primevue';
 
 import { ref, onMounted, watch } from 'vue';

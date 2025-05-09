@@ -3,7 +3,7 @@
         <v-container>
             <Panel>
                 <template #header> 
-                    <h2 style="padding-left: 12px;">Расширенный поиск</h2>
+                    <h2 style="padding-left: 16px;">Расширенный поиск</h2>
                 </template>
 
                 <v-container>

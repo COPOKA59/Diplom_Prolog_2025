@@ -142,6 +142,16 @@ const MyPreset2 = definePreset(Aura, {
             color: var(--main-light-color);
             }
             `,
+        },
+        textarea: {
+            border: {
+                color: getCssVar('--main-light-color'),
+            },
+            hover: {
+                border: {
+                    color: getCssVar('--main-light-color'),
+                },
+            },
         }
     }
 })

@@ -90,7 +90,7 @@
 
 <script setup>
 import MainContainerLayout from '@/layouts/MainContainerLayout.vue';
-import { VContainer, VRow, VCol, VSpacer } from 'vuetify/lib/components/index.mjs';
+import { VContainer, VRow, VCol } from 'vuetify/lib/components/index.mjs';
 import { Card, Divider } from 'primevue';
 </script>
 
