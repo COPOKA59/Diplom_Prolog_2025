@@ -8,8 +8,7 @@ import PrimeVue from 'primevue/config';
 // import 'vuetify/styles';
 import { createVuetify } from 'vuetify';
 
-// import { MyPreset } from './themes/theme';
-import { MyPreset2 } from './themes/theme2';
+import { MyPreset } from './themes/theme';
 
 const vuetify = createVuetify({
     theme: { 
@@ -20,7 +19,7 @@ const vuetify = createVuetify({
 const app = createApp(App);
 app.use(PrimeVue, {
     theme: {
-        preset: MyPreset2//Aurora,
+        preset: MyPreset//Aurora,
     },
     options: {
         darkModeSelector: '.app-dark'

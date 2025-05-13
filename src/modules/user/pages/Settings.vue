@@ -103,7 +103,6 @@ const onFileUpload = (event) => {
     const reader = new FileReader();
     reader.onload = (e) => {
         imageUrl.value = e.target.result; // Update the image URL with the uploaded file
-        console.log(imageUrl.value);
     };
     reader.readAsDataURL(file); // Read the file as a data URL
   }

@@ -11,28 +11,28 @@
 
                     <v-form>
                         <v-row>
-                            <v-col cols="auto" lg="2" md="2" sm="12" class="input-label"> 
+                            <v-col cols="12" lg="2" md="2" sm="12" class="input-label"> 
                                 <label>Название</label>
                             </v-col>
-                            <v-col cols="auto" lg="10" md="10" sm="12" class="advanced-search-input"> 
+                            <v-col cols="12" lg="10" md="10" sm="12" class="advanced-search-input"> 
                                 <InputText id="input-work-name"/>
                             </v-col>
                         </v-row>
 
                         <v-row>
-                            <v-col cols="auto" lg="2" md="2" sm="12" class="input-label">
+                            <v-col cols="12" lg="2" md="2" sm="12" class="input-label">
                                 <label>Автор</label>
                             </v-col>
-                            <v-col cols="auto" lg="10" md="10" sm="12" class="advanced-search-input">
+                            <v-col cols="12" lg="10" md="10" sm="12" class="advanced-search-input">
                                 <InputText id="input-work-author"/>
                             </v-col>
                         </v-row>
 
                         <v-row>
-                            <v-col cols="auto" lg="2" md="2" sm="12" class="input-label">
+                            <v-col cols="12" lg="2" md="2" sm="12" class="input-label">
                                 <label>Дата</label>
                             </v-col>
-                            <v-col cols="auto" lg="10" md="10" sm="12" class="advanced-search-input">
+                            <v-col cols="12" lg="10" md="10" sm="12" class="advanced-search-input">
                                 <div style="display: flex; gap: 60px;">
                                     <div>
                                         <label class="input-label">от: </label>
@@ -52,10 +52,10 @@
 
 
                         <v-row>
-                            <v-col cols="auto" lg="2" md="2" sm="12">
+                            <v-col cols="12" lg="2" md="2" sm="12">
                                 <label>Тип работы</label>
                             </v-col>
-                            <v-col cols="auto" lg="10" md="10" sm="12" class="advanced-search-btns">
+                            <v-col cols="12" lg="10" md="10" sm="12" class="advanced-search-btns">
                                 <RadioButtonGroup v-model="selectedType">
                                     <div>
                                         <RadioButton v-model="selectedType" 
@@ -80,10 +80,10 @@
                         </v-row>
 
                         <v-row>
-                            <v-col cols="auto" lg="2" md="2" sm="12"> 
+                            <v-col cols="12" lg="2" md="2" sm="12"> 
                                 <label>Направление</label>
                             </v-col>
-                            <v-col cols="auto" lg="10" md="10" sm="12" class="advanced-search-btns"> 
+                            <v-col cols="12" lg="10" md="10" sm="12" class="advanced-search-btns"> 
                                 <CheckboxGroup>
                                     <div>
                                         <Checkbox inputId="work-dir-get" value="get"/>
@@ -104,10 +104,10 @@
                         </v-row>
 
                         <v-row>
-                            <v-col cols="auto" lg="2" md="2" sm="12"> 
+                            <v-col cols="12" lg="2" md="2" sm="12"> 
                                 <label>Рейтинг</label>
                             </v-col>
-                            <v-col cols="auto" lg="10" md="10" sm="12" class="advanced-search-btns"> 
+                            <v-col cols="12" lg="10" md="10" sm="12" class="advanced-search-btns"> 
                                 <CheckboxGroup>
                                     <div>
                                         <Checkbox inputId="work-rating-g" value="G"/>
@@ -139,37 +139,37 @@
 
 
                         <v-row>
-                            <v-col cols="auto" lg="2" md="2" sm="12" class="input-label"> 
+                            <v-col cols="12" lg="2" md="2" sm="12" class="input-label"> 
                                 <label>Жанры</label>
                             </v-col>
-                            <v-col cols="auto" lg="10" md="10" sm="12" class="advanced-search-input"> 
+                            <v-col cols="12" lg="10" md="10" sm="12" class="advanced-search-input"> 
                                 <InputText id="input-genres"/>
                             </v-col>
                         </v-row>
 
                         <v-row>
-                            <v-col cols="auto" lg="2" md="2" sm="12" class="input-label"> 
+                            <v-col cols="12" lg="2" md="2" sm="12" class="input-label"> 
                                 <label>Персонажи</label>
                             </v-col>
-                            <v-col cols="auto" lg="10" md="10" sm="12" class="advanced-search-input"> 
+                            <v-col cols="12" lg="10" md="10" sm="12" class="advanced-search-input"> 
                                 <InputText id="input-characters"/>
                             </v-col>
                         </v-row>
 
                         <v-row>
-                            <v-col cols="auto" lg="2" md="2" sm="12" class="input-label"> 
+                            <v-col cols="12" lg="2" md="2" sm="12" class="input-label"> 
                                 <label>Отношения</label>
                             </v-col>
-                            <v-col cols="auto" lg="10" md="10" sm="12" class="advanced-search-input"> 
+                            <v-col cols="12" lg="10" md="10" sm="12" class="advanced-search-input"> 
                                 <InputText id="input-relationships"/>
                             </v-col>
                         </v-row>
 
                         <v-row>
-                            <v-col cols="auto" lg="2" md="2" sm="12" class="input-label"> 
+                            <v-col cols="12" lg="2" md="2" sm="12" class="input-label"> 
                                 <label>Теги</label>
                             </v-col>
-                            <v-col cols="auto" lg="10" md="10" sm="12" class="advanced-search-input"> 
+                            <v-col cols="12" lg="10" md="10" sm="12" class="advanced-search-input"> 
                                 <InputText id="input-tags"/>
                             </v-col>
                         </v-row>
@@ -179,10 +179,10 @@
 
 
                         <v-row>
-                            <v-col cols="auto" lg="2" md="2" sm="12"> 
+                            <v-col cols="12" lg="2" md="2" sm="12"> 
                                 <label>Размер</label>
                             </v-col>
-                            <v-col cols="auto" lg="10" md="10" sm="12" class="advanced-search-btns"> 
+                            <v-col cols="12" lg="10" md="10" sm="12" class="advanced-search-btns"> 
                                 <CheckboxGroup>
                                     <div>
                                         <Checkbox inputId="work-size-drabble" value="drabble"/>
@@ -208,10 +208,10 @@
                         </v-row>
 
                         <v-row>
-                            <v-col cols="auto" lg="2" md="2" sm="12"> 
+                            <v-col cols="12" lg="2" md="2" sm="12"> 
                                 <label>Статус</label>
                             </v-col>
-                            <v-col cols="auto" lg="10" md="10" sm="12" class="advanced-search-btns"> 
+                            <v-col cols="12" lg="10" md="10" sm="12" class="advanced-search-btns"> 
                                 <CheckboxGroup>
                                     <div>
                                         <Checkbox inputId="work-status-in-progress" value="in-progress"/>

@@ -8,129 +8,124 @@ function getCssVar(variableName) {
 const MyPreset = definePreset(Aura, {
     semantic: {
         primary: {
-            50: getCssVar('--main-blue-color'),
-            100: getCssVar('--main-blue-color'),
-            200: getCssVar('--main-blue-color'),
-            300: getCssVar('--main-blue-color'),
-            400: getCssVar('--main-blue-color'),
+            50: '#6c7d99',
+            100: '#63738c',
+            200: '#5a687f',
+            300: '#515e72',
+            400: '#485366',
             500: getCssVar('--main-blue-color'),
-            600: getCssVar('--main-blue-color'),
-            700: getCssVar('--main-blue-color'),
-            800: getCssVar('--main-blue-color'),
-            900: getCssVar('--main-blue-color'),
-            950: getCssVar('--main-blue-color')
+            600: '#363e4c',
+            700: '#2d343f',
+            800: '#242933',
+            900: '#1b1e26',
+            950: '#121419'
         },
         secondary: {
-            50: getCssVar('--main-dark-color'),
-            100: getCssVar('--main-dark-color'),
-            200: getCssVar('--main-dark-color'),
-            300: getCssVar('--main-dark-color'),
-            400: getCssVar('--main-dark-color'),
+            50: '#626972',
+            100: '#575d66',
+            200: '#4c5259',
+            300: '#41464c',
+            400: '#363a3f',
             500: getCssVar('--main-dark-color'),
-            600: getCssVar('--main-dark-color'),
-            700: getCssVar('--main-dark-color'),
-            800: getCssVar('--main-dark-color'),
-            900: getCssVar('--main-dark-color'),
-            950: getCssVar('--main-dark-color')
+            600: '#202326',
+            700: '#151719',
+            800: '#0a0b0c',
+            900: '#0a0b0c',
+            950: '#000000'
         },
-        accent: {
-            50: 'red',
-            100: 'red',
-            200: 'red',
-            300: 'red',
-            400: 'red',
-            500: 'red',
-            600: 'red',
-            700: 'red',
-            800: 'red',
-            900: 'red',
-            950: 'red'
-        },
-        background: {
-            50: getCssVar('--main-dark-color'),
-            100: getCssVar('--main-dark-color'),
-            200: getCssVar('--main-dark-color'),
-            300: getCssVar('--main-dark-color'),
-            400: getCssVar('--main-dark-color'),
-            500: getCssVar('--main-dark-color'),
-            600: getCssVar('--main-dark-color'),
-            700: getCssVar('--main-dark-color'),
-            800: getCssVar('--main-dark-color'),
-            900: getCssVar('--main-dark-color'),
-            950: getCssVar('--main-dark-color')
-        },
-        text: {
-            50: getCssVar('--main-light-color'),
-            100: getCssVar('--main-light-color'),
-            200: getCssVar('--main-light-color'),
-            300: getCssVar('--main-light-color'),
-            400: getCssVar('--main-light-color'),
-            500: getCssVar('--main-light-color'),
-            600: getCssVar('--main-light-color'),
-            700: getCssVar('--main-light-color'),
-            800: getCssVar('--main-light-color'),
-            900: getCssVar('--main-light-color'),
-            950: getCssVar('--main-light-color')
-        }
-    },
-
-    colorScheme: {
-        light: {
-          primary: {
-            color: '{primary.500}',
-            contrastColor: '#ffffff',
-            hoverColor: '{primary.600}',
-            activeColor: '{primary.700}',
-          },
-          secondary: {
-            color: '{secondary.500}',
-            contrastColor: '#ffffff',
-            hoverColor: '{secondary.600}',
-            activeColor: '{secondary.700}',
-          },
-          highlight: {
-            background: '{primary.50}',
-            focusBackground: '{primary.100}',
-            color: '{primary.700}',
-            focusColor: '{primary.800}',
-          },
-        },
-        dark: {
-            primary: {
-                color: '{primary.500}',
-                contrastColor: '#ffffff',
-                hoverColor: '{primary.600}',
-                activeColor: '{primary.700}',
-              },
-              secondary: {
-                color: '{secondary.500}',
-                contrastColor: '#ffffff',
-                hoverColor: '{secondary.600}',
-                activeColor: '{secondary.700}',
-              },
-              highlight: {
-                background: '{primary.50}',
-                focusBackground: '{primary.100}',
-                color: '{primary.700}',
-                focusColor: '{primary.800}',
-              },
-        },
-      },
-    /* components: {
-        paginator: {
-            colorScheme: {
-                light: {
-                    root: {
-                        background: '{secondary.500}',
-                        color: '{secondary.500}'
-                    },
+        
+        colorScheme: {
+            light: {
+                surface: {
+                    0: '#ffffff',
+                    50: '{secondary.50}',
+                    100: '{secondary.100}',
+                    200: '{secondary.200}',
+                    300: '{secondary.300}',
+                    400: '{secondary.400}',
+                    500: '{secondary.500}',
+                    600: '{secondary.600}',
+                    700: '{secondary.600}',
+                    800: '{secondary.600}',
+                    900: '{secondary.500}',
+                    950: '{secondary.500}'
                 },
-                dark: {
-                    root: {
-                        background: '{secondary.500}',
-                        color: '{secondary.500}'
-                    },
-                }
+            },
+            dark: {
+                surface: {
+                    0: '#ffffff',
+                    50: '#ffffff',
+                    100: '#ffffff',
+                    200: '#ffffff',
+                    300: '#ffffff',
+                    400: '#ffffff',
+                    500: '{secondary.500}',
+                    600: '{secondary.600}',
+                    700: '{secondary.600}',
+                    800: '{secondary.600}',
+                    900: '{secondary.500}',
+                    950: '{secondary.500}'
+                },
+            }
+        },
+    },
+    components: {
+        inputtext: {
+            border: {
+                color: getCssVar('--main-light-color'),
+            },
+            hover: {
+                border: {
+                    color: getCssVar('--main-light-color'),
+                },
+            },
+            css: ({ dt }) => `
+            .p-inputtext.login-input {
+            background: #CCCCCC;
+            border: 1px solid grey;
+            color: var(--main-dark-color)
+            }
+            .p-inputtext.login-input:hover {
+            border: 1px solid var(--main-dark-color);
+            }
+            `,
+        },
+        divider: {
+            border: {
+                color: getCssVar('--main-light-color'),
+            }
+        },
+        radiobutton: {
+            border: {
+                color: getCssVar('--main-light-color'),
+            },
+            hover: {
+                border: {
+                    color: '{primary.500}',
+                },
+            },
+            checked: {
+                border: {
+                    color: getCssVar('--main-light-color'),
+                },
+                background: getCssVar('--main-light-color'),
+                
+            },
+        },
+        checkbox: {
+            border: {
+                color: getCssVar('--main-light-color'),
+            },
+            hover: {
+                border: {
+                    color: '{primary.500}',
+                },
+            },
+            checked: {
+                hover: {
+                    background: '{primary.500}',
+                },
+                background: getCssVar('--main-light-color'),
             }
         },
         button: {
@@ -138,20 +133,57 @@ const MyPreset = definePreset(Aura, {
             .p-button.p-button-outlined.p-button-primary {
             outline: 4px solid var(--main-blue-color);
             outline-offset: -4px;
+            color: var(--main-light-color);
+            } 
+            .p-button.p-button-primary {
+            color: var(--main-light-color);
+            }
+            .p-button.p-button-primary:hover {
+            color: var(--main-light-color);
             }
             `,
-            colorScheme: {
-                light: {
-                    primary: {color: '{primary.500}',},
-                    secondary: {color: '{primary.500}',},
+        },
+        textarea: {
+            border: {
+                color: getCssVar('--main-light-color'),
+            },
+            hover: {
+                border: {
+                    color: getCssVar('--main-light-color'),
                 },
-                dark: {
-                    primary: {background: '{primary.500}',},
-                    secondary: {background: '{primary.500}',},
-                }
+            },
+        },
+        drawer: {
+            css: ({ dt }) => `
+            .sidebar ul {
+            /* Удаляем дефолтные стили для спсика */
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
             }
+
+            .sidebar li {
+            /* Расстояние между элементами списка */
+            /* margin: 15px 0; */
+            }
+
+            .sidebar a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--main-light-color);
+            padding: 15px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+            }
+
+            .sidebar a:hover {
+            background-color: var(--p-surface-600);
+            }
+            `,
         }
-    } */
-});
+    },
+    
+})
 
 export { MyPreset };
