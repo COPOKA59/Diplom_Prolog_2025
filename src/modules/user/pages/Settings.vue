@@ -1,5 +1,5 @@
 <template>
-    <MainContainerLayout>
+    <MainLayout :layout_container="true">
         <Card class="settings-card">
             <template #content>
                 <v-container>
@@ -24,7 +24,7 @@
                         </v-col>
                         <v-col cols="12" lg="9" md="9" sm="12" class="input-container">
                             <label>Описание</label>
-                            <Textarea rows="3" autoResize/>
+                            <Textarea rows="6"/>
                         </v-col>
                     </v-row>
                 
@@ -85,11 +85,11 @@
                 </v-container>
             </template>
         </Card>
-    </MainContainerLayout>
+    </MainLayout>
 </template>
 
 <script setup>
-import MainContainerLayout from '@/layouts/MainContainerLayout.vue';
+import MainLayout from '@/layouts/MainLayout.vue';
 import { VContainer, VRow, VCol, VForm, VSpacer } from 'vuetify/lib/components/index.mjs';
 import { Card, Divider, InputText, Textarea, Button, FileUpload } from 'primevue';
 import { ref } from 'vue';

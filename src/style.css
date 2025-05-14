@@ -5,27 +5,6 @@
   --default-font: "Ubuntu", sans-serif;
 
   --header-height: 64px;
-
-  /* -------- */
-  /* --primary-color: var(--main-dark-color);
-  --surface-color: var(--main-blue-color); */
-  /* PrimeVue */
-  /* --p-button-primary-background: var(--main-dark-color) !important;
-  --p-button-primary-hover-background: var(--main-dark-color) !important;
-  --p-button-primary-active-background: var(--main-dark-color) !important;
-  --p-button-outlined-primary-border-color: var(--main-blue-color) !important;
-  --p-button-outlined-primary-hover-background: var(--main-blue-color) !important;
-  --p-button-outlined-primary-color: var(--main-light-color) !important;
-
-  --p-button-secondary-background: var(--main-blue-color) !important;
-  --p-button-secondary-hover-background: #4c576a !important;
-  --p-button-secondary-active-background: var(--main-blue-color) !important;
-  
-
-  --p-button-label-font-weight: 600 !important;
-  --p-button-border-radius: 10px !important;
-
-  --button-text-color: var(--main-light-color) !important; */
 }
 
 body {
@@ -41,30 +20,3 @@ body {
   padding: 2rem;
   text-align: center; */
 }
-
-
-/* ---------------------- |  PrimeVue  | ---------------------- */
-/* .p-button.p-button-primary {
-  background-color: var(--main-dark-color);
-  color: var(--main-light-color);
-}
-.p-button.p-button-outlined.p-button-primary {
-  border-color: var(--main-blue-color);
-}
-.p-button.p-button-secondary {
-  background-color: var(--main-blue-color);
-  color: var(--main-light-color);
-} */
-
-
-
-/* .p-button.p-button-outlined.p-button-primary {
-  outline: 4px solid var(--main-blue-color);
-  outline-offset: -4px;
-} */
-/* .p-button .p-button-label {
-  font-weight: 600 !important;
-} */
-/* .p-paginator {
-  background-color: var(--main-dark-color) !important;
-} */

@@ -14,7 +14,6 @@
 
 <script setup>
 import { Toolbar, IconField, InputIcon, InputText, Button } from 'primevue';
-import { VToolbar } from 'vuetify/lib/components/index.mjs';
 import 'primeicons/primeicons.css'
 </script>
 

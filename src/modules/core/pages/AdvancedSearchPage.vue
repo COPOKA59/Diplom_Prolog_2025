@@ -1,6 +1,6 @@
 <template>
-    <MainContainerLayout>
-        <v-container>
+    <MainLayout :layout_container="true">
+        <!-- <v-container> -->
             <Panel>
                 <template #header> 
                     <h2 style="padding-left: 16px;">Расширенный поиск</h2>
@@ -212,7 +212,7 @@
                                 <label>Статус</label>
                             </v-col>
                             <v-col cols="12" lg="10" md="10" sm="12" class="advanced-search-btns"> 
-                                <CheckboxGroup>
+                                <!-- <CheckboxGroup>
                                     <div>
                                         <Checkbox inputId="work-status-in-progress" value="in-progress"/>
                                         <label for="work-status-in-progress"> в процессе </label>
@@ -222,7 +222,22 @@
                                         <Checkbox inputId="work-status-complete" value="complete"/>
                                         <label for="work-status-complete"> завершено </label>
                                     </div>
-                                </CheckboxGroup>
+                                </CheckboxGroup> -->
+                                <RadioButtonGroup v-model="selectedStatus">
+                                    <div>
+                                        <RadioButton v-model="selectedStatus" 
+                                                inputId="work-status-in-progress"
+                                                value="in-progress"/>
+                                        <label for="work-status-in-progress"> в процессе </label>
+                                    </div>
+                                    
+                                    <div>
+                                        <RadioButton v-model="selectedStatus" 
+                                                inputId="work-status-complete" 
+                                                value="complete"/>
+                                        <label for="work-status-complete"> завершено </label>
+                                    </div>
+                                </RadioButtonGroup>
                             </v-col>
                         </v-row>
 
@@ -234,19 +249,19 @@
                 </v-container>
 
             </Panel>
-        </v-container>
-    </MainContainerLayout>
+        <!-- </v-container> -->
+    </MainLayout>
 </template>
 
 <script setup>
 import MainLayout from "@/layouts/MainLayout.vue";
-import MainContainerLayout from "@/layouts/MainContainerLayout.vue";
 import { Panel, Divider, Button, InputText, DatePicker, 
         RadioButton, RadioButtonGroup, Checkbox, CheckboxGroup } from "primevue";
 import { VContainer, VCol, VRow, VForm } from "vuetify/lib/components/index.mjs";
 import { ref } from 'vue';
 
 const selectedType = ref('original');
+const selectedStatus = ref('in-progress')
 const minDate = new Date('2000-01-01');
 const maxDate = new Date();
 

@@ -1,17 +1,27 @@
 <template>
     <Card class="story-card-v2" :key="id">
         <template #title>
-            <v-col>
-            <RouterLink :to="{ name: 'StoryPage', params: { id: id } }">
-                {{ title }}
-            </RouterLink>
-            </v-col>
+            <v-container>
+                <v-row>
+                    <v-col class="story-name" cols="9" lg="9" md="9">
+                        <RouterLink :to="{ name: 'StoryPage', params: { id: id } }">
+                            {{ title }}
+                        </RouterLink>
+                    </v-col>
+                    <v-col class="edit-button" cols="3" lg="3" md="3" v-if="isAuthor">
+                        <Button severity="primary">
+                            <i class="pi pi-pencil"></i>
+                            <span>Изменить</span>
+                        </Button>
+                    </v-col>
+                </v-row>
+            </v-container>
         </template>
         <template #content>
           <v-container>
             <v-row>
                 <!-- class="img-col" cols="12" lg="3" md="3" -->
-                <v-col class="img-col" lg="3" md="3">
+                <v-col class="img-col" cols="12" lg="3" md="3" sm="12">
                     <img :src="img_url"/>
                 </v-col>
                 
@@ -27,7 +37,7 @@
                 </v-col>
 
                 <v-col class="col-2">
-                    <div class="row-1" v-if="read">
+                    <div class="row-1" v-if="read && !isAuthor">
                         <Chip class="read-work-label" label="Прочитано">
                         <template #icon>
                         <img src="@/assets/icons/task_alt_24dp_D9D9D9.svg"/>
@@ -82,8 +92,9 @@
 </template>
 
 <script setup>
-import { Card, Divider, Tag, Chip} from 'primevue';
+import { Card, Divider, Tag, Chip, Button} from 'primevue';
 import { VContainer, VRow, VCol } from 'vuetify/lib/components/index.mjs';
+import { ref } from 'vue';
 
 const props = defineProps({
     id: Number,
@@ -101,6 +112,7 @@ const props = defineProps({
     img_url: String,
     read: Boolean
 })
+const isAuthor = ref(true);
 </script>
 
 <style scoped>
@@ -122,7 +134,12 @@ const props = defineProps({
     /* padding: 45px; */
     padding: 33px;
 }
-.story-card-v2 :deep(.p-card-title) {
+/* .story-card-v2 :deep(.p-card-title) {
+    text-align: left;
+    font-size: 32px;
+    text-decoration: underline;
+} */
+.story-card-v2 .story-name {
     text-align: left;
     font-size: 32px;
     text-decoration: underline;
@@ -131,22 +148,6 @@ const props = defineProps({
     color: var(--main-light-color);
 }
 
-/* Grids */
-.main-card-grid {
-    display: grid;
-    flex-direction: row;
-    row-gap: 35px;
-}
-.top-inner-card-grid {
-    display: inline-grid;
-    grid-template-columns: 1fr 3fr; 
-    column-gap: 35px;
-    height: 100%;
-    width: 100%;
-
-    text-align: left;
-    line-height: 1.2;
-}
 .col-2 {
     display: flex;
     flex-direction: column;
@@ -220,5 +221,15 @@ const props = defineProps({
     align-items: center;
     gap: 10px;
 }
-
+.edit-button span {
+  @media (max-width: 600px) {
+    display: none;
+  }
+}
+.edit-button {
+    display: flex;
+    flex-direction: column;
+    justify-self: end;
+    align-items: flex-end;
+}
 </style>

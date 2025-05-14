@@ -70,6 +70,7 @@
 </template>
 
 <script setup>
+// import MainLayout from "@/layouts/MainLayout.vue";
 import MainLayout from "@/layouts/MainLayout.vue";
 import SearchPanel from "@/modules/core/components/SearchPanel.vue";
 import StoryCardSmall from "@/modules/works/components/StoryCardSmall.vue";

@@ -1,5 +1,5 @@
 <template>
-    <MainContainerLayout>
+    <MainLayout :layout_container="true">
         <Card class="user-profile">
             <template #content>
                 <v-container>
@@ -84,12 +84,13 @@
                 </v-container>
             </template>
         </Card>
-
-    </MainContainerLayout>
+    
+    </MainLayout>
 </template>
 
 <script setup>
-import MainContainerLayout from '@/layouts/MainContainerLayout.vue';
+import MainLayout from '@/layouts/MainLayout.vue';
+import CreateStoryNavBar from '../../works/components/CreateStoryNavBar.vue';
 import { VContainer, VRow, VCol } from 'vuetify/lib/components/index.mjs';
 import { Card, Divider } from 'primevue';
 </script>

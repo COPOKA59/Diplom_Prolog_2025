@@ -7,9 +7,11 @@ import AdvancedSearchPage from '@/modules/core/pages/AdvancedSearchPage.vue';
 import LoginPage from '@/modules/user/pages/LoginPage.vue';
 import Profile from '@/modules/user/pages/Profile.vue';
 import Settings from '@/modules/user/pages/Settings.vue';
+import StoryHeader from '@/modules/works/pages/StoryHeader.vue';
 
 const routes = [
   {
+    /* --------| User |-------- */
     path: '/',
     name: 'Home',
     component: MainPage,
@@ -29,6 +31,13 @@ const routes = [
     name: 'Settings',
     component: Settings,
   },
+
+  /* --------| Works |-------- */
+  {
+    path: '/search',
+    name: 'AdvancedSearchPage',
+    component: AdvancedSearchPage,
+  },
   {
     path: '/works',
     name: 'Stories',
@@ -46,10 +55,12 @@ const routes = [
     component: StoryChapterPage,
     props: true,
   },
+
+  /* --------| Editing Works |-------- */
   {
-    path: '/search',
-    name: 'AdvancedSearchPage',
-    component: AdvancedSearchPage,
+    path: '/editing',
+    name: 'Editing',
+    component: StoryHeader,
   },
 ];
 
