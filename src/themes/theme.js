@@ -181,6 +181,38 @@ const MyPreset = definePreset(Aura, {
             background-color: var(--p-surface-600);
             }
             `,
+        },
+        panel: {
+            css: ({ dt }) => `
+            .default-form .input-label {
+                margin-top: auto; 
+                margin-bottom: auto;
+            }
+            .default-form .p-divider {
+                margin-top: 40px;
+                margin-bottom: 40px;
+            }
+            .default-form-input .p-inputtext, .p-datepicker, .p-textarea {
+                width: 100%;
+            }
+
+            .default-form-btns .p-radiobutton-group, .p-checkbox-group {
+                display: grid;
+                gap: 20px;
+            }
+            .default-form-btns .p-radiobutton-group div {
+                display: flex;
+                gap: 10px;
+            }
+            .default-form-btns .p-radiobutton-group div .v-row {
+                display: flex;
+                gap: 10px;
+            }
+            .default-form .search-button, .save-button {
+                display: flex;
+                justify-content: end;
+            }
+            `,
         }
     },
     

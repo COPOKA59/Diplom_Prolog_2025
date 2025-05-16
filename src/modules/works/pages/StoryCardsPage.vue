@@ -10,7 +10,7 @@
         </v-col>
         
         <v-col class="create-story-button" cols="12" lg="7" md="7" sm="12">
-          <Button label="Создать" severity="secondary" icon="pi pi-plus" @click="$router.push({ name: 'Editing' })"/>
+          <Button label="Создать" severity="secondary" icon="pi pi-plus" @click="$router.push({ name: 'Editing Header' })"/>
         </v-col>
       </v-row>
 

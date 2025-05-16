@@ -8,6 +8,7 @@ import LoginPage from '@/modules/user/pages/LoginPage.vue';
 import Profile from '@/modules/user/pages/Profile.vue';
 import Settings from '@/modules/user/pages/Settings.vue';
 import StoryHeader from '@/modules/works/pages/StoryHeader.vue';
+import StoryStructure from '@/modules/works/pages/StoryStructure.vue';
 
 const routes = [
   {
@@ -61,6 +62,16 @@ const routes = [
     path: '/editing',
     name: 'Editing',
     component: StoryHeader,
+  },
+  {
+    path: '/editing/header',
+    name: 'Editing Header',
+    component: StoryHeader,
+  },
+  {
+    path: '/editing/structure',
+    name: 'Editing Structure',
+    component: StoryStructure,
   },
 ];
 

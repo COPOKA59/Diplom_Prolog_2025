@@ -23,7 +23,7 @@ const props = defineProps({
     default: false,
     type: Boolean
   }
-})
+});
 </script>
 
 <style scoped>
