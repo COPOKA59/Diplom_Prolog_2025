@@ -15,18 +15,18 @@
                         <label>Работа является переводом</label>
                     </v-col>
                     <v-col cols="12" lg="10" md="10" sm="12" class="default-form-btns">
-                        <RadioButtonGroup v-model="workProps.selectedTranslation">
+                        <RadioButtonGroup v-model="workProps.selectedTranslation.value">
                             <div>
-                                <RadioButton v-model="workProps.selectedTranslation" value="no-translation"/>
+                                <RadioButton value="no-translation"/>
                                 <label>нет</label>
                             </div>
                             
                             <div>
-                                <RadioButton v-model="workProps.selectedTranslation" value="translation"/>
+                                <RadioButton value="translation"/>
                                 <label>да</label>
                             </div>
 
-                            <div v-if="workProps.selectedTranslation === 'translation'">
+                            <div v-if="workProps.selectedTranslation.value === 'translation'">
                                 <label class="input-label">Автор переведённой работы</label>
                                 <InputText fluid/>
                             </div>
@@ -41,18 +41,18 @@
                         <label>Тип работы</label>
                     </v-col>
                     <v-col cols="12" lg="10" md="10" sm="12" class="default-form-btns">
-                        <RadioButtonGroup v-model="workProps.selectedWorkType">
+                        <RadioButtonGroup v-model="workProps.selectedWorkType.value">
                             <div>
-                                <RadioButton v-model="workProps.selectedWorkType" value="original"/>
+                                <RadioButton value="original"/>
                                 <label>оригинальная работа</label>
                             </div>
                             
                             <div>
-                                <RadioButton v-model="workProps.selectedWorkType" value="fandom"/>
+                                <RadioButton value="fandom"/>
                                 <label>фандом</label>
                             </div>
 
-                            <div v-if="workProps.selectedWorkType === 'fandom'">
+                            <div v-if="workProps.selectedWorkType.value === 'fandom'">
                                 <label class="input-label">Фандом</label>
                                 <InputText fluid/>
                             </div>
@@ -63,11 +63,11 @@
                 <BasicInput :inputType="'radiobutton'"
                     :label="workProps.workData.workDirection.label"
                     :options="workProps.workData.workDirection.options"
-                    v-model="workProps.selectedWorkDirection"/>
+                    v-model="workProps.selectedWorkDirection.value"/>
                 <BasicInput :inputType="'radiobutton'"
                     :label="workProps.workData.workRating.label"
                     :options="workProps.workData.workRating.options"
-                    v-model="workProps.selectedWorkRating"/>
+                    v-model="workProps.selectedWorkRating.value"/>
                 
                 <BasicInput :label="'Жанры'" :inputType="'input'"/>
                 <BasicInput :label="'Персонажи'" :inputType="'input'"/>
@@ -79,16 +79,16 @@
                 <BasicInput :inputType="'radiobutton'"
                     :label="workProps.workData.workSize.label"
                     :options="workProps.workData.workSize.options"
-                    v-model="workProps.selectedWorkSize"/>
+                    v-model="workProps.selectedWorkSize.value"/>
                 <BasicInput :inputType="'radiobutton'"
                     :label="workProps.workData.workStatus.label"
                     :options="workProps.workData.workStatus.options"
-                    v-model="workProps.selectedWorkStatus"/>
+                    v-model="workProps.selectedWorkStatus.value"/>
 
                 <Divider/>
 
                 <v-row>
-                    <v-col cols="12" lg="2" md="2" sm="12" :class="input-label"> 
+                    <v-col cols="12" lg="2" md="2" sm="12"> 
                         <label>Описание</label>
                     </v-col>
                     <v-col cols="12" lg="10" md="10" sm="12" class="default-form-input"> 
@@ -97,7 +97,7 @@
                 </v-row>
 
                 <v-row>
-                    <v-col cols="12" lg="2" md="2" sm="12" :class="input-label"> 
+                    <v-col cols="12" lg="2" md="2" sm="12"> 
                         <label>Обложка</label>
                     </v-col>
                     <v-col cols="12" lg="3" md="3" sm="12" class="img-col"> 
@@ -116,7 +116,7 @@
 
                 <v-row >
                     <v-col class="save-button">
-                        <Button severity="primary">Сохранить</Button>
+                        <Button severity="primary"> Сохранить </Button>
                     </v-col>
                 </v-row>
                     
@@ -136,7 +136,7 @@ import { Panel, Divider, Button, InputText, Textarea,
         RadioButton, RadioButtonGroup, FileUpload } from "primevue";
 import { VContainer, VCol, VRow, VForm } from "vuetify/lib/components/index.mjs";
 import workProps from '@/services/work_properties';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
 const imageUrl = ref('https://images.unsplash.com/photo-1543270122-f7a11ad44f3a?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
 const onFileUpload = (event) => {
@@ -150,6 +150,10 @@ const onFileUpload = (event) => {
   }
   
 };
+
+onMounted(() => {
+    workProps.resetWorkProps(); // Сброс значений при заходе на страницу
+});
 </script>
 
 <style scoped>

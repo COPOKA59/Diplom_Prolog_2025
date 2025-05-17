@@ -16,7 +16,7 @@
                 </li>
 
                 <li>
-                    <RouterLink to="/editing" active-class="active">
+                    <RouterLink to="/editing/characteristics" active-class="active">
                     <!-- <span>Характеристики</span> -->
                     Характеристики
                     </RouterLink>
@@ -37,7 +37,7 @@
                 </li>
 
                 <li>
-                    <RouterLink to="/editing" active-class="active">
+                    <RouterLink to="/editing/contents" active-class="active">
                     <!-- <span>Содержание</span> -->
                     Содержание
                     </RouterLink>

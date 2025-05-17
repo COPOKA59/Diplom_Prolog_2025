@@ -44,7 +44,7 @@
                                 <label>Тип работы</label>
                             </v-col>
                             <v-col cols="12" lg="10" md="10" sm="12" class="default-form-btns">
-                                <RadioButtonGroup v-model="workProps.selectedWorkType">
+                                <RadioButtonGroup v-model="workProps.selectedWorkType.value">
                                     <div>
                                         <RadioButton value="original"/>
                                         <label>оригинальная работа</label>
@@ -55,7 +55,7 @@
                                         <label>фандом</label>
                                     </div>
 
-                                    <div v-if="workProps.selectedWorkType === 'fandom'">
+                                    <div v-if="workProps.selectedWorkType.value === 'fandom'">
                                         <label class="input-label">Фандом</label>
                                         <InputText fluid/>
                                     </div>
@@ -113,9 +113,14 @@ import { Panel, Divider, Button, InputText, DatePicker,
         RadioButton, RadioButtonGroup, Checkbox, CheckboxGroup } from "primevue";
 import { VContainer, VCol, VRow, VForm } from "vuetify/lib/components/index.mjs";
 import workProps from '@/services/work_properties';
+import { onMounted } from "vue";
 
 const minDate = new Date('2000-01-01');
 const maxDate = new Date();
+
+onMounted(() => {
+    workProps.resetWorkProps(); // Сброс значений при заходе на страницу
+});
 </script>
 
 <!-- <style scoped>

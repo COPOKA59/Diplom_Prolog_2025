@@ -86,6 +86,16 @@ const selectedWorkRating = ref('G');
 const selectedWorkSize = ref('drabble');
 const selectedWorkStatus = ref('in-progress');
 
-export default { workData, 
+const resetWorkProps = () => {
+    selectedWorkType.value = 'original';
+    selectedTranslation.value = 'no-translation';
+    
+    selectedWorkDirection.value = 'get';
+    selectedWorkRating.value = 'G';
+    selectedWorkSize.value = 'drabble';
+    selectedWorkStatus.value = 'in-progress';
+}
+
+export default { workData, resetWorkProps,
     selectedWorkType, selectedTranslation, selectedWorkDirection,
     selectedWorkRating, selectedWorkSize, selectedWorkStatus,};

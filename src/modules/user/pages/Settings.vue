@@ -127,6 +127,7 @@ img {
 }
 .input-container textarea {
     flex-grow: 1;
+    resize: none;
 }
 .input-column {
     display: grid;

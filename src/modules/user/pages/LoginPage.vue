@@ -7,7 +7,6 @@
         </div>
         <v-row>
             <v-col cols="auto" lg="6" md="6" sm="12" style="margin: 30px auto;">
-                <!-- <LoginForm/> -->
                 <component :is="currentForm" @switch-form="toggleForm" />
             </v-col>
         </v-row>

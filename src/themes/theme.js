@@ -195,6 +195,9 @@ const MyPreset = definePreset(Aura, {
             .default-form-input .p-inputtext, .p-datepicker, .p-textarea {
                 width: 100%;
             }
+            .default-form textarea {
+                resize: none;
+            }
 
             .default-form-btns .p-radiobutton-group, .p-checkbox-group {
                 display: grid;
