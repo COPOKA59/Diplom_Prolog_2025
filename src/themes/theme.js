@@ -211,12 +211,41 @@ const MyPreset = definePreset(Aura, {
                 display: flex;
                 gap: 10px;
             }
-            .default-form .search-button, .save-button {
+            .default-form .search-button, .save-button, .default-button {
                 display: flex;
                 justify-content: end;
+                gap: 20px;
             }
             `,
-        }
+        },
+        editor: {
+            toolbar: {
+                border: {
+                    color: getCssVar('--main-light-color'),
+                },
+            },
+            overlay: {
+                border: {
+                    color: getCssVar('--main-light-color'),
+                }
+            },
+            content: {
+                border: {
+                    color: getCssVar('--main-light-color'),
+                }
+            },
+            css: ({ dt }) => `
+            /* .p-editor .ql-snow.ql-toolbar button.ql-active {
+                background: grey;
+                border-radius: 10px;
+            } */
+            .p-editor {
+                --p-editor-toolbar-item-color: var(--p-primary-200);
+                --p-editor-toolbar-item-hover-color: var(--p-primary-50);
+                --p-editor-toolbar-item-active-color: var(--main-light-color);
+            }
+            `,
+        },
     },
     
 })

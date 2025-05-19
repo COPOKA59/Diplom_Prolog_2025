@@ -11,6 +11,7 @@ import StoryHeader from '@/modules/works/pages/StoryHeader.vue';
 import StoryStructure from '@/modules/works/pages/StoryStructure.vue';
 import StoryCharacteristics from '@/modules/works/pages/StoryCharacteristics.vue';
 import StoryContents from '@/modules/works/pages/StoryContents.vue';
+import ChapterEditingPage from '@/modules/works/pages/ChapterEditingPage.vue';
 
 const routes = [
   {
@@ -84,6 +85,11 @@ const routes = [
     path: '/editing/contents',
     name: 'Editing Contents',
     component: StoryContents,
+  },
+  {
+    path: '/editing/contents/chapter',
+    name: 'Editing Chapter',
+    component: ChapterEditingPage,
   },
 ];
 

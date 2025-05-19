@@ -30,7 +30,7 @@
         <v-container v-else>
             <v-row>
                 <v-col>
-                    <Button icon="pi pi-arrow-left" label="Вернуться к выбору структуры" severity="secondary"
+                    <Button icon="pi pi-chevron-left" label="Вернуться к выбору структуры" severity="secondary"
                             @click="currentStructureForm = null;"/>
                 </v-col>
             </v-row>
