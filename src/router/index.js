@@ -12,6 +12,7 @@ import StoryStructure from '@/modules/works/pages/StoryStructure.vue';
 import StoryCharacteristics from '@/modules/works/pages/StoryCharacteristics.vue';
 import StoryContents from '@/modules/works/pages/StoryContents.vue';
 import ChapterEditingPage from '@/modules/works/pages/ChapterEditingPage.vue';
+import WorldPage from '@/modules/works/pages/WorldPage.vue';
 
 const routes = [
   {
@@ -58,6 +59,11 @@ const routes = [
     name: 'StoryChapterPage',
     component: StoryChapterPage,
     props: true,
+  },
+  {
+    path: '/worlds',
+    name: 'WorldPage',
+    component: WorldPage,
   },
 
   /* --------| Editing Works |-------- */

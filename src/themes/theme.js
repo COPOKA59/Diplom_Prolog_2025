@@ -1,4 +1,4 @@
-import { definePreset } from '@primeuix/themes';
+import { definePreset, dt } from '@primeuix/themes';
 import Aura from "@primeuix/themes/aura";
 
 function getCssVar(variableName) {
@@ -88,12 +88,24 @@ const MyPreset = definePreset(Aura, {
             .p-inputtext.login-input:hover {
             border: 1px solid var(--main-dark-color);
             }
+            .p-inputtext::placeholder {
+                color: gray;
+            }
+            .p-inputtext {
+                --p-inputtext-border-color: var(--main-light-color);
+                --p-inputtext-hover-border-color: var(--main-light-color);
+            }
             `,
         },
         divider: {
             border: {
                 color: getCssVar('--main-light-color'),
+            },
+            css: ({ dt }) => `
+            .p-divider {
+            --p-divider-border-color: var(--main-light-color);
             }
+            `,
         },
         radiobutton: {
             border: {
@@ -111,6 +123,14 @@ const MyPreset = definePreset(Aura, {
                 background: getCssVar('--main-light-color'),
                 
             },
+            css: ({ dt }) => `
+            .p-radiobutton {
+                --p-radiobutton-border-color: var(--main-light-color);
+                --p-radiobutton-hover-border-color: var(--p-primary-500);
+                --p-radiobutton-checked-border-color: var(--main-light-color);
+                --p-radiobutton-checked-background: var(--main-light-color);
+            }
+            `,
         },
         checkbox: {
             border: {
@@ -126,7 +146,15 @@ const MyPreset = definePreset(Aura, {
                     background: '{primary.500}',
                 },
                 background: getCssVar('--main-light-color'),
+            },
+            css: ({ dt }) => `
+            .p-checkbox {
+                --p-checkbox-border-color: var(--main-light-color);
+                --p-checkbox-hover-border-color: var(--p-primary-500);
+                --p-checkbox-checked-hover-background: var(--p-primary-500);
+                --p-checkbox-checked-background: var(--main-light-color);
             }
+            `,
         },
         button: {
             css: ({ dt }) => `
@@ -152,6 +180,12 @@ const MyPreset = definePreset(Aura, {
                     color: getCssVar('--main-light-color'),
                 },
             },
+            css: ({ dt }) => `
+            .p-textarea {
+                --p-textarea-border-color: var(--main-light-color);
+                --p-textarea-hover-border-color: var(--main-light-color);
+            }
+            `,
         },
         drawer: {
             css: ({ dt }) => `
@@ -246,6 +280,50 @@ const MyPreset = definePreset(Aura, {
             }
             `,
         },
+        tabs: {
+            css: ({ dt }) => `
+            .p-tabs {
+                --p-tabs-tab-color: var(--p-primary-50);
+                --p-tabs-tab-hover-color: var(--main-light-color);
+                --p-tabs-tab-active-color: var(--main-light-color);
+            }
+            .p-tablist-active-bar {
+                background: var(--main-light-color);
+            }
+            `
+        },
+        stepper: {
+            css: ({ dt }) => `
+            .p-stepper {
+                --p-stepper-step-title-color: var(--p-primary-50);
+                --p-stepper-step-number-border-color: var(--p-primary-50);
+                --p-stepper-step-number-color: var(--p-primary-50);
+
+                --p-stepper-step-title-active-color: var(--main-light-color);
+                --p-stepper-step-number-active-color: var(--main-light-color);
+                --p-stepper-step-number-active-border-color: var(--main-light-color);
+            }
+            `
+        },
+        scrollpanel: {
+            css: ({ dt }) => `
+            .p-scrollpanel-bar {
+                --p-scrollpanel-bar-background: var(--main-light-color);
+            }
+            .p-scrollpanel {
+                border: 1px solid var(--main-light-color);
+            }
+            `
+        },
+        listbox: {
+            css: ({ dt }) => `
+            .p-listbox {
+                --p-listbox-option-selected-background: var(--p-secondary-200);
+                --p-listbox-option-selected-focus-background: var(--p-secondary-50);
+                border: none;
+            }
+            `
+        }
     },
     
 })

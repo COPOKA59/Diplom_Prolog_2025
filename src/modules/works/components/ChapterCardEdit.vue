@@ -1,20 +1,8 @@
 <template>
     <Card :key="id">
         <template #title>
-            <!-- <v-container>
-                <v-row class="chapter-edit-container">
-                    <v-col class="chapter-text" style="width: calc(100% - 40px);">
-                        <span>
-                            Глава {{ chapter_number }}. {{ chapter_title }}. Quisque vulputate vulputate enim quis pretium. Nullam malesuada semper ornare. Etiam tincidunt massa sed turpis rutrum, vel eleifend lorem tincidunt
-                        </span>
-                    </v-col>
-
-                    <v-col style="width: 40px;" class="delete-col" ><Button class="delete-chapter" icon="pi pi-trash" severity="secondary"/></v-col>
-                </v-row>
-            </v-container> -->
             <div class="chapter-edit-container">
                 <RouterLink to="/editing/contents/chapter">
-                <!-- <div class="chapter-text" @click="$router.push({ name: 'Editing Chapter' })"> -->
                 <div class="chapter-text">
                     Глава {{ chapter_number }}. Quisque vulputate vulputate enim quis pretium. Nullam malesuada semper ornare. Etiam tincidunt massa sed turpis rutrum, vel eleifend lorem tincidunt
                 </div>

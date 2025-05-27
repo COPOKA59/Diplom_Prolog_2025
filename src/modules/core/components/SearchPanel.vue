@@ -33,9 +33,9 @@ import 'primeicons/primeicons.css'
         width: 400px;
     }
 }
-.p-inputtext::placeholder {
+/* .p-inputtext::placeholder {
     color: gray;
-}
+} */
 
 
 .search-panel :deep(.p-toolbar-center) {

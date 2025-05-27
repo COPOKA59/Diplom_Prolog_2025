@@ -30,7 +30,7 @@
                 </li>
 
                 <li>
-                    <RouterLink to="/">
+                    <RouterLink to="/worlds">
                     <span>Миры</span>
                     </RouterLink>
                 </li>
