@@ -18,7 +18,7 @@
                 </li>
 
                 <li>
-                    <RouterLink to="/">
+                    <RouterLink to="/collections">
                     <span>Сборники</span>
                     </RouterLink>
                 </li>
@@ -36,7 +36,7 @@
                 </li>
 
                 <li>
-                    <RouterLink to="/">
+                    <RouterLink to="/characters">
                     <span>Персонажи</span>
                     </RouterLink>
                 </li>
@@ -50,7 +50,6 @@
                 <li>
                     <RouterLink to="/">
                     <div style="display: flex; gap: 10px; align-items: center;">
-                        
                         <span>Выход</span>
                         <i class="pi pi-sign-out"/>
                     </div>
@@ -60,14 +59,27 @@
         </div>
 
         </Drawer>
-        <Button icon="pi pi-user" iconPos="right" label="user_name" severity="primary" @click="sidebarVisibility = true" />
+        <Button severity="primary" @click="sidebarVisibility = true">
+            <span>user_name</span>
+            <i class="pi pi-user"></i>
+        </Button>
 </template>
 
 <script setup>
 import { Button, Drawer, Avatar, Divider } from 'primevue';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
 
 const sidebarVisibility = ref(false);
+
+const route = useRoute();
+watch(
+    () => route.fullPath,
+    () => {
+        sidebarVisibility.value = false;
+    }
+);
+// @click="sidebarVisibility = false"
 </script>
 
 <style scoped>
@@ -78,5 +90,11 @@ const sidebarVisibility = ref(false);
 }
 .sidebar {
   padding: 10px 0;
+}
+
+@media (max-width: 400px) {
+    .p-button span {
+        display: none;
+    }
 }
 </style>

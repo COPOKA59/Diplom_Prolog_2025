@@ -37,7 +37,7 @@
                 </li>
 
                 <li>
-                    <RouterLink to="/editing/contents" active-class="active">
+                    <RouterLink to="/editing/contents" :class="{ active: $route.path.startsWith('/editing/contents') }">
                     <!-- <span>Содержание</span> -->
                     Содержание
                     </RouterLink>

@@ -1,81 +1,3 @@
-<!-- <template>
-    <Panel>
-        <Stepper value="1">
-            <StepList class="the-step-list">
-                <Step value="1"> Основная информация </Step>
-                <Step value="2"> Мироустройство </Step>
-                <Step value="3"> Персонажи </Step>
-                <Step value="4"> Произведения </Step>
-            </StepList>
-            <StepPanels>
-                <v-form>
-                <StepPanel v-slot="{ activateCallback }" value="1">
-                    <v-container>
-                        <v-row class="step-buttons">
-                            <v-col cols="auto"></v-col>
-                            <v-col> <span>Основная информация</span> </v-col>
-                            <v-col cols="auto">
-                                <Button icon="pi pi-arrow-right" iconPos="right" severity="primary"
-                                @click="activateCallback('2')" />
-                            </v-col>
-                        </v-row>
-                    </v-container>
-                </StepPanel>
-                <StepPanel v-slot="{ activateCallback }" value="2">
-                    <v-container>
-                        <v-row class="step-buttons">
-                            <v-col cols="auto">
-                                <Button icon="pi pi-arrow-left" iconPos="right" severity="primary"
-                                @click="activateCallback('1')" />
-                            </v-col>
-                            <v-col> <span>Мироустройство</span> </v-col>
-                            <v-col cols="auto">
-                                <Button icon="pi pi-arrow-right" iconPos="right" severity="primary"
-                                @click="activateCallback('3')" />
-                            </v-col>
-                        </v-row>
-                    </v-container>
-                </StepPanel>
-                <StepPanel v-slot="{ activateCallback }" value="3">
-                    <v-container>
-                        <v-row class="step-buttons">
-                            <v-col cols="auto">
-                                <Button icon="pi pi-arrow-left" iconPos="right" severity="primary"
-                                @click="activateCallback('2')" />
-                            </v-col>
-                            <v-col> <span>Персонажи</span> </v-col>
-                            <v-col cols="auto">
-                                <Button icon="pi pi-arrow-right" iconPos="right" severity="primary"
-                                @click="activateCallback('4')" />
-                            </v-col>
-                        </v-row>
-                    </v-container>
-                </StepPanel>
-                <StepPanel v-slot="{ activateCallback }" value="4">
-                    <v-container>
-                        <v-row class="step-buttons">
-                            <v-col cols="auto">
-                                <Button icon="pi pi-arrow-left" iconPos="right" severity="primary"
-                                @click="activateCallback('3')" />
-                            </v-col>
-                            <v-col> <span>Произведения</span> </v-col>
-                            <v-col cols="auto" class="step-button-left">
-                            </v-col>
-                        </v-row>
-                    </v-container>
-                </StepPanel>
-
-                <v-row>
-                    <v-col class="default-button">
-                        <Button severity="primary">Сохранить</Button>
-                    </v-col>
-                </v-row>
-                
-                </v-form>
-            </StepPanels>
-        </Stepper>
-    </Panel>
-</template> -->
 <template>
     <Panel>
         <Stepper value="1">
@@ -148,10 +70,6 @@
 
                         <v-row>
                             <v-col>
-                                <!-- <AutoComplete class="items-autocomplete" 
-                                    v-model="chosenInputValue" optionLabel="name" :suggestions="filteredItems" 
-                                    @complete="search" @option-select="addItem" placeholder="Введите название..."
-                                    forceSelection/> -->
                                 <AutoComplete class="items-autocomplete" 
                                     v-model="itemCategories.category1.chosenInputValue" optionLabel="name" 
                                     :suggestions="itemCategories.category1.filteredItems.value" 
@@ -160,14 +78,17 @@
                                     placeholder="Введите название..."
                                     forceSelection/>
                             </v-col>
+                            <v-col cols="auto">
+                                <Button class="clear-items-button" severity="primary"
+                                    @click="itemCategories.category1.chosenItems.length = 0;">
+                                    <i class="pi pi-ban"></i>
+                                    <span>Очистить</span>
+                                </Button>
+                            </v-col>
                         </v-row>
 
                         <v-row>
                             <v-col>
-                                <!-- <ScrollPanel v-if="chosenItems.length > 0">
-                                    <ItemCard v-for="item in chosenItems" :key="item.id" :name="item.name"
-                                        @delete-item="deleteItem(item.id)"/>
-                                </ScrollPanel> -->
                                 <ScrollPanel v-if="itemCategories.category1.chosenItems.length > 0">
                                     <ItemCard v-for="item in itemCategories.category1.chosenItems" :key="item.id" :name="item.name"
                                         @delete-item="deleteItem(item.id, 'category1')"/>
@@ -202,14 +123,17 @@
                                     placeholder="Введите название..."
                                     forceSelection/>
                             </v-col>
+                            <v-col cols="auto">
+                                <Button class="clear-items-button" severity="primary"
+                                    @click="itemCategories.category2.chosenItems.length = 0;">
+                                    <i class="pi pi-ban"></i>
+                                    <span>Очистить</span>
+                                </Button>
+                            </v-col>
                         </v-row>
 
                         <v-row>
                             <v-col>
-                                <!-- <ScrollPanel v-if="chosenItems.length > 0">
-                                    <ItemCard v-for="item in chosenItems" :key="item.id" :name="item.name"
-                                    @delete-item="deleteItem(item.id)"/>
-                                </ScrollPanel> -->
                                 <ScrollPanel v-if="itemCategories.category2.chosenItems.length > 0">
                                     <ItemCard v-for="item in itemCategories.category2.chosenItems" :key="item.id" :name="item.name"
                                         @delete-item="deleteItem(item.id, 'category2')"/>
@@ -238,11 +162,12 @@
 
 <script setup>
 import { VContainer, VRow, VCol, VForm } from 'vuetify/lib/components/index.mjs';
-import { Listbox, Button, Textarea, InputText, Panel, Tab, Tabs, TabList, TabPanel, TabPanels,
-        Stepper, Step, StepList, StepPanel, StepPanels, Dialog, Divider, ScrollPanel, AutoComplete } from 'primevue';
+import { Button, Textarea, AutoComplete, 
+        Divider, Panel, ScrollPanel, 
+        Stepper, Step, StepList, StepPanel, StepPanels } from 'primevue';
 import BasicInput from '@/modules/core/components/BasicInput.vue';
 import ItemCard from './ItemCard.vue';
-import { ref } from "vue";
+import { reactive } from "vue";
 
 const props = defineProps({
     formType: {
@@ -277,73 +202,44 @@ const formData = {
 //-----------| AutoComplete |-----------
 
 import options_list from '@/services/search_options';
-const chosenInputValue = ref(null);
 
-const items = ref(options_list);
-const chosenItems = ref([]);
-const filteredItems = ref(items.value); // ref([]);
-
-/* const search = (event, filtered) => {
-    const query = event.query.toLowerCase();
-    filteredItems.value = items.value.filter(item => 
-        item.name.toLowerCase().includes(query)
-    );
-};
-const addItem = (event) => {
-    console.log('event value: ', event.value);
-    if (chosenItems.value.includes(event.value)) {
-        console.log(`${event.value.name} is already in the array.`);
-    }
-    else {
-        chosenItems.value.push(event.value);
-    }
-    console.log('value list: ', chosenItems);
-};
-
-const deleteItem = (itemId) => {
-    chosenItems.value = chosenItems.value.filter(item => item.id != itemId);
-}; */
-
-
-
-// ---------| v2.0 |---------
-const itemCategories = ref({
-    category1: {
-        chosenInputValue: ref(null),
-        items: ref(options_list),
-        filteredItems: ref([]),
-        chosenItems: ref([]),
-    },
-    category2: {
-        chosenInputValue: ref(null),
-        items: ref([
-            { id: 0, name: 'qwerty' },
-            { id: 1, name: 'abc' },
-            { id: 2, name: 'oplkjmhngbf' },
-        ]),
-        filteredItems: ref([]),
-        chosenItems: ref([]),
-    },
+const itemCategories = reactive({
+  category1: {
+    chosenInputValue: null,
+    items: options_list,
+    filteredItems: [],
+    chosenItems: [],
+  },
+  category2: {
+    chosenInputValue: null,
+    items: [
+      { id: 0, name: 'qwerty' },
+      { id: 1, name: 'abc' },
+      { id: 2, name: 'oplkjmhngbf' },
+    ],
+    filteredItems: [],
+    chosenItems: [],
+  },
 });
 
 const search = (event, category) => {
     const query = event.query.toLowerCase();
-    itemCategories.value[category].filteredItems.value = itemCategories.value[category].items.filter(item => 
+    itemCategories[category].filteredItems.value = itemCategories[category].items.filter(item => 
         item.name.toLowerCase().includes(query)
     );
-    console.log(`filtered items of ${category}: ${JSON.stringify(itemCategories.value[category].filteredItems.value)}`);
+    console.log(`filtered items of ${category}: ${JSON.stringify(itemCategories[category].filteredItems.value)}`);
 };
 const addItem = (event, category) => {
-    if (!itemCategories.value[category].chosenItems.includes(event.value)) {
-        itemCategories.value[category].chosenItems.push(event.value);
+    if (!itemCategories[category].chosenItems.includes(event.value)) {
+        itemCategories[category].chosenItems.push(event.value);
     }
     console.log(`added ${event.value.name} to chosen items of ${category}: 
-    ${JSON.stringify(itemCategories.value[category].chosenItems)}`);
+    ${JSON.stringify(itemCategories[category].chosenItems)}`);
 };
 const deleteItem = (itemId, category) => {
-    itemCategories.value[category].chosenItems = itemCategories.value[category].chosenItems.filter(item => item.id != itemId);
+    itemCategories[category].chosenItems = itemCategories[category].chosenItems.filter(item => item.id != itemId);
     console.log(`deleted id=${itemId} from chosen items of ${category}: 
-    ${JSON.stringify(itemCategories.value[category].chosenItems)}`);
+    ${JSON.stringify(itemCategories[category].chosenItems)}`);
 };
 </script>
 
@@ -390,6 +286,9 @@ textarea {
     }
     .step-buttons .v-col {
         padding: 6px;
+    }
+    .clear-items-button span {
+        display: none;
     }
 }
 </style>

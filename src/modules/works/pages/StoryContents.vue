@@ -1,15 +1,5 @@
 <template>
     <CreateStoryLayout>
-    <!-- <v-container style="max-width: 70vw;"> -->
-    <!-- <v-container class="contents-container">
-        <v-row v-for="index in 10">
-            <v-col>
-                <ChapterCardEdit :id="index" :chapter_number="index" 
-                :chapter_title="'Lfhrei Halt ei'" :published="new Date('2021-01-01')"/>
-            </v-col>
-        </v-row>
-    </v-container> -->
-
     <v-container class="contents-container">
     <Panel class="default-form">
         <v-container>
@@ -17,23 +7,17 @@
             <v-row >
                 <v-col class="default-button">
                     <Button severity="primary" icon="pi pi-plus" label="Создать"/>
-                    <!-- <Button severity="primary"> Сохранить </Button> -->
                 </v-col>
             </v-row>
 
-            <v-row v-for="index in 10">
+            <v-row v-for="chapter in storyChapters">
                 <v-col>
-                    <ChapterCardEdit :id="index" :chapter_number="index" 
-                    :chapter_title="'Lfhrei Halt ei'" :published="new Date('2021-01-01')"/>
+                    <ChapterCardEdit :id="chapter.id" :chapter_number="chapter.number" 
+                    :chapter_title="chapter.title" :published="chapter.date"
+                    @delete-item="deleteChapter(chapter.id)"/>
                 </v-col>
             </v-row>
 
-            <!-- <v-row >
-                <v-col class="default-button">
-                    <Button severity="primary" icon="pi pi-plus" label="Создать"/>
-                    <Button severity="primary"> Сохранить </Button>
-                </v-col>
-            </v-row> -->
         </v-container>
     </Panel>
     </v-container>
@@ -45,6 +29,13 @@ import CreateStoryLayout from '@/layouts/CreateStoryLayout.vue';
 import { VContainer, VRow, VCol } from 'vuetify/lib/components/index.mjs';
 import { Panel, ScrollPanel, Button } from 'primevue';
 import ChapterCardEdit from '../components/ChapterCardEdit.vue';
+import chapters from '@/services/stories';
+import { ref } from 'vue';
+
+const storyChapters = ref(chapters);
+const deleteChapter = (chapterId) => {
+    storyChapters.value = storyChapters.value.filter(chapter => chapter.id != chapterId);
+};
 </script>
 
 <style scoped>

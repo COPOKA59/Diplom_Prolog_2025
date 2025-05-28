@@ -1,14 +1,14 @@
 <template>
     <Card :key="id">
         <template #title>
-            <div class="chapter-edit-container">
-                <RouterLink :to="{ name: 'Editing Chapter', params: { id: id } }">
-                <div class="chapter-text">
-                    Глава {{ chapter_number }}. {{ chapter_title }} Quisque vulputate vulputate enim quis pretium. Nullam malesuada semper ornare. Etiam tincidunt massa sed turpis rutrum, vel eleifend lorem tincidunt
+            <div class="item-edit-container">
+                <RouterLink :to="{ name: pageName, params: { id: id } }">
+                <div class="item-text">
+                    {{ name }} Quisque vulputate vulputate enim quis pretium. Nullam malesuada semper ornare. Etiam tincidunt massa sed turpis rutrum, vel eleifend lorem tincidunt
                 </div>
                 </RouterLink>
 
-                <div class="delete-chapter">
+                <div class="delete-item">
                     <Button icon="pi pi-trash" severity="secondary"
                      @click="$emit('delete-item')"/>
                 </div>
@@ -24,10 +24,8 @@ import { RouterLink } from 'vue-router';
 
 const props = defineProps({
     id: Number,
-    chapter_number: Number,
-    chapter_title: String,
-    published: Date,
-    text: String,
+    name: String,
+    pageName: String
 })
 
 </script>
@@ -41,7 +39,7 @@ const props = defineProps({
     border: 2px solid var(--main-light-color);
 }
 
-.chapter-edit-container {
+.item-edit-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -49,7 +47,7 @@ const props = defineProps({
     --btn-width: 60px;
     --padding-size: 24px;
 }
-.chapter-text, a {
+.item-text, a {
     /* width: calc(100% - 40px); */
     width: 100%;
     white-space: nowrap;
@@ -59,12 +57,12 @@ const props = defineProps({
     color: var(--main-light-color);
     text-decoration: none;
 }
-.chapter-text {
+.item-text {
     padding: var(--padding-size);
     padding-right: 8px;
 }
 
-.delete-chapter button {
+.delete-item button {
     background-color: transparent;
     border: none;
     width: var(--btn-width);
@@ -72,14 +70,14 @@ const props = defineProps({
 }
 
 @media (max-width: 600px) {
-    .chapter-text {
+    .item-text {
         font-size: 14px;
     }
-    .chapter-text {
+    .item-text {
         padding: calc(var(--padding-size) - 10px);
         padding-right: 8px;;
     }
-    .delete-chapter button {
+    .delete-item button {
         width: calc(var(--btn-width) - 20px);
         border-radius: 20px;
     }

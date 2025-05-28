@@ -311,8 +311,8 @@ export const works = [
       direction: "", size: "", genres: "", relationships: "", tags: [],
       description: "", img_url: "", read: false, chapters: [], text: "",
     },
-]
-
+];
+export default chapters;
 /* async function fetchWorks() {
   return works;
 }
