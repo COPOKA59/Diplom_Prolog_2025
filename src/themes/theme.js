@@ -323,6 +323,15 @@ const MyPreset = definePreset(Aura, {
                 border: none;
             }
             `
+        },
+        select: {
+            css: ({ dt }) => `
+            .p-select {
+                --p-select-border-color: var(--main-light-color);
+                --p-select-hover-border-color: var(--main-light-color);
+                --p-select-placeholder-color: grey;
+            }
+            `
         }
     },
     

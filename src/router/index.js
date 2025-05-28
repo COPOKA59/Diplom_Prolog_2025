@@ -11,6 +11,8 @@ import StoryChapterPage from '@/modules/works/pages/StoryChapterPage.vue';
 import StoryHeader from '@/modules/works/pages/StoryHeader.vue';
 import StoryStructure from '@/modules/works/pages/StoryStructure.vue';
 import StoryCharacteristics from '@/modules/works/pages/StoryCharacteristics.vue';
+import StoryWorld from '@/modules/works/pages/StoryWorld.vue';
+import StoryCharacters from '@/modules/works/pages/StoryCharacters.vue';
 import StoryContents from '@/modules/works/pages/StoryContents.vue';
 import ChapterEditingPage from '@/modules/works/pages/ChapterEditingPage.vue';
 import WorldbuildingPage from '@/modules/works/pages/WorldbuildingPage.vue';
@@ -134,6 +136,16 @@ const routes = [
     path: '/editing/characteristics',
     name: 'Editing Characteristics',
     component: StoryCharacteristics,
+  },
+  {
+    path: '/editing/world',
+    name: 'Editing World',
+    component: StoryWorld,
+  },
+  {
+    path: '/editing/characters',
+    name: 'Editing Characters',
+    component: StoryCharacters,
   },
   {
     path: '/editing/contents',

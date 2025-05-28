@@ -24,7 +24,7 @@
                             @complete="search" 
                             @option-select="addItem" 
                             placeholder="Введите название..."
-                            forceSelection/>
+                            forceSelection emptySearchMessage="Ничего не найдено"/>
                     </v-col>
                     <v-col cols="auto">
                         <Button class="clear-items-button" severity="primary"

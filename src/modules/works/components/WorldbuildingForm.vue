@@ -76,7 +76,7 @@
                                     @complete="(event) => search(event, 'category1')" 
                                     @option-select="(event) => addItem(event, 'category1')" 
                                     placeholder="Введите название..."
-                                    forceSelection/>
+                                    forceSelection emptySearchMessage="Ничего не найдено"/>
                             </v-col>
                             <v-col cols="auto">
                                 <Button class="clear-items-button" severity="primary"
@@ -121,7 +121,7 @@
                                     @complete="(event) => search(event, 'category2')" 
                                     @option-select="(event) => addItem(event, 'category2')" 
                                     placeholder="Введите название..."
-                                    forceSelection/>
+                                    forceSelection emptySearchMessage="Ничего не найдено"/>
                             </v-col>
                             <v-col cols="auto">
                                 <Button class="clear-items-button" severity="primary"

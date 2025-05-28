@@ -3,42 +3,36 @@
             <ul>
                 <li>
                     <RouterLink to="/editing/header" active-class="active">
-                    <!-- <span>Шапка</span> -->
                     Шапка
                     </RouterLink>
                 </li>
 
                 <li>
                     <RouterLink to="/editing/structure" active-class="active">
-                    <!-- <span>Структура</span> -->
                     Структура
                     </RouterLink>
                 </li>
 
                 <li>
                     <RouterLink to="/editing/characteristics" active-class="active">
-                    <!-- <span>Характеристики</span> -->
                     Характеристики
                     </RouterLink>
                 </li>
 
                 <li>
-                    <RouterLink to="/editing" active-class="active">
-                    <!-- <span>Миры</span> -->
+                    <RouterLink to="/editing/world" active-class="active">
                     Миры
                     </RouterLink>
                 </li>
 
                 <li>
-                    <RouterLink to="/editing" active-class="active">
-                    <!-- <span>Персонажи</span> -->
+                    <RouterLink to="/editing/characters" active-class="active">
                     Персонажи
                     </RouterLink>
                 </li>
 
                 <li>
                     <RouterLink to="/editing/contents" :class="{ active: $route.path.startsWith('/editing/contents') }">
-                    <!-- <span>Содержание</span> -->
                     Содержание
                     </RouterLink>
                 </li>
