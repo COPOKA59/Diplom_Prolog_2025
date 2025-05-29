@@ -4,7 +4,7 @@
           :key="id">
         <template #content>
             <RouterLink v-if="id" :to="{ name: 'StoryPage', params: { id: id } }">
-                <img :src="img_url" />
+                <img :src="img_url ? img_url : '/src/assets/img/default_cover.svg'" />
                 <div class="story-name">
                     <span>{{ title }}</span>
                 </div>

@@ -5,7 +5,7 @@
             <v-row>
                 <!-- class="img-col" cols="12" lg="3" md="3" -->
                 <v-col class="img-col" lg="3" md="3">
-                    <img :src="img_url"/>
+                    <img :src="img_url ? img_url : '/src/assets/img/default_cover.svg'"/>
                 </v-col>
                 
                 <v-col class="col-1">
