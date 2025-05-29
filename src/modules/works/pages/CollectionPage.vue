@@ -37,8 +37,9 @@
 
                 <v-row v-if="itemData.chosenItems.length > 0" v-for="work in itemData.chosenItems">
                     <v-col>
-                        <ItemCardEdit :id="work.id" :name="work.title" 
-                        :pageName="'StoryPage'" @delete-item="deleteItem(work.id)"/>
+                        <ItemCardMain :id="work.id" :title="work.title" 
+                        :pageName="'StoryPage'"
+                        :canDelete="true" @delete-item="deleteItem(work.id)"/>
                     </v-col>
                 </v-row>
                 <v-row v-else>
@@ -64,9 +65,8 @@ import MainLayout from '@/layouts/MainLayout.vue';
 import { VContainer, VRow, VCol, VForm } from 'vuetify/lib/components/index.mjs';
 import { Panel, Button, AutoComplete } from 'primevue';
 import BasicInput from '@/modules/core/components/BasicInput.vue';
-import ItemCardEdit from '../components/ItemCardEdit.vue';
-import { reactive, ref } from 'vue';
-import options_list from '@/services/search_options';
+import ItemCardMain from '../components/ItemCardMain.vue';
+import { reactive } from 'vue';
 import { works } from '@/services/stories';
 
 const itemData = reactive({

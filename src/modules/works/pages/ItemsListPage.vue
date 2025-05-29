@@ -13,8 +13,9 @@
 
                 <v-row v-for="item in itemsList">
                     <v-col>
-                        <ItemCardEdit :id="item.id" :name="item.title" 
-                        :pageName="$route.meta.itemData.pageName" @delete-item="deleteItem(item.id)"/>
+                        <ItemCardMain :id="item.id" :title="item.title" 
+                        :pageName="$route.meta.itemData.pageName"
+                        :canDelete="true" @delete-item="deleteItem(item.id)"/>
                     </v-col>
                 </v-row>
             </v-container>
@@ -26,7 +27,7 @@
 import MainLayout from '@/layouts/MainLayout.vue';
 import { VContainer, VRow, VCol, VForm } from 'vuetify/lib/components/index.mjs';
 import { Panel, Button } from 'primevue';
-import ItemCardEdit from '../components/ItemCardEdit.vue';
+import ItemCardMain from '../components/ItemCardMain.vue';
 import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 

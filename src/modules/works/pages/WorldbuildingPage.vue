@@ -10,8 +10,6 @@
 import MainLayout from '@/layouts/MainLayout.vue';
 import { VContainer, VRow, VCol, VForm } from 'vuetify/lib/components/index.mjs';
 import WorldbuildingForm from '../components/WorldbuildingForm.vue';
-import ChapterCardEdit from '../components/ChapterCardEdit.vue';
-import ItemCardEdit from '../components/ItemCardEdit.vue';
 </script>
 
 <style scoped>

@@ -4,6 +4,7 @@ import AdvancedSearchPage from '@/modules/core/pages/AdvancedSearchPage.vue';
 import LoginPage from '@/modules/user/pages/LoginPage.vue';
 import Profile from '@/modules/user/pages/Profile.vue';
 import Settings from '@/modules/user/pages/Settings.vue';
+import AuthorProfile from '@/modules/user/pages/AuthorProfile.vue';
 
 import StoryCardsPage from '@/modules/works/pages/StoryCardsPage.vue';
 import StoryPage from '@/modules/works/pages/StoryPage.vue';
@@ -40,6 +41,21 @@ const routes = [
     path: '/settings',
     name: 'Settings',
     component: Settings,
+  },
+  {
+    path: '/user/profile',
+    name: 'Author Profile',
+    component: AuthorProfile,
+  },
+  {
+    path: '/user/series',
+    name: 'Author Series',
+    component: AuthorProfile,
+  },
+  {
+    path: '/user/works',
+    name: 'Author Works',
+    component: AuthorProfile,
   },
 
   /* --------| Works |-------- */

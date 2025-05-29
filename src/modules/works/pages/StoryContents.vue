@@ -12,9 +12,9 @@
 
             <v-row v-for="chapter in storyChapters">
                 <v-col>
-                    <ChapterCardEdit :id="chapter.id" :chapter_number="chapter.number" 
-                    :chapter_title="chapter.title" :published="chapter.date"
-                    @delete-item="deleteChapter(chapter.id)"/>
+                    <ItemCardMain :id="chapter.id" :title="chapter.title" :pageName="'Editing Chapter'"
+                    :isChapter="true" :number="chapter.number"
+                    :canDelete="true" @delete-item="deleteChapter(chapter.id)"/>
                 </v-col>
             </v-row>
 
@@ -27,8 +27,8 @@
 <script setup>
 import CreateStoryLayout from '@/layouts/CreateStoryLayout.vue';
 import { VContainer, VRow, VCol } from 'vuetify/lib/components/index.mjs';
-import { Panel, ScrollPanel, Button } from 'primevue';
-import ChapterCardEdit from '../components/ChapterCardEdit.vue';
+import { Panel, Button } from 'primevue';
+import ItemCardMain from '../components/ItemCardMain.vue';
 import chapters from '@/services/stories';
 import { ref } from 'vue';
 

@@ -35,7 +35,6 @@
 import CreateStoryLayout from '@/layouts/CreateStoryLayout.vue';
 import { VContainer, VRow, VCol, VForm } from 'vuetify/lib/components/index.mjs';
 import { Panel, Button, Textarea } from 'primevue';
-import ChapterCardEdit from '../components/ChapterCardEdit.vue';
 
 const questions = [
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit?",

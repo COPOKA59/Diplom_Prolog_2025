@@ -30,7 +30,7 @@
                 <v-row>
                     <v-col>
                         <ScrollPanel v-if="characterData.chosenItems.length > 0">
-                            <ItemCard v-for="item in characterData.chosenItems" :key="item.id" :name="item.name"
+                            <ItemCardSimple v-for="item in characterData.chosenItems" :key="item.id" :name="item.name"
                                 @delete-item="deleteItem(item.id)"/>
                         </ScrollPanel>
                         <div v-else class="no-items">
@@ -54,7 +54,7 @@
 import CreateStoryLayout from '@/layouts/CreateStoryLayout.vue';
 import { VContainer, VRow, VCol, VForm } from 'vuetify/lib/components/index.mjs';
 import { Panel, Button, AutoComplete, ScrollPanel } from 'primevue';
-import ItemCard from '../components/ItemCard.vue';
+import ItemCardSimple from '../components/ItemCardSimple.vue';
 import { reactive } from 'vue';
 import options_list from '@/services/search_options';
 

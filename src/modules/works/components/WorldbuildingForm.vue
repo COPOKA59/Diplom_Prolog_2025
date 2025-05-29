@@ -90,7 +90,7 @@
                         <v-row>
                             <v-col>
                                 <ScrollPanel v-if="itemCategories.category1.chosenItems.length > 0">
-                                    <ItemCard v-for="item in itemCategories.category1.chosenItems" :key="item.id" :name="item.name"
+                                    <ItemCardSimple v-for="item in itemCategories.category1.chosenItems" :key="item.id" :name="item.name"
                                         @delete-item="deleteItem(item.id, 'category1')"/>
                                 </ScrollPanel>
                                 <div v-else class="no-items">
@@ -135,7 +135,7 @@
                         <v-row>
                             <v-col>
                                 <ScrollPanel v-if="itemCategories.category2.chosenItems.length > 0">
-                                    <ItemCard v-for="item in itemCategories.category2.chosenItems" :key="item.id" :name="item.name"
+                                    <ItemCardSimple v-for="item in itemCategories.category2.chosenItems" :key="item.id" :name="item.name"
                                         @delete-item="deleteItem(item.id, 'category2')"/>
                                 </ScrollPanel>
                                 <div v-else class="no-items">
@@ -166,7 +166,7 @@ import { Button, Textarea, AutoComplete,
         Divider, Panel, ScrollPanel, 
         Stepper, Step, StepList, StepPanel, StepPanels } from 'primevue';
 import BasicInput from '@/modules/core/components/BasicInput.vue';
-import ItemCard from './ItemCard.vue';
+import ItemCardSimple from './ItemCardSimple.vue';
 import { reactive } from "vue";
 
 const props = defineProps({

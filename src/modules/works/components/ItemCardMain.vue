@@ -1,14 +1,16 @@
 <template>
     <Card :key="id">
         <template #title>
-            <div class="item-edit-container">
+            <div class="item-container">
                 <RouterLink :to="{ name: pageName, params: { id: id } }">
                 <div class="item-text">
-                    {{ name }} Quisque vulputate vulputate enim quis pretium. Nullam malesuada semper ornare. Etiam tincidunt massa sed turpis rutrum, vel eleifend lorem tincidunt
+                    {{ isChapter ? `Глава ${ number }. ` : '' }}
+                    {{ title }} Quisque vulputate vulputate enim quis pretium. Nullam malesuada semper ornare. Etiam tincidunt massa sed 
+                    turpis rutrum, vel eleifend lorem tincidunt
                 </div>
                 </RouterLink>
 
-                <div class="delete-item">
+                <div v-if="canDelete" class="item-chapter">
                     <Button icon="pi pi-trash" severity="secondary"
                      @click="$emit('delete-item')"/>
                 </div>
@@ -24,9 +26,12 @@ import { RouterLink } from 'vue-router';
 
 const props = defineProps({
     id: Number,
-    name: String,
+    title: String,
+    isChapter: { type: Boolean, default: false },
+    number: Number,
+    canDelete: { type: Boolean, default: false },
     pageName: String
-})
+});
 
 </script>
 
@@ -39,7 +44,7 @@ const props = defineProps({
     border: 2px solid var(--main-light-color);
 }
 
-.item-edit-container {
+.item-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -62,7 +67,7 @@ const props = defineProps({
     padding-right: 8px;
 }
 
-.delete-item button {
+.item-chapter button {
     background-color: transparent;
     border: none;
     width: var(--btn-width);
@@ -77,7 +82,7 @@ const props = defineProps({
         padding: calc(var(--padding-size) - 10px);
         padding-right: 8px;;
     }
-    .delete-item button {
+    .item-chapter button {
         width: calc(var(--btn-width) - 20px);
         border-radius: 20px;
     }
