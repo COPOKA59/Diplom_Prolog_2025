@@ -64,7 +64,7 @@ const props = defineProps({
 }
 .item-text {
     padding: var(--padding-size);
-    padding-right: 8px;
+    /* padding-right: 8px; */
 }
 
 .item-chapter button {
@@ -80,7 +80,7 @@ const props = defineProps({
     }
     .item-text {
         padding: calc(var(--padding-size) - 10px);
-        padding-right: 8px;;
+        padding-right: 8px;
     }
     .item-chapter button {
         width: calc(var(--btn-width) - 20px);

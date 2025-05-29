@@ -5,6 +5,8 @@ import LoginPage from '@/modules/user/pages/LoginPage.vue';
 import Profile from '@/modules/user/pages/Profile.vue';
 import Settings from '@/modules/user/pages/Settings.vue';
 import AuthorProfile from '@/modules/user/pages/AuthorProfile.vue';
+import AuthorSeries from '@/modules/user/pages/AuthorSeries.vue';
+import AuthorStories from '@/modules/user/pages/AuthorStories.vue';
 
 import StoryCardsPage from '@/modules/works/pages/StoryCardsPage.vue';
 import StoryPage from '@/modules/works/pages/StoryPage.vue';
@@ -19,6 +21,7 @@ import ChapterEditingPage from '@/modules/works/pages/ChapterEditingPage.vue';
 import WorldbuildingPage from '@/modules/works/pages/WorldbuildingPage.vue';
 import ItemsListPage from '@/modules/works/pages/ItemsListPage.vue';
 import CollectionPage from '@/modules/works/pages/CollectionPage.vue';
+import SeriesStoriesPage from '@/modules/works/pages/SeriesStoriesPage.vue';
 
 const routes = [
   {
@@ -48,14 +51,24 @@ const routes = [
     component: AuthorProfile,
   },
   {
+    path: '/user',
+    redirect: '/user/profile'
+  },
+  {
     path: '/user/series',
     name: 'Author Series',
-    component: AuthorProfile,
+    component: AuthorSeries,
+  },
+  {
+    path: '/series/:id',
+    name: 'Series',
+    component: SeriesStoriesPage,
+    props: true
   },
   {
     path: '/user/works',
     name: 'Author Works',
-    component: AuthorProfile,
+    component: AuthorStories,
   },
 
   /* --------| Works |-------- */

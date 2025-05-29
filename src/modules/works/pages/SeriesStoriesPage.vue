@@ -1,6 +1,20 @@
 <template>
-    <UserLayout>
-        <v-container class="container">
+    <MainLayout :layout_container="true">
+    <v-container class="container">
+        <v-row>
+            <v-col>
+                <Card>
+                    <template #title>
+                        <h3>Сборник «название сборника»</h3>
+                    </template>
+                    <template #content>
+                        <p><b>Автор:</b> ник автора</p>
+                        <p><b>Дата создания:</b> 21.01.2023</p>
+                        <p><b>Дата изменения:</b> 11.03.2024</p>
+                    </template>
+                </Card>
+            </v-col>
+        </v-row>
         <v-row v-for="work in works">
             <v-col>
             <StoryCard
@@ -21,13 +35,14 @@
             </v-col>
         </v-row>
     </v-container>
-    </UserLayout>
+    </MainLayout>
 </template>
 
 <script setup>
-import UserLayout from '@/layouts/UserLayout.vue';
+import MainLayout from '@/layouts/MainLayout.vue';
 import { VContainer, VRow, VCol } from 'vuetify/lib/components/index.mjs';
-import StoryCard from '@/modules/works/components/StoryCard.vue';
+import { Panel, Card } from 'primevue';
+import StoryCard from '../components/StoryCard.vue';
 import { works } from '@/services/stories';
 </script>
 
@@ -41,5 +56,9 @@ import { works } from '@/services/stories';
   padding: 0 20px;
   /* Ensures padding and borders are included in the width */
   box-sizing: border-box; 
+}
+
+.p-card h3 {
+    /* margin-top: 0; */
 }
 </style>
