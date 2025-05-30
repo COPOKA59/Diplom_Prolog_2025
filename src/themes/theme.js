@@ -37,15 +37,15 @@ const MyPreset = definePreset(Aura, {
         colorScheme: {
             light: {
                 surface: {
-                    0: '#ffffff',
+                    0: '{secondary.500}',
                     50: '{secondary.50}',
-                    100: '{secondary.100}',
-                    200: '{secondary.200}',
+                    100: '{secondary.600}',
+                    200: '{secondary.500}',
                     300: '{secondary.300}',
                     400: '{secondary.400}',
                     500: '{secondary.500}',
-                    600: '{secondary.600}',
-                    700: '{secondary.600}',
+                    600: getCssVar('--main-light-color'),
+                    700: getCssVar('--main-light-color'),
                     800: '{secondary.600}',
                     900: '{secondary.500}',
                     950: '{secondary.500}'
@@ -53,12 +53,12 @@ const MyPreset = definePreset(Aura, {
             },
             dark: {
                 surface: {
-                    0: '#ffffff',
-                    50: '#ffffff',
-                    100: '#ffffff',
-                    200: '#ffffff',
-                    300: '#ffffff',
-                    400: '#ffffff',
+                    0: getCssVar('--main-light-color'),
+                    50: getCssVar('--main-light-color'),
+                    100: getCssVar('--main-light-color'),
+                    200: getCssVar('--main-light-color'),
+                    300: getCssVar('--main-light-color'),
+                    400: getCssVar('--main-light-color'),
                     500: '{secondary.500}',
                     600: '{secondary.600}',
                     700: '{secondary.600}',
@@ -126,11 +126,19 @@ const MyPreset = definePreset(Aura, {
             css: ({ dt }) => `
             .p-radiobutton {
                 --p-radiobutton-border-color: var(--main-light-color);
-                --p-radiobutton-hover-border-color: var(--p-primary-500);
+                --p-radiobutton-hover-border-color: var(--main-blue-color);
                 --p-radiobutton-checked-border-color: var(--main-light-color);
                 --p-radiobutton-checked-background: var(--main-light-color);
+                --p-radiobutton-icon-checked-color: var(--main-dark-color);
+                --p-radiobutton-icon-checked-hover-color: var(--main-dark-color);
+                --p-radiobutton-checked-hover-border-color: var(--main-blue-color);
+                --p-radiobutton-checked-hover-background: var(--main-blue-color);
             }
             `,
+            /*
+            --p-radiobutton-icon-checked-color: #c20000;
+            --p-radiobutton-icon-checked-hover-color: var(--p-primary-contrast-color); 
+             */
         },
         checkbox: {
             border: {
@@ -150,9 +158,11 @@ const MyPreset = definePreset(Aura, {
             css: ({ dt }) => `
             .p-checkbox {
                 --p-checkbox-border-color: var(--main-light-color);
-                --p-checkbox-hover-border-color: var(--p-primary-500);
-                --p-checkbox-checked-hover-background: var(--p-primary-500);
+                --p-checkbox-hover-border-color: var(--main-blue-color);
+                --p-checkbox-checked-hover-background: var(--main-blue-color);
                 --p-checkbox-checked-background: var(--main-light-color);
+                --p-checkbox-icon-checked-color: var(--main-dark-color);
+                --p-checkbox-icon-checked-hover-color: var(--main-light-color);
             }
             `,
         },
@@ -302,6 +312,8 @@ const MyPreset = definePreset(Aura, {
                 --p-stepper-step-title-active-color: var(--main-light-color);
                 --p-stepper-step-number-active-color: var(--main-light-color);
                 --p-stepper-step-number-active-border-color: var(--main-light-color);
+
+                --p-stepper-separator-background: var(--p-secondary-600);
             }
             `
         },
@@ -331,6 +343,44 @@ const MyPreset = definePreset(Aura, {
                 --p-select-hover-border-color: var(--main-light-color);
                 --p-select-placeholder-color: grey;
             }
+            .p-select-dropdown {
+                color: var(--main-light-color);
+            }
+            .p-select-option {
+                --p-select-option-selected-background: var(--main-blue-color);
+                --p-select-option-selected-focus-background: var(--main-blue-color);
+            }
+            .p-select-option-label {
+                color: var(--main-light-color);
+            }
+            `
+        },
+        autocomplete: {
+            css: ({ dt }) => `
+            .p-autocomplete-option {
+                 --p-autocomplete-option-focus-color: var(--main-light-color);
+            }
+            `
+        },
+        datepicker: {
+            css: ({ dt }) => `
+            .p-datepicker-day {
+                /* --p-datepicker-date-hover-background */
+                --p-datepicker-date-hover-color: var(--main-light-color);
+            }
+            `
+        },
+        paginator: {
+            css: ({ dt }) => `
+            .p-paginator-first, .p-paginator-prev, 
+            .p-paginator-next, .p-paginator-last, 
+            .p-paginator-page, .p-paginator-page.p-paginator-page-selected {
+                color: var(--main-light-color);
+            }
+            .p-paginator-page.p-paginator-page-selected {
+                background: var(--main-blue-color);
+            }
+            
             `
         }
     },

@@ -10,6 +10,7 @@
 body {
   background-color: var(--main-blue-color);
   font-family: var(--default-font);
+  color: var(--main-light-color);
 
   /* для шапки/хэдера страницы*/
   margin: 0;

@@ -91,7 +91,9 @@ watch(
 .sidebar {
   padding: 10px 0;
 }
-
+.sidebar a:hover {
+  background-color: var(--p-secondary-600);
+}
 @media (max-width: 400px) {
     .p-button span {
         display: none;

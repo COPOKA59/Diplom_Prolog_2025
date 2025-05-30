@@ -34,7 +34,10 @@ const props = defineProps({
     padding: 20px 25px;
 }
 #sidebar-main .active {
-    background-color: var(--p-surface-600);
+    background-color: var(--p-secondary-600);
+}
+#sidebar-main a:hover {
+  background-color: var(--p-secondary-600);
 }
 @media (max-width: 600px) {
     #sidebar-main {
