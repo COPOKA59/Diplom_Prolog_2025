@@ -20,3 +20,11 @@ class SizeViewSet(ModelViewSet):
 class OrientationViewSet(ModelViewSet):
     queryset = Orientation.objects.all()
     serializer_class = OrientationSerializer
+
+class GenresViewSet(ModelViewSet):
+    queryset = Genres.objects.all()
+    serializer_class = GenresSerializer
+
+class QuestionsViewSet(ModelViewSet):
+    queryset = Questions.objects.all()
+    serializer_class = QuestionsSerializer

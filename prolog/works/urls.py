@@ -7,6 +7,8 @@ router = routers.SimpleRouter()
 router.register(r'works', WorksViewSet)
 router.register(r'size', SizeViewSet)
 router.register(r'orientation', OrientationViewSet)
+router.register(r'genres', GenresViewSet)
+router.register(r'questions', QuestionsViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

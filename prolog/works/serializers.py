@@ -16,3 +16,13 @@ class OrientationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Orientation
         fields = '__all__'
+
+class GenresSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Genres
+        fields = '__all__'
+
+class QuestionsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Questions
+        fields = '__all__'
