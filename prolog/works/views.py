@@ -32,3 +32,19 @@ class QuestionsViewSet(ModelViewSet):
 class WorksQuestionsViewSet(ModelViewSet):
     queryset = WorksQuestions.objects.all()
     serializer_class = WorksQuestionsSerializer
+
+class RatingViewSet(ModelViewSet):
+    queryset = Rating.objects.all()
+    serializer_class = RatingSerializer
+
+class FandomViewSet(ModelViewSet):
+    queryset = Fandom.objects.all()
+    serializer_class = FandomSerializer
+
+class TypeViewSet(ModelViewSet):
+    queryset = Type.objects.all()
+    serializer_class = TypeSerializer
+
+class StatusViewSet(ModelViewSet):
+    queryset = Status.objects.all()
+    serializer_class = StatusSerializer
