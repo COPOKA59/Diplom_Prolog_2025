@@ -9,6 +9,7 @@ router.register(r'size', SizeViewSet)
 router.register(r'orientation', OrientationViewSet)
 router.register(r'genres', GenresViewSet)
 router.register(r'questions', QuestionsViewSet)
+router.register(r'worksquestions', WorksQuestionsViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

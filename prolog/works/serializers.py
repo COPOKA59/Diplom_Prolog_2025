@@ -1,3 +1,5 @@
+from tkinter.font import names
+
 from rest_framework import serializers
 from works.models import *
 
@@ -26,3 +28,11 @@ class QuestionsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Questions
         fields = '__all__'
+
+class WorksQuestionsSerializer(serializers.ModelSerializer):
+    question_text = serializers.CharField(source='question.name', read_only=True)
+    question_description = serializers.CharField(source='question.description', read_only=True)
+
+    class Meta:
+        model = WorksQuestions
+        fields = ['question', 'question_text', 'question_description', 'answer']

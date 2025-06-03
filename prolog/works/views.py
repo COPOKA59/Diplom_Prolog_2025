@@ -28,3 +28,7 @@ class GenresViewSet(ModelViewSet):
 class QuestionsViewSet(ModelViewSet):
     queryset = Questions.objects.all()
     serializer_class = QuestionsSerializer
+
+class WorksQuestionsViewSet(ModelViewSet):
+    queryset = WorksQuestions.objects.all()
+    serializer_class = WorksQuestionsSerializer

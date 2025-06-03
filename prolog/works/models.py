@@ -80,3 +80,5 @@ class WorksQuestions(models.Model):
     class Meta:
         unique_together = ('work', 'question')
         db_table = 'works_questions'
+        verbose_name = 'Вопрос произведения'
+        verbose_name_plural = 'Вопросы произведения'
