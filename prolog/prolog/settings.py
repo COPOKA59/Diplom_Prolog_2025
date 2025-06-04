@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     #Наши приложения
     'works',
+    'meta_data',
 
     # Установленные фреймворки, пакеты и др.
     'rest_framework',
