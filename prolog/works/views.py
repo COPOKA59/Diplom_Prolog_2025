@@ -16,3 +16,13 @@ class WorksViewSet(ModelViewSet):
 class WorksQuestionsViewSet(ModelViewSet):
     queryset = WorksQuestions.objects.all()
     serializer_class = WorksQuestionsSerializer
+
+    def get_queryset(self):
+        return WorksQuestions.objects.filter(work_id=self.kwargs['work_pk'])
+
+class ChaptersViewSet(ModelViewSet):
+    queryset = Chapters.objects.all()
+    serializer_class = ChaptersSerializer
+
+    def get_queryset(self):
+        return Chapters.objects.filter(work_id=self.kwargs['work_pk'])

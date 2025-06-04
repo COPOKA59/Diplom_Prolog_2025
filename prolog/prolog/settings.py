@@ -38,6 +38,7 @@ INSTALLED_APPS = [
 
     # Установленные фреймворки, пакеты и др.
     'rest_framework',
+    'ordered_model',
 
     # Начальные данные
     'django.contrib.admin',

@@ -1,4 +1,5 @@
 from django.db import models
+from ordered_model.models import OrderedModel
 from meta_data.models import Size, Orientation, Genres, Questions, Rating, Fandom, Type, Status
 
 class Works(models.Model):
@@ -7,8 +8,8 @@ class Works(models.Model):
     date_of_creation = models.DateTimeField('Дата создания', auto_now_add=True)
     date_of_editing = models.DateTimeField('Дата редактирования', auto_now=True)
     translation = models.BooleanField('Перевод?', default=False)
-    author_original = models.CharField('Автор оригинала', max_length=250, default='Автор')
-    original = models.CharField('Оригинал', max_length=250, default='Название оригинала')
+    author_original = models.CharField('Автор оригинала', max_length=250)
+    original = models.CharField('Оригинал', max_length=250)
 
     size = models.ForeignKey(Size, verbose_name='Размер', on_delete=models.SET_NULL, null=True, blank=False, related_name='works')
     orientation = models.ForeignKey(Orientation, verbose_name='Направление', on_delete=models.SET_NULL, null=True, blank=False, related_name='works')
@@ -38,3 +39,20 @@ class WorksQuestions(models.Model):
         db_table = 'works_questions'
         verbose_name = 'Вопрос произведения'
         verbose_name_plural = 'Вопросы произведения'
+
+class Chapters(OrderedModel):
+    name = models.CharField('Название', max_length=100, default='Новая глава')
+    first_comment = models.CharField('Примечание автора', max_length=100, default='')
+    text = models.CharField('Текст', max_length=100, default='Текст главы')
+    end_comment = models.CharField('Примечание автора', max_length=100, default='')
+    date_of_creation = models.DateTimeField('Дата создания', auto_now_add=True)
+    date_of_editing = models.DateTimeField('Дата редактирования', auto_now=True)
+
+    work = models.ForeignKey(Works, verbose_name='Произведение', on_delete=models.CASCADE, related_name='chapters')
+    order_with_respect_to = 'work'
+
+    class Meta(OrderedModel.Meta):
+        ordering = ['order']
+        db_table = 'chapters'
+        verbose_name = 'Глава'
+        verbose_name_plural = 'Главы'
