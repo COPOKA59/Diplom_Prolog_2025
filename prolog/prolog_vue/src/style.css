@@ -1,0 +1,23 @@
+:root {
+  --main-light-color: #D9D9D9;
+  --main-dark-color: #2A2D31;
+  --main-blue-color: #414B5B;
+  --default-font: "Ubuntu", sans-serif;
+
+  --header-height: 64px;
+}
+
+body {
+  background-color: var(--main-blue-color);
+  font-family: var(--default-font);
+  color: var(--main-light-color);
+
+  /* для шапки/хэдера страницы*/
+  margin: 0;
+  padding-top: var(--header-height);
+}
+#app {
+  /* margin: 0 auto;
+  padding: 2rem;
+  text-align: center; */
+}
