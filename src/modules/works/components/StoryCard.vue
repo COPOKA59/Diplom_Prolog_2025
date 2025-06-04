@@ -11,7 +11,11 @@
                     <v-col class="edit-button" cols="3" lg="3" md="3" v-if="isAuthor">
                         <Button severity="primary">
                             <i class="pi pi-pencil"></i>
-                            <span>Изменить</span>
+                            <!-- <span>Изменить</span> -->
+                        </Button>
+                        <Button severity="danger">
+                            <i class="pi pi-trash"></i>
+                            <!-- <span>Удалить</span> -->
                         </Button>
                     </v-col>
                 </v-row>
@@ -226,10 +230,16 @@ const isAuthor = ref(true);
     display: none;
   }
 }
-.edit-button {
+/* .edit-button {
     display: flex;
     flex-direction: column;
     justify-self: end;
     align-items: flex-end;
+} */
+.edit-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 10px;
 }
 </style>

@@ -68,6 +68,11 @@
                     <img src="@/assets/icons/task_alt_24dp_D9D9D9.svg"/>
                     </template>
                 </Button>
+
+                <!-- <Button label="Сохранить" rounded severity="secondary" icon="pi pi-bookmark" />
+                <Button label="Нравится" rounded severity="secondary" icon="pi pi-thumbs-up" />
+                <Button label="Комментарии" rounded severity="secondary" icon="pi pi-comment" />
+                <Button label="Прочитано" rounded severity="secondary" icon="pi pi-check-circle" /> -->
                 
             </v-row>
                 
