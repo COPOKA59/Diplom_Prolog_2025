@@ -20,12 +20,12 @@
                 :read="work.read"/>
         </div>
         <ButtonGroup>
-            <Button label="<" 
+            <Button icon="pi pi-chevron-left"
               severity="secondary" 
               @click="previousChapter" 
               :disabled="work.chapters.indexOf(chapter) === 0"/>
             <Button label="Содержание" severity="secondary" @click="$router.push({ name: 'StoryPage', params: { id: work.id } })"/>
-            <Button label=">" 
+            <Button icon="pi pi-chevron-right"
               severity="secondary" 
               @click="nextChapter"
               :disabled="work.chapters.indexOf(chapter) === work.chapters.length - 1"/>

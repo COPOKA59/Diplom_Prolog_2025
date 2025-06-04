@@ -4,29 +4,32 @@
             <label>{{label}}</label>
         </v-col>
 
-        <v-col v-if="inputType === 'input'" cols="12" lg="10" md="10" sm="12" class="default-form-input"> 
-            <!-- <InputText :id="inputId"/> -->
-            <InputText />
+        <v-col v-if="inputType === 'input'" cols="12" lg="10" md="10" sm="12" class="default-form-input">
+            <InputText v-model="modelValue"/>
         </v-col>
 
         <v-col v-else-if="inputType === 'checkbox'" cols="12" lg="10" md="10" sm="12" class="default-form-btns"> 
-            <CheckboxGroup>
-                <div v-for="option of options" :key="option.value">
-                    <!-- <Checkbox :inputId="option.inputId" :value="option.value"/>
-                    <label :for="option.inputId"> {{option.label}} </label> -->
+            <CheckboxGroup v-model="modelValue">
+                <!-- <div v-for="option of options" :key="option.value">
                     <Checkbox :value="option.value"/>
                     <label> {{option.label}} </label>
+                </div> -->
+                <div v-for="option of options" :key="option.id">
+                    <Checkbox :value="option.id"/>
+                    <label> {{option.name}} </label>
                 </div>
             </CheckboxGroup>
         </v-col>
 
         <v-col v-else-if="inputType === 'radiobutton'" cols="12" lg="10" md="10" sm="12" class="default-form-btns"> 
-            <RadioButtonGroup v-model="props.modelValue">
-                <div v-for="option of options" :key="option.value">
-                    <!-- <RadioButton :inputId="option.inputId" :value="option.value"/>
-                    <label :for="option.inputId"> {{option.label}} </label> -->
+            <RadioButtonGroup v-model="modelValue">
+                <!-- <div v-for="option of options" :key="option.value">
                     <RadioButton :value="option.value"/>
                     <label> {{option.label}} </label>
+                </div> -->
+                <div v-for="option of options" :key="option.id">
+                    <RadioButton :value="option.id"/>
+                    <label> {{option.name}} </label>
                 </div>
             </RadioButtonGroup>
         </v-col>
@@ -42,8 +45,9 @@ const props = defineProps({
     // inputId: String,
     inputType: String,
     options: Array,
-    modelValue: String
+    // modelValue: String
 });
+const modelValue = defineModel();
 </script>
 
 <style scoped>

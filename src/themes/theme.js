@@ -83,7 +83,7 @@ const MyPreset = definePreset(Aura, {
             .p-inputtext.login-input {
             background: #CCCCCC;
             border: 1px solid grey;
-            color: var(--main-dark-color)
+            color: var(--main-dark-color);
             }
             .p-inputtext.login-input:hover {
             border: 1px solid var(--main-dark-color);
@@ -95,6 +95,27 @@ const MyPreset = definePreset(Aura, {
                 --p-inputtext-border-color: var(--main-light-color);
                 --p-inputtext-hover-border-color: var(--main-light-color);
             }
+            `,
+        },
+        password: {
+            css: ({ dt }) => `
+            .login-input .p-password-input {
+                background: #CCCCCC;
+                border: 1px solid grey;
+                color: var(--main-dark-color);
+            }
+            .login-input .p-password-input::placeholder {
+                color: gray;
+            }
+            .login-input .p-password-input:hover {
+                border: 1px solid var(--main-dark-color);
+            }
+            .p-password-toggle-mask-icon {
+                color: var(--main-dark-color);
+            }
+            /* .p-password .p-inputtext {
+                border-color: var(--main-light-color);
+            } */
             `,
         },
         divider: {
@@ -169,15 +190,21 @@ const MyPreset = definePreset(Aura, {
         button: {
             css: ({ dt }) => `
             .p-button.p-button-outlined.p-button-primary {
-            outline: 4px solid var(--main-blue-color);
-            outline-offset: -4px;
-            color: var(--main-light-color);
+                outline: 4px solid var(--main-blue-color);
+                outline-offset: -4px;
+                color: var(--main-light-color);
             } 
-            .p-button.p-button-primary {
-            color: var(--main-light-color);
-            }
+            .p-button.p-button-primary,
             .p-button.p-button-primary:hover {
-            color: var(--main-light-color);
+                color: var(--main-light-color);
+            }
+            .p-button.p-button-secondary {
+                background: var(--main-dark-color);
+                border-color: var(--main-dark-color);
+            }
+            .p-button.p-button-secondary:hover {
+                background: var(--p-secondary-600);
+                border-color: var(--p-secondary-600);
             }
             `,
         },
@@ -236,7 +263,7 @@ const MyPreset = definePreset(Aura, {
                 margin-top: 40px;
                 margin-bottom: 40px;
             }
-            .default-form-input .p-inputtext, .p-datepicker, .p-textarea {
+            .default-form-input .p-inputtext, .p-datepicker, .p-textarea, .p-multiselect {
                 width: 100%;
             }
             .default-form textarea {
@@ -352,6 +379,15 @@ const MyPreset = definePreset(Aura, {
             }
             .p-select-option-label {
                 color: var(--main-light-color);
+            }
+            `
+        },
+        multiselect: {
+            css: ({ dt }) => `
+            .p-multiselect {
+                --p-multiselect-border-color: var(--main-light-color);
+                --p-multiselect-hover-border-color: var(--main-light-color);
+                --p-multiselect-placeholder-color: grey;
             }
             `
         },

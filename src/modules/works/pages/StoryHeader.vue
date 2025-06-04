@@ -1,34 +1,31 @@
 <template>
     <CreateStoryLayout>
-        <!-- <template v-slot:navbar>
-            <CreateStoryNavBar/>
-        </template> -->
-
         <Panel class="default-form">
             <v-container>
                 <v-form>
                     
-                <BasicInput :label="'Название'" :inputType="'input'"/>
+                <BasicInput :label="'Название'" :inputType="'input'"
+                v-model="formData.name"/>
 
                 <v-row>
                     <v-col cols="12" lg="2" md="2" sm="12">
                         <label>Работа является переводом</label>
                     </v-col>
                     <v-col cols="12" lg="10" md="10" sm="12" class="default-form-btns">
-                        <RadioButtonGroup v-model="workProps.selectedTranslation.value">
+                        <RadioButtonGroup v-model="formData.translation">
                             <div>
-                                <RadioButton value="no-translation"/>
+                                <RadioButton :value="0"/>
                                 <label>нет</label>
                             </div>
                             
                             <div>
-                                <RadioButton value="translation"/>
+                                <RadioButton :value="1"/>
                                 <label>да</label>
                             </div>
 
-                            <div v-if="workProps.selectedTranslation.value === 'translation'">
+                            <div v-if="formData.translation === 1">
                                 <label class="input-label">Автор переведённой работы</label>
-                                <InputText fluid/>
+                                <InputText fluid v-model="formData.author_orignal"/>
                             </div>
                         </RadioButtonGroup>
                     </v-col>
@@ -41,20 +38,24 @@
                         <label>Тип работы</label>
                     </v-col>
                     <v-col cols="12" lg="10" md="10" sm="12" class="default-form-btns">
-                        <RadioButtonGroup v-model="workProps.selectedWorkType.value">
+                        <RadioButtonGroup v-model="formData.type">
                             <div>
-                                <RadioButton value="original"/>
+                                <RadioButton :value="1"/>
                                 <label>оригинальная работа</label>
                             </div>
                             
                             <div>
-                                <RadioButton value="fandom"/>
+                                <RadioButton :value="2"/>
                                 <label>фандом</label>
                             </div>
 
-                            <div v-if="workProps.selectedWorkType.value === 'fandom'">
-                                <label class="input-label">Фандом</label>
-                                <InputText fluid/>
+                            <div v-if="formData.type === 2">
+                                <label class="input-label">Фандомы</label>
+                                <MultiSelect :options="workProps.workData.fandoms.options"
+                                optionLabel="name" optionValue="id"
+                                filter
+                                v-model="formData.fandoms"
+                                />
                             </div>
                         </RadioButtonGroup>
                     </v-col>
@@ -63,27 +64,51 @@
                 <BasicInput :inputType="'radiobutton'"
                     :label="workProps.workData.workDirection.label"
                     :options="workProps.workData.workDirection.options"
-                    v-model="workProps.selectedWorkDirection.value"/>
+                    v-model="formData.orientation"/>
                 <BasicInput :inputType="'radiobutton'"
                     :label="workProps.workData.workRating.label"
                     :options="workProps.workData.workRating.options"
-                    v-model="workProps.selectedWorkRating.value"/>
+                    v-model="formData.rating"/>
                 
-                <BasicInput :label="'Жанры'" :inputType="'input'"/>
+                <v-row>
+                    <v-col cols="12" lg="2" md="2" sm="12" class="input-label">
+                        <label>Жанры</label>
+                    </v-col>
+                    <v-col cols="12" lg="10" md="10" sm="12" class="default-form-input">
+                        <MultiSelect :options="workProps.workData.workGenres.options"
+                        optionLabel="name" optionValue="id"
+                        filter
+                        v-model="formData.genres"
+                        />
+                    </v-col>
+                </v-row>
+
                 <BasicInput :label="'Персонажи'" :inputType="'input'"/>
                 <BasicInput :label="'Отношения'" :inputType="'input'"/>
-                <BasicInput :label="'Теги'" :inputType="'input'"/>
+
+                <v-row>
+                    <v-col cols="12" lg="2" md="2" sm="12" class="input-label">
+                        <label>Теги</label>
+                    </v-col>
+                    <v-col cols="12" lg="10" md="10" sm="12" class="default-form-input">
+                        <MultiSelect :options="workProps.workData.workTags.options"
+                        optionLabel="name" optionValue="id"
+                        filter
+                        v-model="formData.tags"
+                        />
+                    </v-col>
+                </v-row>
 
                 <Divider/>
 
                 <BasicInput :inputType="'radiobutton'"
                     :label="workProps.workData.workSize.label"
                     :options="workProps.workData.workSize.options"
-                    v-model="workProps.selectedWorkSize.value"/>
+                    v-model="formData.size"/>
                 <BasicInput :inputType="'radiobutton'"
                     :label="workProps.workData.workStatus.label"
                     :options="workProps.workData.workStatus.options"
-                    v-model="workProps.selectedWorkStatus.value"/>
+                    v-model="formData.status"/>
 
                 <Divider/>
 
@@ -92,7 +117,7 @@
                         <label>Описание</label>
                     </v-col>
                     <v-col cols="12" lg="10" md="10" sm="12" class="default-form-input"> 
-                        <Textarea rows="5" cols="30" />
+                        <Textarea rows="5" cols="30" v-model="formData.desciption"/>
                     </v-col>
                 </v-row>
 
@@ -102,13 +127,13 @@
                     </v-col>
                     <v-col cols="12" lg="3" md="3" sm="12" class="img-col"> 
                         <div class="work-picture-container">
-                            <img class="user-profile-img" :src="imageUrl"/>
+                            <img class="user-profile-img" :src="image"/>
                             <FileUpload 
                                 accept="image/*" 
                                 mode="basic" 
                                 class="p-button-primary"
                                 chooseLabel="Загрузить изображение" customUpload auto
-                                @select="onFileUpload" 
+                                @select="onFileSelect" 
                             />
                         </div>
                     </v-col>
@@ -116,7 +141,15 @@
 
                 <v-row >
                     <v-col class="save-button">
-                        <Button severity="primary"> Сохранить </Button>
+                        <Button severity="primary"
+                        @click="
+                        console.log('----------- formData -----------');
+                        Object.keys(formData).forEach(key => {
+                            console.log(`${key}: ${formData[key]}`);
+                        });
+                                ">
+                            Сохранить
+                        </Button>
                     </v-col>
                 </v-row>
                     
@@ -128,32 +161,61 @@
 </template>
 
 <script setup>
-/* import MainLayout from '@/layouts/MainLayout.vue';
-import CreateStoryNavBar from '../components/CreateStoryNavBar.vue'; */
 import CreateStoryLayout from '@/layouts/CreateStoryLayout.vue';
 import BasicInput from '@/modules/core/components/BasicInput.vue';
-import { Panel, Divider, Button, InputText, Textarea,
+import { Panel, Divider, Button, InputText, Textarea, MultiSelect,
         RadioButton, RadioButtonGroup, FileUpload } from "primevue";
 import { VContainer, VCol, VRow, VForm } from "vuetify/lib/components/index.mjs";
 import workProps from '@/services/work_properties';
-import { ref, onMounted } from 'vue';
+import defaultCover from '@/assets/img/default_cover.svg';
+import { ref, reactive, onMounted } from 'vue';
 
-const imageUrl = ref('https://images.unsplash.com/photo-1543270122-f7a11ad44f3a?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-const onFileUpload = (event) => {
-  const file = event.files[0]; // Get the uploaded file
+const formData = reactive({
+    name: '',
+    translation: 0,
+    author_orignal: '',
+    
+    type: 1,
+    fandoms: [],
+    orientation: 1,
+    rating: 1,
+    genres: [],
+    tags: [],
+
+    size: 1,
+    status: 1,
+
+    desciption: '',
+});
+
+const image = ref(defaultCover);
+const selectedFile = ref(null);
+
+const onFileSelect = (event) => {
+  const file = event.files[0]; // Get the selected file
   if (file) {
     const reader = new FileReader();
     reader.onload = (e) => {
-        imageUrl.value = e.target.result; // Update the image URL with the uploaded file
+        image.value = e.target.result; // Update the image URL with the selected file
     };
     reader.readAsDataURL(file); // Read the file as a data URL
   }
-  
 };
 
-onMounted(() => {
-    workProps.resetWorkProps(); // Сброс значений при заходе на страницу
-});
+const uploadImage = () => {
+  // Ensure a file is available before attempting to upload
+  if (!selectedFile.value) {
+    console.error("No file selected for upload.");
+    return;
+  }
+
+  const formData = new FormData();
+  // Append the selected file to FormData with the key 'file' (adjust key if needed by your API)
+  formData.append('file', selectedFile.value);
+
+  // Use fetch to send a POST request with the FormData object
+};
+
 </script>
 
 <style scoped>

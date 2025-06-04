@@ -43,7 +43,7 @@
                 </v-col>
             </v-row>
 
-            <v-row style="gap:20px;">
+            <v-row class="reading-buttons">
 
                 <Button label="Сохранить" rounded severity="secondary">
                     <template #icon>
@@ -201,4 +201,15 @@ const props = defineProps({
     gap: 10px;
 }
 
+.reading-buttons {
+    gap: 20px;
+}
+.reading-buttons .p-button {
+    background: var(--p-secondary-600);
+    border-color: var(--p-secondary-600);
+}
+.reading-buttons .p-button:hover {
+    background: var(--main-blue-color);
+    border-color: var(--main-blue-color);
+}
 </style>

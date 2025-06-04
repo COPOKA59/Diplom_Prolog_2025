@@ -1,9 +1,7 @@
 <template>
     <MainLayout :layout_container="true">
-        <!-- <v-container> -->
             <Panel class="default-form">
                 <template #header> 
-                    <!-- <h2 style="padding-left: 16px;">Расширенный поиск</h2> -->
                     <v-col>
                         <h2>Расширенный поиск</h2>
                     </v-col>
@@ -13,8 +11,10 @@
                 <v-container>
                     <v-form>
 
-                        <BasicInput :label="'Название'" :inputType="'input'"/>
-                        <BasicInput :label="'Автор'" :inputType="'input'"/>
+                        <BasicInput :label="'Название'" :inputType="'input'"
+                        v-model="formData.name" />
+                        <BasicInput :label="'Автор'" :inputType="'input'"
+                        v-model="formData.author" />
 
                         <v-row>
                             <v-col cols="12" lg="2" md="2" sm="12" class="input-label">
@@ -24,11 +24,13 @@
                                 <div style="display: flex; gap: 60px;">
                                     <div>
                                         <label class="input-label">от: </label>
-                                        <DatePicker id="search-input-work-date" :minDate="minDate" :maxDate="maxDate"/>
+                                        <DatePicker id="search-input-work-date" :minDate="minDate" :maxDate="maxDate"
+                                        v-model="formData.startDate"/>
                                     </div>
                                     <div>
                                         <label class="input-label">до: </label>
-                                        <DatePicker id="search-input-work-date2" :minDate="minDate" :maxDate="maxDate"/>
+                                        <DatePicker id="search-input-work-date2" :minDate="minDate" :maxDate="maxDate"
+                                        v-model="formData.endDate"/>
                                     </div>
                                 </div>
                                 
@@ -44,20 +46,24 @@
                                 <label>Тип работы</label>
                             </v-col>
                             <v-col cols="12" lg="10" md="10" sm="12" class="default-form-btns">
-                                <RadioButtonGroup v-model="workProps.selectedWorkType.value">
+                                <RadioButtonGroup v-model="formData.type">
                                     <div>
-                                        <RadioButton value="original"/>
+                                        <RadioButton :value="1"/>
                                         <label>оригинальная работа</label>
                                     </div>
                                     
                                     <div>
-                                        <RadioButton value="fandom"/>
+                                        <RadioButton :value="2"/>
                                         <label>фандом</label>
                                     </div>
 
-                                    <div v-if="workProps.selectedWorkType.value === 'fandom'">
-                                        <label class="input-label">Фандом</label>
-                                        <InputText fluid/>
+                                    <div v-if="formData.type === 2">
+                                        <label class="input-label">Фандомы</label>
+                                        <MultiSelect :options="workProps.workData.fandoms.options"
+                                        optionLabel="name" optionValue="id"
+                                        filter
+                                        v-model="formData.fandoms"
+                                        />
                                     </div>
                                 </RadioButtonGroup>
                             </v-col>
@@ -66,17 +72,43 @@
 
                         <BasicInput :inputType="'checkbox'"
                             :label="workProps.workData.workDirection.label"
-                            :options="workProps.workData.workDirection.options"/>
+                            :options="workProps.workData.workDirection.options"
+                            v-model="formData.orientation"/>
                         <BasicInput :inputType="'checkbox'"
                             :label="workProps.workData.workRating.label"
-                            :options="workProps.workData.workRating.options"/>
+                            :options="workProps.workData.workRating.options"
+                            v-model="formData.rating"/>
 
 
                         
-                        <BasicInput :label="'Жанры'" :inputType="'input'"/>
+                        <v-row>
+                            <v-col cols="12" lg="2" md="2" sm="12" class="input-label">
+                                <label>Жанры</label>
+                            </v-col>
+                            <v-col cols="12" lg="10" md="10" sm="12" class="default-form-input">
+                                <MultiSelect :options="workProps.workData.workGenres.options"
+                                optionLabel="name" optionValue="id"
+                                filter
+                                v-model="formData.genres"
+                                />
+                            </v-col>
+                        </v-row>
+
                         <BasicInput :label="'Персонажи'" :inputType="'input'"/>
                         <BasicInput :label="'Отношения'" :inputType="'input'"/>
-                        <BasicInput :label="'Теги'" :inputType="'input'"/>
+
+                        <v-row>
+                            <v-col cols="12" lg="2" md="2" sm="12" class="input-label">
+                                <label>Теги</label>
+                            </v-col>
+                            <v-col cols="12" lg="10" md="10" sm="12" class="default-form-input">
+                                <MultiSelect :options="workProps.workData.workTags.options"
+                                optionLabel="name" optionValue="id"
+                                filter
+                                v-model="formData.tags"
+                                />
+                            </v-col>
+                        </v-row>
 
 
                         <Divider/>
@@ -84,17 +116,24 @@
 
                         <BasicInput :inputType="'checkbox'"
                             :label="workProps.workData.workSize.label"
-                            :options="workProps.workData.workSize.options"/>
+                            :options="workProps.workData.workSize.options"
+                            v-model="formData.size"/>
                         <BasicInput :inputType="'checkbox'"
                             :label="workProps.workData.workStatus.label"
-                            :options="workProps.workData.workStatus.options"/>
-                        <!-- <BasicInput :inputType="'radiobutton'"
-                            :label="workProps.workData.workStatus.label"
-                            :options="workProps.workData.workStatus.options" v-model="selectedStatus"/> -->
+                            :options="workProps.workData.workStatus.options"
+                            v-model="formData.status"/>
 
                         <v-row >
                             <v-col class="search-button">
-                                <Button severity="primary">Найти</Button>
+                                <Button severity="primary"
+                                @click="
+                                console.log('----------- formData -----------');
+                                Object.keys(formData).forEach(key => {
+                                    console.log(`${key}: ${formData[key]}`);
+                                });
+                                ">
+                                    Найти
+                                </Button>
                             </v-col>
                         </v-row>
                         
@@ -102,7 +141,6 @@
                 </v-container>
 
             </Panel>
-        <!-- </v-container> -->
     </MainLayout>
 </template>
 
@@ -110,46 +148,28 @@
 import MainLayout from "@/layouts/MainLayout.vue";
 import BasicInput from "../components/BasicInput.vue";
 import { Panel, Divider, Button, InputText, DatePicker, 
-        RadioButton, RadioButtonGroup, Checkbox, CheckboxGroup } from "primevue";
+        RadioButton, RadioButtonGroup, Checkbox, CheckboxGroup,
+        MultiSelect } from "primevue";
 import { VContainer, VCol, VRow, VForm } from "vuetify/lib/components/index.mjs";
 import workProps from '@/services/work_properties';
-import { onMounted } from "vue";
+import { reactive, onMounted } from "vue";
 
+const formData = reactive({
+    name: '',
+    author: '',
+    startDate: '',
+    endDate: '',
+
+    type: 1,
+    fandoms: [],
+    orientation: [],
+    rating: [],
+    genres: [],
+    tags: [],
+    size: [],
+    status: [],
+});
 const minDate = new Date('2000-01-01');
 const maxDate = new Date();
 
-onMounted(() => {
-    workProps.resetWorkProps(); // Сброс значений при заходе на страницу
-});
 </script>
-
-<!-- <style scoped>
-.default-form .input-label {
-    margin-top: auto; 
-    margin-bottom: auto;
-}
-.default-form .p-divider {
-    margin-top: 40px;
-    margin-bottom: 40px;
-}
-.default-form-input .p-inputtext, .p-datepicker {
-    width: 100%;
-}
-
-.default-form-btns .p-radiobutton-group, .p-checkbox-group {
-    display: grid;
-    gap: 20px;
-}
-.default-form-btns .p-radiobutton-group div {
-    display: flex;
-    gap: 10px;
-}
-.default-form-btns .p-radiobutton-group div .v-row {
-    display: flex;
-    gap: 10px;
-}
-.default-form .search-button {
-    display: flex;
-    justify-content: end;
-}
-</style> -->

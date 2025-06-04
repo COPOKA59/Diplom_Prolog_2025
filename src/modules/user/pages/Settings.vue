@@ -11,13 +11,13 @@
                     <v-row>
                         <v-col cols="12" lg="3" md="3" sm="12">
                             <div class="profile-picture-container">
-                                <img class="user-profile-img" :src="imageUrl"/>
+                                <img class="user-profile-img" :src="image"/>
                                 <FileUpload 
                                     accept="image/*" 
                                     mode="basic" 
                                     class="p-button-primary"
                                     chooseLabel="Загрузить изображение" customUpload auto
-                                    @select="onFileUpload" 
+                                    @select="onFileSelect" 
                                 />
                             </div>
                             
@@ -52,7 +52,8 @@
 
                             <div class="input-container">
                                 <label>Введите пароль для подтверждения</label>
-                                <InputText/>
+                                <!-- <InputText/> -->
+                                <Password :feedback="false" fluid toggleMask/>
                             </div>
                         </v-col>
 
@@ -61,17 +62,20 @@
                         <v-col class="input-column" cols="12" lg="5" md="5">
                             <div class="input-container">
                                 <label>Старый пароль</label>
-                                <InputText/>
+                                <!-- <InputText/> -->
+                                <Password :feedback="false" fluid toggleMask/>
                             </div>
 
                             <div class="input-container">
                                 <label>Новый пароль</label>
-                                <InputText/>
+                                <!-- <InputText/> -->
+                                <Password :feedback="false" fluid toggleMask/>
                             </div>
 
                             <div class="input-container">
                                 <label>Повторите новый пароль</label>
-                                <InputText/>
+                                <!-- <InputText/> -->
+                                <Password :feedback="false" fluid toggleMask/>
                             </div>
                         </v-col>
                     </v-row>
@@ -91,22 +95,36 @@
 <script setup>
 import MainLayout from '@/layouts/MainLayout.vue';
 import { VContainer, VRow, VCol, VForm, VSpacer } from 'vuetify/lib/components/index.mjs';
-import { Card, Divider, InputText, Textarea, Button, FileUpload } from 'primevue';
+import { Card, Divider, InputText, Password, Textarea, Button, FileUpload } from 'primevue';
 import { ref } from 'vue';
-import defaultImage from '@/assets/img/user_default.jpg'; // Import the default image
+import defaultImage from '@/assets/img/user_default.jpg';
 
-const imageUrl = ref(defaultImage); // Set the default image
+const image = ref(defaultImage);
+const selectedFile = ref(null);
 
-const onFileUpload = (event) => {
+const onFileSelect = (event) => {
   const file = event.files[0]; // Get the uploaded file
   if (file) {
     const reader = new FileReader();
     reader.onload = (e) => {
-        imageUrl.value = e.target.result; // Update the image URL with the uploaded file
+        image.value = e.target.result; // Update the image URL with the uploaded file
     };
     reader.readAsDataURL(file); // Read the file as a data URL
   }
-  
+};
+
+const uploadImage = () => {
+  // Ensure a file is available before attempting to upload
+  if (!selectedFile.value) {
+    console.error("No file selected for upload.");
+    return;
+  }
+
+  const formData = new FormData();
+  // Append the selected file to FormData with the key 'file' (adjust key if needed by your API)
+  formData.append('file', selectedFile.value);
+
+  // Use fetch to send a POST request with the FormData object
 };
 </script>
 
