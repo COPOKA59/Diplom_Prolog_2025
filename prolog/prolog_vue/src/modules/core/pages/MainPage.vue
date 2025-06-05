@@ -49,7 +49,7 @@
           justify="center"
           align="start"
         >
-          <v-col
+          <!-- <v-col
             v-for="work in works.slice(0, 5)"
             :key="work.id"
             cols="12" 
@@ -61,6 +61,19 @@
               :id="work.id"
               :title="work.title"
               :img_url="work.img_url"
+              />
+          </v-col> -->
+          <v-col
+            v-for="work in data"
+            :key="work.id"
+            cols="12" 
+            sm="6"
+            md="4"
+            lg="3"
+          >
+            <StoryCardSmall style="margin: auto;"
+              :id="work.id"
+              :title="work.name"
               />
           </v-col>
         </v-row>
@@ -77,13 +90,26 @@ import StoryCardSmall from "@/modules/works/components/StoryCardSmall.vue";
 import { VContainer, VRow, VCol } from "vuetify/lib/components/index.mjs";
 import { Divider } from "primevue";
 
-import { onBeforeMount, onBeforeUnmount } from "vue";
+import { onBeforeMount, onBeforeUnmount, onMounted, ref, } from "vue";
 import { works } from "@/services/stories";
-
+import axios from 'axios';
+// /api/v1/works/
 onBeforeMount(() => {
   document.body.style.background = "#222";
 });
 onBeforeUnmount(() => {
   document.body.style.background = "var(--main-blue-color)";
+});
+
+const data = ref([]);
+
+onMounted(async () => {
+  try {
+    const response = await axios.get('/api/v1/works/');
+    data.value = response.data;
+    console.log('data: ', JSON.stringify(data));
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
 });
 </script>
