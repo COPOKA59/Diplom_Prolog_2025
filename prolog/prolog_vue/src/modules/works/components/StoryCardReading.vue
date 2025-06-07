@@ -3,16 +3,15 @@
         <template #content>
             <v-container>
             <v-row>
-                <!-- class="img-col" cols="12" lg="3" md="3" -->
-                <v-col class="img-col" lg="3" md="3">
+                <v-col class="img-col" cols="12" lg="3" md="3" sm="12">
                     <img :src="img_url ? img_url : '/src/assets/img/default_cover.svg'"/>
                 </v-col>
                 
-                <v-col class="col-1">
+                <v-col cols="auto">
                     <p>
                         <b>Автор:</b> <u> {{ author }}</u>
                     </p>
-                    <p> <b>Фандом:</b> оригинальная работа </p>
+                    <p class="comma-sep"> <b>Фандом:</b> <span v-for="fd in fandom"> {{ fd }} </span> </p>
                     <p> <b>Обновлено:</b> {{ last_update }} </p>
                     <p> <b>Рейтинг:</b> {{ rating }} </p>
                     <p> <b>Направленность:</b> {{ direction }} </p>
@@ -23,7 +22,7 @@
 
             <v-row>
                 <v-col>
-                <p class="comma-sep">
+                <!-- <p class="comma-sep">
                     <b>Жанры:</b> <span v-for="genre in genres"> {{ genre }}</span>
                 </p>
                 <p class="comma-sep">
@@ -35,6 +34,13 @@
                         <Tag severity="secondary"
                             v-for="tag in tags" :value="tag"/>
                     </span>
+                </p> -->
+                <p class="tag-list">
+                    <span class="tags">
+                        <b>Жанры: </b>
+                        <Tag severity="secondary"
+                            v-for="genre in genres" :value="genre"/>
+                    </span>
                 </p>
                 <Divider class="inner-card-divider"/>
                 <p>
@@ -43,7 +49,21 @@
                 </v-col>
             </v-row>
 
-            <v-row class="reading-buttons">
+
+            <v-row v-if="isAuthor">
+                <v-col class="edit-button">
+                    <Button severity="primary">
+                        <i class="pi pi-pencil"></i>
+                        <span>Изменить</span>
+                    </Button>
+                    <Button severity="danger">
+                        <i class="pi pi-trash"></i>
+                        <span>Удалить</span>
+                    </Button>
+                </v-col>
+            </v-row>
+
+            <v-row v-else class="reading-buttons">
 
                 <Button label="Сохранить" rounded severity="secondary">
                     <template #icon>
@@ -90,7 +110,7 @@ const props = defineProps({
     id: Number,
     title: String,
     author: String,
-    fandom: String,
+    fandom: Array,
     last_update: String,
     rating: String,
     direction: String,
@@ -217,4 +237,29 @@ const props = defineProps({
     background: var(--main-blue-color);
     border-color: var(--main-blue-color);
 }
+
+.edit-button {
+    display: flex;
+    justify-content: end;
+    gap: 20px;
+    padding: 0;
+}
+
+.edit-button span {
+  @media (max-width: 480px) {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+    .story-card-v2, :deep(.p-tag-label) {
+        font-size: 14px;
+    }
+    :deep(.p-card-title) a {
+        font-size: 26px;
+    }
+    .story-card-v2 :deep(.p-card-body) {
+        padding: 10px;
+    }
+  }
 </style>

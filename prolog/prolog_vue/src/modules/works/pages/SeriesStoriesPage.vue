@@ -17,16 +17,16 @@
         </v-row>
         <v-row v-for="work in works">
             <v-col>
-            <StoryCard
+                <StoryCard
                     :id="work.id"
-                    :title="work.title"
+                    :title="work.name"
                     :author="work.author"
-                    :fandom="work.fandom"
-                    :last_update="work.last_update"
-                    :rating="work.rating"
-                    :direction="work.direction"
-                    :size="work.size"
-                    :genres="work.genres"
+                    :fandom="work.fandom_details.map(fandom => fandom.name)"
+                    :last_update="(new Date(work.date_of_editing)).toLocaleDateString('ru-RU')"
+                    :rating="work.rating_details.name"
+                    :direction="work.orientation_details.name"
+                    :size="work.size_details.name"
+                    :genres="work.genres_details.map(genre => genre.name)"
                     :relationships="work.relationships"
                     :tags="work.tags"
                     :description="work.description"

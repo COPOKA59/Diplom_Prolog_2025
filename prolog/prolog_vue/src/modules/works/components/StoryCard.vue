@@ -3,21 +3,21 @@
         <template #title>
             <v-container>
                 <v-row>
-                    <v-col class="story-name" cols="9" lg="9" md="9">
+                    <v-col class="story-name" cols="12">
                         <RouterLink :to="{ name: 'StoryPage', params: { id: id } }">
                             {{ title }}
                         </RouterLink>
                     </v-col>
-                    <v-col class="edit-button" cols="3" lg="3" md="3" v-if="isAuthor">
+                    <!-- <v-col class="edit-button" cols="3" lg="3" md="3" v-if="isAuthor" gutter="4">
                         <Button severity="primary">
                             <i class="pi pi-pencil"></i>
-                            <!-- <span>Изменить</span> -->
+                            <span>Изменить</span>
                         </Button>
                         <Button severity="danger">
                             <i class="pi pi-trash"></i>
-                            <!-- <span>Удалить</span> -->
+                            <span>Удалить</span>
                         </Button>
-                    </v-col>
+                    </v-col> -->
                 </v-row>
             </v-container>
         </template>
@@ -33,7 +33,8 @@
                     <p>
                         <b>Автор:</b> <u> {{ author }}</u>
                     </p>
-                    <p> <b>Фандом:</b> оригинальная работа </p>
+                    <!-- <p> <b>Фандом:</b> оригинальная работа </p> -->
+                    <p class="comma-sep"> <b>Фандом:</b> <span v-for="fd in fandom"> {{ fd }} </span> </p>
                     <p> <b>Обновлено:</b> {{ last_update }} </p>
                     <p> <b>Рейтинг:</b> {{ rating }} </p>
                     <p> <b>Направленность:</b> {{ direction }} </p>
@@ -49,7 +50,7 @@
                         </Chip>
                     </div>
 
-                    <div class="row-2">
+                    <!-- <div class="row-2">
                         <div>
                             0 <Divider class="counter-divider" layout="vertical"/>
                             <img src="@/assets/icons/bookmark_24px_weight_2.5.svg"/>
@@ -62,14 +63,14 @@
                             0 <Divider class="counter-divider" layout="vertical"/>
                             <img src="@/assets/icons/message-circle_24px_weight_2.5.svg"/>
                         </div>
-                    </div>
+                    </div> -->
                 </v-col>
             </v-row>
             
 
             <v-row>
                 <v-col>
-                <p class="comma-sep">
+                <!-- <p class="comma-sep">
                     <b>Жанры:</b> <span v-for="genre in genres"> {{ genre }}</span>
                 </p>
                 <p class="comma-sep">
@@ -81,11 +82,31 @@
                         <Tag severity="secondary"
                             v-for="tag in tags" :value="tag"/>
                     </span>
+                </p> -->
+                <p class="tag-list">
+                    <span class="tags">
+                        <b>Жанры: </b>
+                        <Tag severity="secondary"
+                            v-for="genre in genres" :value="genre"/>
+                    </span>
                 </p>
                 <Divider class="inner-card-divider"/>
                 <p>
                     {{ description }}
                 </p>
+                </v-col>
+            </v-row>
+
+            <v-row v-if="isAuthor">
+                <v-col class="edit-button">
+                    <Button severity="primary">
+                        <i class="pi pi-pencil"></i>
+                        <span>Изменить</span>
+                    </Button>
+                    <Button severity="danger">
+                        <i class="pi pi-trash"></i>
+                        <span>Удалить</span>
+                    </Button>
                 </v-col>
             </v-row>
                 
@@ -104,7 +125,7 @@ const props = defineProps({
     id: Number,
     title: String,
     author: String,
-    fandom: String,
+    fandom: Array,
     last_update: String,
     rating: String,
     direction: String,
@@ -174,11 +195,11 @@ const isAuthor = ref(true);
     aspect-ratio: 2 / 3;
     object-fit: cover;
 }
-.img-col {
-    /* background: linear-gradient(135deg, rgba(65, 75, 91, 0.5) 31%, rgba(0, 0, 0, 0.5) 100%);
-    padding: 0; */
-    /* padding-left: 0; */
-}
+/* .img-col {
+    background: linear-gradient(135deg, rgba(65, 75, 91, 0.5) 31%, rgba(0, 0, 0, 0.5) 100%);
+    padding: 0;
+    padding-left: 0;
+} */
 
 .read-work-label {
     background-color: var(--main-blue-color);
@@ -226,7 +247,7 @@ const isAuthor = ref(true);
     gap: 10px;
 }
 .edit-button span {
-  @media (max-width: 600px) {
+  @media (max-width: 480px) {
     display: none;
   }
 }
@@ -236,10 +257,27 @@ const isAuthor = ref(true);
     justify-self: end;
     align-items: flex-end;
 } */
-.edit-button {
+/* .edit-button {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     gap: 10px;
+} */
+.edit-button {
+    display: flex;
+    justify-content: end;
+    gap: 20px;
+    padding: 0;
 }
+@media (max-width: 600px) {
+    .story-card-v2, :deep(.p-tag-label) {
+        font-size: 14px;
+    }
+    :deep(.p-card-title) a {
+        font-size: 26px;
+    }
+    .story-card-v2 :deep(.p-card-body) {
+        padding: 10px;
+    }
+  }
 </style>

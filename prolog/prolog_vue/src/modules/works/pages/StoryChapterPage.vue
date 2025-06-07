@@ -2,17 +2,17 @@
     <MainLayout>
       <v-container v-if="work" fluid class="container">
         <div class="top-story-info">
-          <h1>{{ work.title }}</h1>
+          <h1>{{ work.name }}</h1>
           <StoryCardReading
                 :key="work.id"
-                :title="work.title"
+                :title="work.name"
                 :author="work.author"
-                :fandom="work.fandom"
-                :last_update="work.last_update"
-                :rating="work.rating"
-                :direction="work.direction"
-                :size="work.size"
-                :genres="work.genres"
+                :fandom="work.fandom_details.map(fandom => fandom.name)"
+                :last_update="(new Date(work.date_of_editing)).toLocaleDateString('ru-RU')"
+                :rating="work.rating_details.name"
+                :direction="work.orientation_details.name"
+                :size="work.size_details.name"
+                :genres="work.genres_details.map(genre => genre.name)"
                 :relationships="work.relationships"
                 :tags="work.tags"
                 :description="work.description"
@@ -33,13 +33,14 @@
 
         <Card class="work-text-card">
             <template #title>
-              Глава {{ chapter.number }}
+              <!-- Глава {{ chapter.number }} -->
+              {{ chapter.name }}
             </template>
             <template #content>
-              <div v-if="chapter.notes_before" class="author-notes">
+              <!-- <div v-if="chapter.first_comment" class="author-notes">
                 <Divider class="inner-card-divider"/>
                 <h3>Заметки автора</h3>
-                {{ chapter.notes_before }}
+                {{ chapter.first_comment }}
                 <Divider class="inner-card-divider"/>
               </div>
   
@@ -47,12 +48,35 @@
                 <p class="m-0" v-html="chapter.text"></p>
               </div>
   
-              <div  v-if="chapter.notes_after" class="author-notes">
+              <div  v-if="chapter.end_comment" class="author-notes">
                 <Divider class="inner-card-divider"/>
                 <h3>Заметки автора</h3>
-                {{ chapter.notes_after }}
+                {{ chapter.end_comment }}
                 <Divider class="inner-card-divider"/>
-              </div>
+              </div> -->
+              <v-container>
+                <v-row v-if="chapter.first_comment">
+                  <v-col cols="12" lg="6" md="6" class="author-notes">
+                    <Divider class="inner-card-divider"/>
+                    <h3>Заметки автора</h3>
+                    {{ chapter.first_comment }}
+                    <Divider class="inner-card-divider"/>
+                  </v-col>
+                </v-row>
+  
+                <div class="work-text">
+                  <p class="m-0" v-html="chapter.text"></p>
+                </div>
+  
+                <v-row v-if="chapter.first_comment">
+                  <v-col cols="12" lg="6" md="6" class="author-notes">
+                    <Divider class="inner-card-divider"/>
+                    <h3>Заметки автора</h3>
+                    {{ chapter.end_comment }}
+                    <Divider class="inner-card-divider"/>
+                  </v-col>
+                </v-row>
+              </v-container>
             </template>
         </Card>
 
@@ -76,6 +100,7 @@
 // import MainLayout from '@/layouts/MainLayout.vue';
 import MainLayout from '@/layouts/MainLayout.vue';
 import StoryCardReading from '../components/StoryCardReading.vue';
+import { VContainer, VRow, VCol } from 'vuetify/lib/components/index.mjs';
 import { Card, Divider, Button, ButtonGroup } from 'primevue';
 
 import { ref, onMounted, watch } from 'vue';
@@ -135,8 +160,12 @@ watch(() => route.params.chapter_id, loadChapter);
   justify-content: center;
 }
 
-.author-notes {
+/* .author-notes {
   width: 50%;
+  margin: auto;
+  text-align: left;
+} */
+.author-notes {
   margin: auto;
   text-align: left;
 }

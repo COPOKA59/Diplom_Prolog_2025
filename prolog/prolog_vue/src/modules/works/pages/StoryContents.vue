@@ -12,7 +12,7 @@
 
             <v-row v-for="chapter in storyChapters">
                 <v-col>
-                    <ItemCardMain :id="chapter.id" :title="chapter.title" :pageName="'Editing Chapter'"
+                    <ItemCardMain :id="chapter.id" :title="chapter.name" :pageName="'Editing Chapter'"
                     :isChapter="true" :number="chapter.number"
                     :canDelete="true" @delete-item="deleteChapter(chapter.id)"/>
                 </v-col>

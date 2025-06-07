@@ -4,7 +4,7 @@
             <div class="item-container">
                 <RouterLink :to="{ name: pageName, params: { id: id } }">
                 <div class="item-text">
-                    {{ isChapter ? `Глава ${ number }. ` : '' }}
+                    <!-- {{ isChapter ? `Глава ${ number }. ` : '' }} -->
                     {{ title }} Quisque vulputate vulputate enim quis pretium. Nullam malesuada semper ornare. Etiam tincidunt massa sed 
                     turpis rutrum, vel eleifend lorem tincidunt
                 </div>

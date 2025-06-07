@@ -29,21 +29,21 @@
 
       <v-row v-for="work in displayedWorks">
         <v-col>
-        <StoryCard
-                :id="work.id"
-                :title="work.title"
-                :author="work.author"
-                :fandom="work.fandom"
-                :last_update="work.last_update"
-                :rating="work.rating"
-                :direction="work.direction"
-                :size="work.size"
-                :genres="work.genres"
-                :relationships="work.relationships"
-                :tags="work.tags"
-                :description="work.description"
-                :img_url="work.img_url"
-                :read="work.read"/>
+          <StoryCard
+              :id="work.id"
+              :title="work.name"
+              :author="work.author"
+              :fandom="work.fandom_details.map(fandom => fandom.name)"
+              :last_update="(new Date(work.date_of_editing)).toLocaleDateString('ru-RU')"
+              :rating="work.rating_details.name"
+              :direction="work.orientation_details.name"
+              :size="work.size_details.name"
+              :genres="work.genres_details.map(genre => genre.name)"
+              :relationships="work.relationships"
+              :tags="work.tags"
+              :description="work.description"
+              :img_url="work.img_url"
+              :read="work.read"/>
           </v-col>
       </v-row>
       
@@ -68,7 +68,7 @@ import MainLayout from '@/layouts/MainLayout.vue';
 import StoryCard from '../components/StoryCard.vue';
 import { Paginator, Button, IconField, InputText, InputIcon } from 'primevue';
 import { VContainer, VRow, VCol } from "vuetify/lib/components/index.mjs";
-import { ref, computed } from 'vue';
+import { ref, computed, onBeforeMount } from 'vue';
 import { works } from '@/services/stories';
 
 const isAuthor = ref(true);
