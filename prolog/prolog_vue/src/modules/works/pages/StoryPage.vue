@@ -49,33 +49,26 @@ import { Paginator } from 'primevue';
 
 import { ref, onMounted, computed } from 'vue';
 import { useRoute } from 'vue-router';
-import { works } from '@/services/stories';
-import { getWork } from '@/services/api/works/works';
+import { getWork, getChapters } from '@/services/api/works/works';
 
 const route = useRoute(); 
 const work = ref(null);
+const chapters = ref(null);
 
 const first = ref(0);
 const rows = ref(10);
 const totalRecords = ref(null);
 
-/* onMounted(() => {
-  const id = parseInt(route.params.id);  // Извлекаем id из параметров маршрута
-  work.value = works.find(item => item.id === id);  // Ищем по id
-
-  totalRecords.value = work.value.chapters.length;
-}); */
 onMounted( async () => {
   const id = parseInt(route.params.id);
   work.value = await getWork(id);
-  if (! work.value)
-    work.value = works.find(item => item.id === id);
-
-  totalRecords.value = work.value.chapters?.length;
+  chapters.value = await getChapters();
+  totalRecords.value = chapters.value.length;
+  console.log(`chapters.value: ${chapters.value}`);
 });
 
 const displayedChapters = computed(() => {
-  return work.value.chapters?.slice(first.value, first.value + rows.value);
+  return chapters.value?.slice(first.value, first.value + rows.value);
 });
 
 function onPageChange(event) {

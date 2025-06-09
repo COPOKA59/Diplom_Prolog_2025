@@ -1,6 +1,6 @@
 <template>
     <MainLayout>
-      <v-container v-if="work" fluid class="container">
+      <v-container v-if="work && chapter" fluid class="container">
         <div class="top-story-info">
           <h1>{{ work.name }}</h1>
           <StoryCardReading
@@ -20,40 +20,22 @@
                 :read="work.read"/>
         </div>
         <ButtonGroup>
-            <Button icon="pi pi-chevron-left"
+            <Button label="<" 
               severity="secondary" 
               @click="previousChapter" 
-              :disabled="work.chapters.indexOf(chapter) === 0"/>
+              :disabled="!isPrev"/>
             <Button label="Содержание" severity="secondary" @click="$router.push({ name: 'StoryPage', params: { id: work.id } })"/>
-            <Button icon="pi pi-chevron-right"
+            <Button label=">" 
               severity="secondary" 
               @click="nextChapter"
-              :disabled="work.chapters.indexOf(chapter) === work.chapters.length - 1"/>
+              :disabled="!isNext"/>
         </ButtonGroup>
 
         <Card class="work-text-card">
             <template #title>
-              <!-- Глава {{ chapter.number }} -->
               {{ chapter.name }}
             </template>
             <template #content>
-              <!-- <div v-if="chapter.first_comment" class="author-notes">
-                <Divider class="inner-card-divider"/>
-                <h3>Заметки автора</h3>
-                {{ chapter.first_comment }}
-                <Divider class="inner-card-divider"/>
-              </div>
-  
-              <div class="work-text">
-                <p class="m-0" v-html="chapter.text"></p>
-              </div>
-  
-              <div  v-if="chapter.end_comment" class="author-notes">
-                <Divider class="inner-card-divider"/>
-                <h3>Заметки автора</h3>
-                {{ chapter.end_comment }}
-                <Divider class="inner-card-divider"/>
-              </div> -->
               <v-container>
                 <v-row v-if="chapter.first_comment">
                   <v-col cols="12" lg="6" md="6" class="author-notes">
@@ -68,7 +50,7 @@
                   <p class="m-0" v-html="chapter.text"></p>
                 </div>
   
-                <v-row v-if="chapter.first_comment">
+                <v-row v-if="chapter.end_comment">
                   <v-col cols="12" lg="6" md="6" class="author-notes">
                     <Divider class="inner-card-divider"/>
                     <h3>Заметки автора</h3>
@@ -84,12 +66,12 @@
             <Button label="<" 
               severity="secondary" 
               @click="previousChapter" 
-              :disabled="work.chapters.indexOf(chapter) === 0"/>
+              :disabled="!isPrev"/>
             <Button label="Содержание" severity="secondary" @click="$router.push({ name: 'StoryPage', params: { id: work.id } })"/>
             <Button label=">" 
               severity="secondary" 
               @click="nextChapter"
-              :disabled="work.chapters.indexOf(chapter) === work.chapters.length - 1"/>
+              :disabled="!isNext"/>
         </ButtonGroup>
 
       </v-container>
@@ -97,7 +79,6 @@
   </template>
   
 <script setup>
-// import MainLayout from '@/layouts/MainLayout.vue';
 import MainLayout from '@/layouts/MainLayout.vue';
 import StoryCardReading from '../components/StoryCardReading.vue';
 import { VContainer, VRow, VCol } from 'vuetify/lib/components/index.mjs';
@@ -105,7 +86,7 @@ import { Card, Divider, Button, ButtonGroup } from 'primevue';
 
 import { ref, onMounted, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { works } from '@/services/stories';
+import { getChapter, getWork } from '@/services/api/works/works';
 
 const route = useRoute();
 const router = useRouter();
@@ -113,7 +94,9 @@ const router = useRouter();
 const work = ref(null);
 const chapter = ref(null);
 
-const loadChapter = () => {
+const isPrev = ref(false);
+const isNext = ref(true);
+/* const loadChapter = () => {
   const chapterId = parseInt(route.params.chapter_id);
   if (work.value) {
     chapter.value = work.value.chapters.find(chap => chap.id === chapterId);
@@ -140,7 +123,29 @@ onMounted(() => {
 
   loadChapter();
 });
-watch(() => route.params.chapter_id, loadChapter);
+watch(() => route.params.chapter_id, loadChapter); */
+const loadChapter = async () => {
+  const chapterId = parseInt(route.params.chapter_id);
+  chapter.value = await getChapter(chapterId);
+  isNext.value = !! await getChapter(chapter.value.number + 1);
+  isPrev.value = !! await getChapter(chapter.value.number - 1);
+}
+
+const nextChapter = () => {
+  router.push({ name: 'StoryChapterPage', params: { chapter_id: chapter.value.number + 1 } });
+}
+const previousChapter = () => {
+  router.push({ name: 'StoryChapterPage', params: { chapter_id: chapter.value.number - 1 } });
+}
+
+
+onMounted( async () => {
+  const id = parseInt(route.params.id);
+  work.value = await getWork(id);
+  
+  await loadChapter();
+});
+watch( () => route.params.chapter_id, loadChapter);
 </script>
 
 <style scoped>

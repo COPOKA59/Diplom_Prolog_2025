@@ -11,8 +11,9 @@
           align="start"
           :spacing="4"
         >
+        <!-- v-for="work in works.slice(0, 8)" -->
           <v-col
-            v-for="work in works.slice(0, 8)"
+            v-for="work in popularWorks"
             :key="work.id"
             cols="12"
             sm="6"
@@ -37,7 +38,7 @@
           align="start"
         >
           <v-col
-            v-for="work in data"
+            v-for="work in newWorks"
             :key="work.id"
             cols="12" 
             sm="6"
@@ -47,6 +48,7 @@
             <StoryCardSmall style="margin: auto;"
               :id="work.id"
               :title="work.name"
+              :img_url="work.img_url"
               />
           </v-col>
         </v-row>
@@ -64,10 +66,8 @@ import { VContainer, VRow, VCol } from "vuetify/lib/components/index.mjs";
 import { Divider } from "primevue";
 
 import { onBeforeMount, onBeforeUnmount, onMounted, ref, } from "vue";
-import { works } from "@/services/stories";
-import axios from 'axios';
-import { getWorks } from "@/services/api/works/works";
-// /api/v1/works/
+import { getWorks, getPopularWorks, getNewWorks } from "@/services/api/works/works";
+
 onBeforeMount(() => {
   document.body.style.background = "#222";
 });
@@ -76,8 +76,13 @@ onBeforeUnmount(() => {
 });
 
 const data = ref([]);
+const newWorks = ref();
+const popularWorks = ref();
+
 onMounted( async () => { 
     data.value = await getWorks();
+    popularWorks.value = await getPopularWorks();
+    newWorks.value = await getNewWorks();
   }
 );
 </script>

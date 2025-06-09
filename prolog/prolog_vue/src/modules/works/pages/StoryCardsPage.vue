@@ -68,17 +68,22 @@ import MainLayout from '@/layouts/MainLayout.vue';
 import StoryCard from '../components/StoryCard.vue';
 import { Paginator, Button, IconField, InputText, InputIcon } from 'primevue';
 import { VContainer, VRow, VCol } from "vuetify/lib/components/index.mjs";
-import { ref, computed, onBeforeMount } from 'vue';
-import { works } from '@/services/stories';
+import { ref, computed, onMounted } from 'vue';
+import { getWorks } from '@/services/api/works/works';
 
 const isAuthor = ref(true);
+const works = ref(null);
 
 const first = ref(0);
 const rows = ref(10);
 
-const totalRecords = works.length;
+onMounted( async () => {
+  works.value = await getWorks();
+});
+
+const totalRecords = works.value?.length;
 const displayedWorks = computed(() => {
-  return works.slice(first.value, first.value + rows.value);
+  return works.value?.slice(first.value, first.value + rows.value);
 });
 
 function onPageChange(event) {

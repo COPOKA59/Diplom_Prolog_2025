@@ -43,7 +43,13 @@ import MainLayout from '@/layouts/MainLayout.vue';
 import { VContainer, VRow, VCol } from 'vuetify/lib/components/index.mjs';
 import { Panel, Card } from 'primevue';
 import StoryCard from '../components/StoryCard.vue';
-import { works } from '@/services/stories';
+import { getWorks } from '@/services/api/works/works';
+import { ref, onMounted } from 'vue';
+
+const works = ref();
+onMounted( async () => {
+    works.value = await getWorks();
+} )
 </script>
 
 <style scoped>

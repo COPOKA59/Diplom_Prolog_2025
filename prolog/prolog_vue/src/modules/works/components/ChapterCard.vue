@@ -15,7 +15,7 @@ const props = defineProps({
     id: Number,
     chapter_number: Number,
     chapter_title: String,
-    published: Date,
+    published: String,
     text: String,
 })
 

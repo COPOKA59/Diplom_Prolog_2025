@@ -66,15 +66,20 @@ import { VContainer, VRow, VCol, VForm } from 'vuetify/lib/components/index.mjs'
 import { Panel, Button, AutoComplete } from 'primevue';
 import BasicInput from '@/modules/core/components/BasicInput.vue';
 import ItemCardMain from '../components/ItemCardMain.vue';
-import { reactive } from 'vue';
-import { works } from '@/services/stories';
+import { reactive, onMounted } from 'vue';
+import { getWorks } from '@/services/api/works/works';
 
 const itemData = reactive({
     chosenInputValue: null,
-    items: works,
+    items: [],
     filteredItems: [],
     chosenItems: [],
 });
+
+onMounted( async () => {
+    itemData.items = await getWorks();
+    }
+)
 
 const search = (event) => {
     const query = event.query.toLowerCase();
