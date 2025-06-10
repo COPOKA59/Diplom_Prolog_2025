@@ -1,19 +1,6 @@
 <template>
     <MainLayout>
-
       <SearchPanel/>
-
-      <!-- <div style="width: 80%; margin: auto;">
-        <h1>Популярные</h1>
-        <Divider style="border-top: 1px solid var(--main-light-color);"/>
-      </div>
-      <div style="display: grid; margin: auto;
-                  gap: 40px;
-                  width: 80%;
-                  box-sizing: border-box;
-                  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));">
-        <StoryCardSmall v-for="n in 3" :key="n" style="margin: auto;"/>
-      </div> -->
 
       <v-container>
         <h1>Популярные</h1>
@@ -24,8 +11,9 @@
           align="start"
           :spacing="4"
         >
+        <!-- v-for="work in works.slice(0, 8)" -->
           <v-col
-            v-for="work in works.slice(0, 8)"
+            v-for="work in popularWorks"
             :key="work.id"
             cols="12"
             sm="6"
@@ -34,7 +22,7 @@
           >
             <StoryCardSmall style="margin: auto;"
               :id="work.id"
-              :title="work.title"
+              :title="work.name"
               :img_url="work.img_url"
               />
           </v-col>
@@ -50,7 +38,7 @@
           align="start"
         >
           <v-col
-            v-for="work in works.slice(0, 5)"
+            v-for="work in newWorks"
             :key="work.id"
             cols="12" 
             sm="6"
@@ -59,7 +47,7 @@
           >
             <StoryCardSmall style="margin: auto;"
               :id="work.id"
-              :title="work.title"
+              :title="work.name"
               :img_url="work.img_url"
               />
           </v-col>
@@ -77,8 +65,8 @@ import StoryCardSmall from "@/modules/works/components/StoryCardSmall.vue";
 import { VContainer, VRow, VCol } from "vuetify/lib/components/index.mjs";
 import { Divider } from "primevue";
 
-import { onBeforeMount, onBeforeUnmount } from "vue";
-import { works } from "@/services/stories";
+import { onBeforeMount, onBeforeUnmount, onMounted, ref, } from "vue";
+import { getWorks, getPopularWorks, getNewWorks } from "@/services/api/works/works";
 
 onBeforeMount(() => {
   document.body.style.background = "#222";
@@ -86,4 +74,15 @@ onBeforeMount(() => {
 onBeforeUnmount(() => {
   document.body.style.background = "var(--main-blue-color)";
 });
+
+const data = ref([]);
+const newWorks = ref();
+const popularWorks = ref();
+
+onMounted( async () => { 
+    data.value = await getWorks();
+    popularWorks.value = await getPopularWorks();
+    newWorks.value = await getNewWorks();
+  }
+);
 </script>

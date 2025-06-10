@@ -1,8 +1,9 @@
 <template>
     <RouterLink class="chapter-link" :to="{ name: 'StoryChapterPage', params: { chapter_id: id } }">
     <Card :key="id">
-        <template #title>Глава {{ chapter_number }}. {{ chapter_title }}</template>
-        <template #subtitle>{{ published.toLocaleDateString('ru-RU') }}</template>
+        <!-- <template #title>Глава {{ chapter_number }}. {{ chapter_title }}</template> -->
+        <template #title>{{ chapter_title }} </template>
+        <template #subtitle>{{ (new Date(published)).toLocaleDateString('ru-RU') }}</template>
     </Card>
     </RouterLink>
 </template>
@@ -14,7 +15,7 @@ const props = defineProps({
     id: Number,
     chapter_number: Number,
     chapter_title: String,
-    published: Date,
+    published: String,
     text: String,
 })
 

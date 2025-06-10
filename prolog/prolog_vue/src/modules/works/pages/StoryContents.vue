@@ -12,7 +12,7 @@
 
             <v-row v-for="chapter in storyChapters">
                 <v-col>
-                    <ItemCardMain :id="chapter.id" :title="chapter.title" :pageName="'Editing Chapter'"
+                    <ItemCardMain :id="chapter.id" :title="chapter.name" :pageName="'Editing Chapter'"
                     :isChapter="true" :number="chapter.number"
                     :canDelete="true" @delete-item="deleteChapter(chapter.id)"/>
                 </v-col>
@@ -29,10 +29,15 @@ import CreateStoryLayout from '@/layouts/CreateStoryLayout.vue';
 import { VContainer, VRow, VCol } from 'vuetify/lib/components/index.mjs';
 import { Panel, Button } from 'primevue';
 import ItemCardMain from '../components/ItemCardMain.vue';
-import chapters from '@/services/stories';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import { getChapters } from '@/services/api/works/works';
 
-const storyChapters = ref(chapters);
+// const storyChapters = ref(chapters);
+const storyChapters = ref();
+onMounted( async () => {
+    storyChapters.value = await getChapters();
+} )
+
 const deleteChapter = (chapterId) => {
     storyChapters.value = storyChapters.value.filter(chapter => chapter.id != chapterId);
 };

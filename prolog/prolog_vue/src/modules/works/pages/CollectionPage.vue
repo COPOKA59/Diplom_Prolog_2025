@@ -19,7 +19,7 @@
                 <v-row>
                     <v-col>
                         <AutoComplete class="items-autocomplete" 
-                            v-model="itemData.chosenInputValue" optionLabel="title" 
+                            v-model="itemData.chosenInputValue" optionLabel="name" 
                             :suggestions="itemData.filteredItems.value" 
                             @complete="search" 
                             @option-select="addItem" 
@@ -37,7 +37,7 @@
 
                 <v-row v-if="itemData.chosenItems.length > 0" v-for="work in itemData.chosenItems">
                     <v-col>
-                        <ItemCardMain :id="work.id" :title="work.title" 
+                        <ItemCardMain :id="work.id" :title="work.name" 
                         :pageName="'StoryPage'"
                         :canDelete="true" @delete-item="deleteItem(work.id)"/>
                     </v-col>
@@ -66,34 +66,39 @@ import { VContainer, VRow, VCol, VForm } from 'vuetify/lib/components/index.mjs'
 import { Panel, Button, AutoComplete } from 'primevue';
 import BasicInput from '@/modules/core/components/BasicInput.vue';
 import ItemCardMain from '../components/ItemCardMain.vue';
-import { reactive } from 'vue';
-import { works } from '@/services/stories';
+import { reactive, onMounted } from 'vue';
+import { getWorks } from '@/services/api/works/works';
 
 const itemData = reactive({
     chosenInputValue: null,
-    items: works,
+    items: [],
     filteredItems: [],
     chosenItems: [],
 });
 
+onMounted( async () => {
+    itemData.items = await getWorks();
+    }
+)
+
 const search = (event) => {
     const query = event.query.toLowerCase();
     itemData.filteredItems.value = itemData.items.filter(item => 
-        item.title.toLowerCase().includes(query)
+        item.name.toLowerCase().includes(query)
     );
-    console.log(`filtered items: ${JSON.stringify(itemData.filteredItems.value.map(a => a.title))}`);
+    console.log(`filtered items: ${JSON.stringify(itemData.filteredItems.value.map(a => a.name))}`);
 };
 const addItem = (event) => {
     if (!itemData.chosenItems.includes(event.value)) {
         itemData.chosenItems.push(event.value);
     }
-    console.log(`added ${event.value.title} to chosen items: 
-    ${JSON.stringify(itemData.chosenItems.map(a => a.title))}`);
+    console.log(`added ${event.value.name} to chosen items: 
+    ${JSON.stringify(itemData.chosenItems.map(a => a.name))}`);
 };
 const deleteItem = (itemId) => {
     itemData.chosenItems = itemData.chosenItems.filter(item => item.id != itemId);
     console.log(`deleted id=${itemId}: 
-    ${JSON.stringify(itemData.chosenItems.map(a => a.title))}`);
+    ${JSON.stringify(itemData.chosenItems.map(a => a.name))}`);
 };
 </script>
 

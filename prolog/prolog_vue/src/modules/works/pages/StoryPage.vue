@@ -2,17 +2,17 @@
   <MainLayout>
     <v-container v-if="work" fluid class="container">
       <div class="top-story-info">
-        <h1>{{ work.title }}</h1>
+        <h1>{{ work.name }}</h1>
         <StoryCardReading
               :key="work.id"
-              :title="work.title"
+              :title="work.name"
               :author="work.author"
-              :fandom="work.fandom"
-              :last_update="work.last_update"
-              :rating="work.rating"
-              :direction="work.direction"
-              :size="work.size"
-              :genres="work.genres"
+              :fandom="work.fandom_details.map(fandom => fandom.name)"
+              :last_update="(new Date(work.date_of_editing)).toLocaleDateString('ru-RU')"
+              :rating="work.rating_details.name"
+              :direction="work.orientation_details.name"
+              :size="work.size_details.name"
+              :genres="work.genres_details.map(genre => genre.name)"
               :relationships="work.relationships"
               :tags="work.tags"
               :description="work.description"
@@ -25,8 +25,8 @@
         <ChapterCard v-for="chapter in displayedChapters"
             :id="chapter.id"
             :chapter_number="chapter.number"
-            :chapter_title="chapter.title"
-            :published="chapter.date"/>
+            :chapter_title="chapter.name"
+            :published="chapter.date_of_editing"/>
       </div>
       <Paginator
         class="story-paginator"
@@ -49,24 +49,26 @@ import { Paginator } from 'primevue';
 
 import { ref, onMounted, computed } from 'vue';
 import { useRoute } from 'vue-router';
-import { works } from '@/services/stories';
+import { getWork, getChapters } from '@/services/api/works/works';
 
 const route = useRoute(); 
 const work = ref(null);
+const chapters = ref(null);
 
 const first = ref(0);
 const rows = ref(10);
 const totalRecords = ref(null);
 
-onMounted(() => {
-  const id = parseInt(route.params.id);  // Извлекаем id из параметров маршрута
-  work.value = works.find(item => item.id === id);  // Ищем по id
-
-  totalRecords.value = work.value.chapters.length;
+onMounted( async () => {
+  const id = parseInt(route.params.id);
+  work.value = await getWork(id);
+  chapters.value = await getChapters();
+  totalRecords.value = chapters.value.length;
+  console.log(`chapters.value: ${chapters.value}`);
 });
 
 const displayedChapters = computed(() => {
-  return work.value.chapters.slice(first.value, first.value + rows.value);
+  return chapters.value?.slice(first.value, first.value + rows.value);
 });
 
 function onPageChange(event) {
