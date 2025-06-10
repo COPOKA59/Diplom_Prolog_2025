@@ -26,8 +26,8 @@ dist-ssr
 .vscode/
 
 # Other directories and files
-OLD/
 .venv
 .env
+.md
 *.pyc
 *.txt

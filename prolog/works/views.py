@@ -10,7 +10,11 @@ def works(request):
     return HttpResponse("<h4>Проверка работы!!!</h4><br><h5>Всё работает! Перейдите по http://127.0.0.1:8000/api/v1/works/</h5>")
 
 class WorksViewSet(ModelViewSet):
-    queryset = Works.objects.all()
+    queryset = Works.objects.all().select_related(
+        'size', 'orientation', 'rating', 'type', 'status'
+    ).prefetch_related(
+        'genres', 'fandom', 'questions'
+    )
     serializer_class = WorksSerializer
 
 class WorksQuestionsViewSet(ModelViewSet):

@@ -8,8 +8,8 @@ class Works(models.Model):
     date_of_creation = models.DateTimeField('Дата создания', auto_now_add=True)
     date_of_editing = models.DateTimeField('Дата редактирования', auto_now=True)
     translation = models.BooleanField('Перевод?', default=False)
-    author_original = models.CharField('Автор оригинала', max_length=250)
-    original = models.CharField('Оригинал', max_length=250)
+    author_original = models.CharField('Автор оригинала', max_length=250, blank=True, default='')
+    original = models.CharField('Оригинал', max_length=250, blank=True, default='')
 
     size = models.ForeignKey(Size, verbose_name='Размер', on_delete=models.SET_NULL, null=True, blank=False, related_name='works')
     orientation = models.ForeignKey(Orientation, verbose_name='Направление', on_delete=models.SET_NULL, null=True, blank=False, related_name='works')
@@ -19,7 +19,7 @@ class Works(models.Model):
 
     genres = models.ManyToManyField(Genres, verbose_name='Жанры', related_name='works')
     questions = models.ManyToManyField(Questions, verbose_name='Вопросы', through='WorksQuestions', related_name='works')
-    fandom = models.ManyToManyField(Fandom, verbose_name='Фандом', related_name='works')
+    fandom = models.ManyToManyField(Fandom, verbose_name='Фандом', blank=True, related_name='works')
 
     def __str__(self):
         return self.name
@@ -43,7 +43,7 @@ class WorksQuestions(models.Model):
 class Chapters(OrderedModel):
     name = models.CharField('Название', max_length=100, default='Новая глава')
     first_comment = models.CharField('Примечание автора', max_length=100, default='')
-    text = models.CharField('Текст', max_length=100, default='Текст главы')
+    text = models.TextField('Текст', max_length=100, default='Текст главы')
     end_comment = models.CharField('Примечание автора', max_length=100, default='')
     date_of_creation = models.DateTimeField('Дата создания', auto_now_add=True)
     date_of_editing = models.DateTimeField('Дата редактирования', auto_now=True)

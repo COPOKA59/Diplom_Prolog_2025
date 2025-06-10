@@ -28,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -48,6 +49,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+AUTH_USER_MODEL = 'users.CustomUsers'
+
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -60,30 +63,13 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8080",
-    "http://127.0.0.1:8080",
-    "http://localhost:8000",
-    "http://127.0.0.1:8000",
-    "http://192.168.100.8:8080",
-
     "http://localhost:5173",
     "http://127.0.0.1:5173",
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-    "http://192.168.100.8:5173",
 ]
+
 CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:8080",
-    "http://127.0.0.1:8080",
     "http://localhost:8000",
     "http://127.0.0.1:8000",
-    "http://192.168.100.8:8080",
-
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-    "http://192.168.100.8:5173",
 ]
 
 ROOT_URLCONF = 'prolog.urls'
