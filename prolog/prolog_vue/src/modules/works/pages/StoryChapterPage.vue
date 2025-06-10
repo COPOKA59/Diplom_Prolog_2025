@@ -96,34 +96,7 @@ const chapter = ref(null);
 
 const isPrev = ref(false);
 const isNext = ref(true);
-/* const loadChapter = () => {
-  const chapterId = parseInt(route.params.chapter_id);
-  if (work.value) {
-    chapter.value = work.value.chapters.find(chap => chap.id === chapterId);
-  }
-}
-const nextChapter = () => {
-  const position = work.value.chapters.indexOf(chapter.value);
-  if (position < work.value.chapters.length - 1) {
-    const next = position + 1;
-    router.push({ name: 'StoryChapterPage', params: { chapter_id: work.value.chapters[next].id } });
-  }
-}
-const previousChapter = () => {
-  const position = work.value.chapters.indexOf(chapter.value);
-  if (position > 0) {
-    const next = position - 1;
-    router.push({ name: 'StoryChapterPage', params: { chapter_id: work.value.chapters[next].id } });
-  }
-}
 
-onMounted(() => {
-  const id = parseInt(route.params.id);  // Извлекаем id из параметров маршрута
-  work.value = works.find(item => item.id === id);  // Ищем по id
-
-  loadChapter();
-});
-watch(() => route.params.chapter_id, loadChapter); */
 const loadChapter = async () => {
   const chapterId = parseInt(route.params.chapter_id);
   chapter.value = await getChapter(chapterId);
