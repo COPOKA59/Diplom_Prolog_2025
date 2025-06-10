@@ -43,7 +43,7 @@ class WorksQuestions(models.Model):
 class Chapters(OrderedModel):
     name = models.CharField('Название', max_length=100, default='Новая глава')
     first_comment = models.CharField('Примечание автора', max_length=100, default='')
-    text = models.CharField('Текст', max_length=100, default='Текст главы')
+    text = models.TextField('Текст', max_length=100, default='Текст главы')
     end_comment = models.CharField('Примечание автора', max_length=100, default='')
     date_of_creation = models.DateTimeField('Дата создания', auto_now_add=True)
     date_of_editing = models.DateTimeField('Дата редактирования', auto_now=True)
