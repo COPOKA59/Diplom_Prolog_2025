@@ -76,12 +76,13 @@ const works = ref(null);
 
 const first = ref(0);
 const rows = ref(10);
+const totalRecords = ref(0);
 
 onMounted( async () => {
   works.value = await getWorks();
+  totalRecords.value = works.value?.length;
 });
 
-const totalRecords = works.value?.length;
 const displayedWorks = computed(() => {
   return works.value?.slice(first.value, first.value + rows.value);
 });

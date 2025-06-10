@@ -6,7 +6,7 @@
     </div>
     <Panel class="default-form">
         <v-container>
-            <h2>Глава Х</h2>
+            <h2>Редактирование главы</h2>
         <v-form>
 
             <BasicInput input-type="input" label="Название главы"/>

@@ -94,10 +94,7 @@
                             </v-col>
                         </v-row>
 
-                        <BasicInput :label="'Персонажи'" :inputType="'input'"/>
-                        <BasicInput :label="'Отношения'" :inputType="'input'"/>
-
-                        <v-row>
+                        <!-- <v-row>
                             <v-col cols="12" lg="2" md="2" sm="12" class="input-label">
                                 <label>Теги</label>
                             </v-col>
@@ -108,7 +105,7 @@
                                 v-model="formData.tags"
                                 />
                             </v-col>
-                        </v-row>
+                        </v-row> -->
 
 
                         <Divider/>
