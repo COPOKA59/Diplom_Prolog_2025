@@ -12,8 +12,8 @@
                 <v-row>
                     <v-col cols="12">
                         <label>Имя</label>
-                        <InputText class="login-input" required v-model="formData.name"/>
-                        <Message v-if="errors.name.invalid" severity="error" variant="simple">{{ errors.name.message }}</Message>
+                        <InputText class="login-input" required v-model="formData.username"/>
+                        <Message v-if="errors.username.invalid" severity="error" variant="simple">{{ errors.username.message }}</Message>
                     </v-col>
                 </v-row>
 
@@ -47,6 +47,14 @@
                     </v-col>
                 </v-row>
 
+                <v-row v-if="errors.other.invalid">
+                    <v-col cols="12">
+                        <Message severity="error" variant="simple">
+                            {{ errors.other.message }}
+                        </Message>
+                    </v-col>
+                </v-row>
+
 
                 <v-row style="margin-top: 20px;">
                     <Button severity="primary" style="margin:auto;" type="submit">
@@ -69,28 +77,34 @@
 <script setup>
 import { VContainer, VRow, VCol, VForm } from 'vuetify/lib/components/index.mjs';
 import { Card, InputText, Password, Message, Button } from 'primevue';
-import { ref, reactive } from 'vue';
+import { ref, reactive, toRaw } from 'vue';
+import { useUserStore } from '@/stores/user';
+
+const userStore = useUserStore();
+
+
 
 const formData = reactive({
-    name: '',
+    username: '',
     email: '',
     password: '',
     passwordRepeat: '',
 });
 const errors = reactive({
-    name: { invalid: false, message: '' },
+    username: { invalid: false, message: '' },
     email: { invalid: false, message: '' },
     password: { invalid: false, message: '' },
     passwordRepeat: { invalid: false, message: '' },
+    other: { invalid: false, message: '' },
 });
-const handleSubmit = () => {
+const handleSubmit = async () => {
     Object.keys(errors).forEach(key => {
         errors[key].invalid = false;
         errors[key].message = '';
     });
-    if (formData.name === '') {
-        errors.name.invalid = true;
-        errors.name.message = 'Укажите имя.';
+    if (formData.username === '') {
+        errors.username.invalid = true;
+        errors.username.message = 'Укажите имя.';
     }
     if (formData.email === '') {
         errors.email.invalid = true;
@@ -110,10 +124,43 @@ const handleSubmit = () => {
     }
     console.log('errors: ', errors);
 
-    if (errors.length === 0) {
+    /* if (errors.length === 0) {
         console.log(`submitted:\n
             email: ${formData.email}\n
             password: ${formData.password}`);
+    } */
+   // if any field errors, abort
+    const hasFieldErrors = Object.entries(errors)
+        .filter(([k]) => k !== 'other')
+        .some(([, v]) => v.invalid)
+
+    if (hasFieldErrors) {
+        return
+    }
+
+    // call registration
+    try {
+        await userStore.register({
+        username: formData.username,
+        email: formData.email,
+        password: formData.password,
+        })
+        // on success, you might redirect or emit an event:
+        // e.g. $emit('registered')
+    } catch (err) {
+        // generic/server-side error
+        errors.other.invalid = true
+        // try to display something meaningful
+        if (err.response?.data) {
+        // if backend gave a message string or list
+        const data = err.response.data
+        errors.other.message =
+            typeof data.detail === 'string'
+            ? data.detail
+            : JSON.stringify(data)
+        } else {
+        errors.other.message = 'Что-то пошло не так.'
+        }
     }
 };
 </script>

@@ -6,5 +6,5 @@ urlpatterns = [
 
     path('api/v1/works/', include('works.urls')),
     path('api/v1/meta/', include('meta_data.urls')),
-    # path('api/v1/users/', include('users.urls')),
+    path('api/v1/users/', include('users.urls')),
 ]
