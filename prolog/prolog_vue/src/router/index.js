@@ -105,7 +105,7 @@ const routes = [
     } }
   },
   {
-    path: '/collections/:id',
+    path: '/collections/:itemId',
     name: 'CollectionPage',
     component: CollectionPage,
     props: true,
@@ -121,7 +121,7 @@ const routes = [
     } }
   },
   {
-    path: '/worlds/:id',
+    path: '/worlds/:itemId',
     name: 'WorldPage',
     component: WorldbuildingPage,
     meta: { formType: 'world' },
@@ -138,7 +138,7 @@ const routes = [
     } }
   },
   {
-    path: '/characters/:id',
+    path: '/characters/:itemId',
     name: 'CharacterPage',
     component: WorldbuildingPage,
     meta: { formType: 'character' },
@@ -146,43 +146,54 @@ const routes = [
   },
 
   /* --------| Editing Works |-------- */
-  {
+  /* {
     path: '/editing',
     name: 'Editing',
     component: StoryHeader,
-  },
+  }, */
   {
+    path: '/editing/:id/header',
+    name: 'Editing Header',
+    component: StoryHeader,
+    props: true,
+  },
+  /* {
     path: '/editing/header',
     name: 'Editing Header',
     component: StoryHeader,
-  },
+  }, */
   {
-    path: '/editing/structure',
+    path: '/editing/:id/structure',
     name: 'Editing Structure',
     component: StoryStructure,
+    props: true,
   },
   {
-    path: '/editing/characteristics',
+    path: '/editing/:id/characteristics',
     name: 'Editing Characteristics',
     component: StoryCharacteristics,
+    props: true,
   },
   {
-    path: '/editing/world',
+    path: '/editing/:id/world',
     name: 'Editing World',
     component: StoryWorld,
+    props: true,
   },
   {
-    path: '/editing/characters',
+    path: '/editing/:id/characters',
     name: 'Editing Characters',
     component: StoryCharacters,
+    props: true,
   },
   {
-    path: '/editing/contents',
+    path: '/editing/:id/contents',
     name: 'Editing Contents',
     component: StoryContents,
+    props: true,
   },
   {
-    path: '/editing/contents/chapter/:id',
+    path: '/editing/:id/contents/chapter/:itemId',
     name: 'Editing Chapter',
     component: ChapterEditingPage,
     props: true,

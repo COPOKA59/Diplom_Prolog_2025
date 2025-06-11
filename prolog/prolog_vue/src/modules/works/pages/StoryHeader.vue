@@ -14,18 +14,18 @@
                     <v-col cols="12" lg="10" md="10" sm="12" class="default-form-btns">
                         <RadioButtonGroup v-model="formData.translation">
                             <div>
-                                <RadioButton :value="0"/>
+                                <RadioButton :value="false"/>
                                 <label>нет</label>
                             </div>
                             
                             <div>
-                                <RadioButton :value="1"/>
+                                <RadioButton :value="true"/>
                                 <label>да</label>
                             </div>
 
-                            <div v-if="formData.translation === 1">
+                            <div v-if="formData.translation === true">
                                 <label class="input-label">Автор переведённой работы</label>
-                                <InputText fluid v-model="formData.author_orignal"/>
+                                <InputText fluid v-model="formData.author_original"/>
                             </div>
                         </RadioButtonGroup>
                     </v-col>
@@ -51,10 +51,10 @@
 
                             <div v-if="formData.type === 2">
                                 <label class="input-label">Фандомы</label>
-                                <MultiSelect :options="workProps.workData.fandoms.options"
+                                <MultiSelect :options="metaData?.fandoms"
                                 optionLabel="name" optionValue="id"
                                 filter
-                                v-model="formData.fandoms"
+                                v-model="formData.fandom"
                                 />
                             </div>
                         </RadioButtonGroup>
@@ -62,12 +62,12 @@
                 </v-row>
 
                 <BasicInput :inputType="'radiobutton'"
-                    :label="workProps.workData.workDirection.label"
-                    :options="workProps.workData.workDirection.options"
+                    :label="'Направление'"
+                    :options="metaData?.orientation"
                     v-model="formData.orientation"/>
                 <BasicInput :inputType="'radiobutton'"
-                    :label="workProps.workData.workRating.label"
-                    :options="workProps.workData.workRating.options"
+                    :label="'Рейтинг'"
+                    :options="metaData?.rating"
                     v-model="formData.rating"/>
                 
                 <v-row>
@@ -75,7 +75,7 @@
                         <label>Жанры</label>
                     </v-col>
                     <v-col cols="12" lg="10" md="10" sm="12" class="default-form-input">
-                        <MultiSelect :options="workProps.workData.workGenres.options"
+                        <MultiSelect :options="metaData?.genres"
                         optionLabel="name" optionValue="id"
                         filter
                         v-model="formData.genres"
@@ -99,12 +99,12 @@
                 <Divider/>
 
                 <BasicInput :inputType="'radiobutton'"
-                    :label="workProps.workData.workSize.label"
-                    :options="workProps.workData.workSize.options"
+                    :label="'Размер'"
+                    :options="metaData?.size"
                     v-model="formData.size"/>
                 <BasicInput :inputType="'radiobutton'"
-                    :label="workProps.workData.workStatus.label"
-                    :options="workProps.workData.workStatus.options"
+                    :label="'Статус'"
+                    :options="metaData?.status"
                     v-model="formData.status"/>
 
                 <Divider/>
@@ -114,7 +114,7 @@
                         <label>Описание</label>
                     </v-col>
                     <v-col cols="12" lg="10" md="10" sm="12" class="default-form-input"> 
-                        <Textarea rows="5" cols="30" v-model="formData.desciption"/>
+                        <Textarea rows="5" cols="30" v-model="formData.description"/>
                     </v-col>
                 </v-row>
 
@@ -139,12 +139,7 @@
                 <v-row >
                     <v-col class="save-button">
                         <Button severity="primary"
-                        @click="
-                        console.log('----------- formData -----------');
-                        Object.keys(formData).forEach(key => {
-                            console.log(`${key}: ${formData[key]}`);
-                        });
-                                ">
+                        @click="putWork(workId, formData);">
                             Сохранить
                         </Button>
                     </v-col>
@@ -163,17 +158,20 @@ import BasicInput from '@/modules/core/components/BasicInput.vue';
 import { Panel, Divider, Button, InputText, Textarea, MultiSelect,
         RadioButton, RadioButtonGroup, FileUpload } from "primevue";
 import { VContainer, VCol, VRow, VForm } from "vuetify/lib/components/index.mjs";
-import workProps from '@/services/work_properties';
+// import workProps from '@/services/work_properties';
 import defaultCover from '@/assets/img/default_cover.svg';
 import { ref, reactive, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
+import { getWork, putWork } from '@/services/api/works/works';
+import { getMetaData } from '@/services/api/works/meta';
 
 const formData = reactive({
     name: '',
     translation: 0,
-    author_orignal: '',
+    author_original: '',
     
     type: 1,
-    fandoms: [],
+    fandom: [],
     orientation: 1,
     rating: 1,
     genres: [],
@@ -182,8 +180,22 @@ const formData = reactive({
     size: 1,
     status: 1,
 
-    desciption: '',
+    description: '',
 });
+
+const metaData = ref();
+
+const route = useRoute();
+const workId = route.params.id;
+const work = ref();
+
+onMounted( async () => {
+    work.value = await getWork(workId);
+    Object.keys(formData)
+        .forEach(k => formData[k] = work.value[k]);
+    metaData.value = await getMetaData();
+})
+
 
 const image = ref(defaultCover);
 const selectedFile = ref(null);

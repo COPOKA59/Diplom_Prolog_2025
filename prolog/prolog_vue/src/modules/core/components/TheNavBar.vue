@@ -1,10 +1,16 @@
 <template>
     <div class="sidebar" id="sidebar-main">
             <ul>
-                <li v-for="route in routes">
+                <!-- <li v-for="route in routes">
                     <RouterLink :to="route.path" active-class="active"
                     :class="{ active: route.extended && $route.path.startsWith(route.path) }">
                     {{ route.name }}
+                    </RouterLink>
+                </li> -->
+                <li v-for="route in routes">
+                    <RouterLink :to="{ name: route.name, params: { id: workId } }" active-class="active"
+                    :class="{ active: route.extended && $route.path.startsWith(route.path) }">
+                    {{ route.title }}
                     </RouterLink>
                 </li>
             </ul>
@@ -12,10 +18,12 @@
 </template>
 
 <script setup>
-import { RouterLink } from 'vue-router';
+import { RouterLink, useRoute } from 'vue-router';
 const props = defineProps({
     routes: Object
 });
+const route = useRoute();
+const workId = route.params.id;
 </script>
 
 <style scoped>

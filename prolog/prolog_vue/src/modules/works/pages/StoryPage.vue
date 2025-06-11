@@ -49,7 +49,9 @@ import { Paginator } from 'primevue';
 
 import { ref, onMounted, computed } from 'vue';
 import { useRoute } from 'vue-router';
-import { getWork, getChapters } from '@/services/api/works/works';
+// import { getWork, getChapters } from '@/services/api/works/works';
+import { getWork } from '@/services/api/works/works';
+import { getChapters } from '@/services/api/works/chapters';
 
 const route = useRoute(); 
 const work = ref(null);
@@ -60,9 +62,14 @@ const rows = ref(10);
 const totalRecords = ref(null);
 
 onMounted( async () => {
-  const id = parseInt(route.params.id);
+  /* const id = parseInt(route.params.id);
   work.value = await getWork(id);
   chapters.value = await getChapters();
+  totalRecords.value = chapters.value.length;
+  console.log(`chapters.value: ${chapters.value}`); */
+  const id = parseInt(route.params.id);
+  work.value = await getWork(id);
+  chapters.value = await getChapters(id);
   totalRecords.value = chapters.value.length;
   console.log(`chapters.value: ${chapters.value}`);
 });

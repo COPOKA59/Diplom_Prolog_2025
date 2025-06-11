@@ -12,11 +12,11 @@ import MainLayout from './MainLayout.vue';
 import TheNavBar from '@/modules/core/components/TheNavBar.vue';
 
 const routes = [
-    { path: '/editing/header', name: 'Шапка', extended: false },
-    { path: '/editing/structure', name: 'Структура', extended: false },
-    { path: '/editing/characteristics', name: 'Характеристики', extended: false },
-    { path: '/editing/world', name: 'Миры', extended: false },
-    { path: '/editing/characters', name: 'Персонажи', extended: false },
-    { path: '/editing/contents', name: 'Содержание', extended: true }
+    { path: '/editing/:id/header', title: 'Шапка', name: 'Editing Header', extended: false },
+    { path: '/editing/:id/structure', title: 'Структура', name: 'Editing Structure', extended: false },
+    { path: '/editing/:id/characteristics', title: 'Характеристики', name: 'Editing Characteristics', extended: false },
+    { path: '/editing/:id/world', title: 'Миры', name: 'Editing World', extended: false },
+    { path: '/editing/:id/characters', title: 'Персонажи', name: 'Editing Characters', extended: false },
+    { path: '/editing/:id/contents', title: 'Содержание', name: 'Editing Contents', extended: true }
 ];
 </script>

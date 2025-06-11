@@ -86,7 +86,9 @@ import { Card, Divider, Button, ButtonGroup } from 'primevue';
 
 import { ref, onMounted, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { getChapter, getWork } from '@/services/api/works/works';
+// import { getChapter, getWork } from '@/services/api/works/works';
+import { getWork } from '@/services/api/works/works';
+import { getChapter } from '@/services/api/works/chapters';
 
 const route = useRoute();
 const router = useRouter();
@@ -98,17 +100,22 @@ const isPrev = ref(false);
 const isNext = ref(true);
 
 const loadChapter = async () => {
-  const chapterId = parseInt(route.params.chapter_id);
+  /* const chapterId = parseInt(route.params.chapter_id);
   chapter.value = await getChapter(chapterId);
   isNext.value = !! await getChapter(chapter.value.number + 1);
-  isPrev.value = !! await getChapter(chapter.value.number - 1);
+  isPrev.value = !! await getChapter(chapter.value.number - 1); */
+  const chapterId = parseInt(route.params.chapter_id);
+  const workId = parseInt(route.params.id);
+  chapter.value = await getChapter(workId, chapterId);
+  isNext.value = !! await getChapter(workId, chapter.value.id + 1); //chapter.value.id
+  isPrev.value = !! await getChapter(workId, chapter.value.id - 1); //chapter.value.id
 }
 
 const nextChapter = () => {
-  router.push({ name: 'StoryChapterPage', params: { chapter_id: chapter.value.number + 1 } });
+  router.push({ name: 'StoryChapterPage', params: { chapter_id: chapter.value.id + 1 } }); //chapter.value.id
 }
 const previousChapter = () => {
-  router.push({ name: 'StoryChapterPage', params: { chapter_id: chapter.value.number - 1 } });
+  router.push({ name: 'StoryChapterPage', params: { chapter_id: chapter.value.id - 1 } }); //chapter.value.id
 }
 
 

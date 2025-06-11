@@ -10,7 +10,8 @@
         </v-col>
         
         <v-col class="create-story-button" cols="12" lg="7" md="7" sm="12">
-          <Button label="Создать" severity="secondary" icon="pi pi-plus" @click="$router.push({ name: 'Editing Header' })"/>
+          <!-- <Button label="Создать" severity="secondary" icon="pi pi-plus"@click="$router.push({ name: 'Editing Header' })"/> -->
+          <Button label="Создать" severity="secondary" icon="pi pi-plus"@click="createWork"/>
         </v-col>
       </v-row>
 
@@ -69,7 +70,10 @@ import StoryCard from '../components/StoryCard.vue';
 import { Paginator, Button, IconField, InputText, InputIcon } from 'primevue';
 import { VContainer, VRow, VCol } from "vuetify/lib/components/index.mjs";
 import { ref, computed, onMounted } from 'vue';
-import { getWorks } from '@/services/api/works/works';
+import { useRouter } from 'vue-router';
+import { getWorks, postWork } from '@/services/api/works/works';
+
+const router = useRouter();
 
 const isAuthor = ref(true);
 const works = ref(null);
@@ -90,6 +94,11 @@ const displayedWorks = computed(() => {
 function onPageChange(event) {
   first.value = event.first;
   rows.value = event.rows;
+}
+
+const createWork = async () => {
+  let newWork = await postWork();
+  router.push({ name: 'Editing Header', params: { id: newWork.id } });
 }
 
 </script>

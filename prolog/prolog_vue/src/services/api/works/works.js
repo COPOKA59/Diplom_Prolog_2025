@@ -17,6 +17,59 @@ export const getWork = async (id) => {
     console.error('Error fetching data:', error);
   }
 }; */
+export const getWorks = () => {
+  return axios.get('/works/')
+    .then(response => response.data)
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    });
+};
+
+export const getWork = (id) => {
+  return axios.get(`/works/${id}`)
+    .then(response => response.data)
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    });
+};
+
+export const postWork = () => {
+  const body = {
+    name: "Ваша работа",
+    description: "Описание работы",
+    translation: false,
+    author_original: "",
+    original: "-",
+    size: 1,
+    orientation: 1,
+    rating: 1,
+    type: 1,
+    status: 1,
+    genres: [1],
+    fandom: []
+};
+  return axios.post(`/works/`, body)
+    .then(response => response.data)
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    });
+};
+
+export const putWork = (id, body) => {
+  return axios.put(`/works/${id}/`, body)
+    .then(response => console.log(response.data))
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    });
+};
+
+export const deleteWork = (id) => {
+  return axios.delete(`/works/${id}/`)
+    .then(response => console.log(response.data))
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    });
+};
 
 
 /*********************************************************************************
@@ -28,7 +81,7 @@ export const getWork = async (id) => {
 
 // ------------------------------ works ------------------------------
 
-export const getWorks = async () => {
+/* export const getWorks = async () => {
   try {
     const response = await axios.get('/works/');
     console.log('data: ', JSON.stringify(response.data));
@@ -49,7 +102,7 @@ export const getWork = async (id) => {
   } catch (error) {
     console.error('Error fetching data:', error);
   }
-};
+}; */
 
 export const getPopularWorks = async () => {
   try {
@@ -72,7 +125,7 @@ export const getNewWorks = async () => {
 };
 
 // ------------------------------ chapters ------------------------------
-export const getChapters = async () => {
+/* export const getChapters = async () => {
   try {
     const response = await axios.get('/chapters/');
     console.log('data: ', JSON.stringify(response.data));
@@ -92,4 +145,4 @@ export const getChapter = async (id) => {
   } catch (error) {
     console.error('Error fetching data:', error);
   }
-};
+}; */

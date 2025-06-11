@@ -99,11 +99,11 @@
 
             <v-row v-if="isAuthor">
                 <v-col class="edit-button">
-                    <Button severity="primary">
+                    <Button severity="primary" @click="$router.push({ name: 'Editing Header', params: { id: id } })">
                         <i class="pi pi-pencil"></i>
                         <span>Изменить</span>
                     </Button>
-                    <Button severity="danger">
+                    <Button severity="danger" @click="deleteWork(id); reloadRouter();">
                         <i class="pi pi-trash"></i>
                         <span>Удалить</span>
                     </Button>
@@ -120,6 +120,14 @@
 import { Card, Divider, Tag, Chip, Button} from 'primevue';
 import { VContainer, VRow, VCol } from 'vuetify/lib/components/index.mjs';
 import { ref } from 'vue';
+import { deleteWork } from '@/services/api/works/works';
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
+function reloadRouter() {
+  // 0 means “reload the current URL”
+  router.go(0)
+}
 
 const props = defineProps({
     id: Number,
