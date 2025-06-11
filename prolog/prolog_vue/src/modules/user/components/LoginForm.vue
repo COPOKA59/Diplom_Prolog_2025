@@ -13,9 +13,9 @@
                 <v-row>
                     <v-col>
                         <label>Логин</label>
-                        <InputText v-model="formData.email" type="email"
-                        class="login-input" required :invalid="errors.email.invalid"/>
-                        <Message v-if="errors.email.invalid" severity="error" variant="simple">{{ errors.email.message }}</Message>
+                        <InputText v-model="formData.username"
+                        class="login-input" required :invalid="errors.username.invalid"/>
+                        <Message v-if="errors.username.invalid" severity="error" variant="simple">{{ errors.username.message }}</Message>
                     </v-col>                    
                 </v-row>
 
@@ -60,25 +60,28 @@
 import { VContainer, VRow, VCol, VForm } from 'vuetify/lib/components/index.mjs';
 import { Card, InputText, Button, Password, Message } from 'primevue';
 import { ref, reactive } from 'vue';
+import { useUserStore } from '@/stores/user';
+
+const userStore = useUserStore();
 
 const formData = reactive({
-    email: '',
+    username: '',
     password: ''
 });
 const errors = reactive({
-    email: { invalid: false, message: '' },
+    username: { invalid: false, message: '' },
     password: { invalid: false, message: '' },
     
 });
 
-const handleSubmit = () => {
+const handleSubmit = async () => {
     Object.keys(errors).forEach(key => {
         errors[key].invalid = false;
         errors[key].message = '';
     });
-    if (formData.email === '') {
-        errors.email.invalid = true;
-        errors.email.message = 'Укажите логин.';
+    if (formData.username === '') {
+        errors.username.invalid = true;
+        errors.username.message = 'Укажите логин.';
     }
     if (formData.password === '') {
         errors.password.invalid = true;
@@ -86,10 +89,27 @@ const handleSubmit = () => {
     }
     console.log('errors: ', errors);
 
-    if (errors.length === 0) {
+    /* if (errors.length === 0) {
         console.log(`submitted:\n
-            email: ${formData.email}\n
+            username: ${formData.username}\n
             password: ${formData.password}`);
+    } */
+    try {
+        // Attempt to log in
+        await userStore.login({
+            username: formData.username,
+            password: formData.password
+        });
+        // Optionally, redirect or show a success message
+        console.log('Login successful');
+    } catch (error) {
+        // Handle login error
+        if (error.non_field_errors) {
+            errors.username.invalid = true;
+            errors.username.message = error.non_field_errors[0]; // Adjust based on your API response
+        } else {
+            console.error('Login failed:', error);
+        }
     }
 };
 </script>
