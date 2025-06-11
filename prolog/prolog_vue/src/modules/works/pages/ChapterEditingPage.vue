@@ -9,12 +9,12 @@
             <h2>Редактирование главы</h2>
         <v-form>
 
-            <BasicInput input-type="input" label="Название главы"/>
+            <BasicInput input-type="input" label="Название главы" v-model="formData.name"/>
 
             
             <v-row >
                 <v-col>
-                    <ChapterTextEditor />
+                    <ChapterTextEditor v-model="formData.text" />
                 </v-col>
             </v-row>
             
@@ -22,7 +22,7 @@
             <v-row >
                 <v-col class="default-button">
                     <Button severity="primary"> Опубликовать </Button>
-                    <Button severity="primary"> Сохранить </Button>
+                    <Button severity="primary" @click="putChapter(id, itemId, formData)"> Сохранить </Button>
                 </v-col>
             </v-row>
         </v-form>
@@ -38,6 +38,29 @@ import { VContainer, VRow, VCol, VForm } from 'vuetify/lib/components/index.mjs'
 import { Panel, Button } from 'primevue';
 import Editor from 'primevue/editor';
 import ChapterTextEditor from '../components/ChapterTextEditor.vue';
+import { ref, reactive, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
+import { getChapter, putChapter } from '@/services/api/works/chapters';
+
+const props = defineProps({
+    id: Number,
+    itemId: Number
+});
+
+const formData = reactive({
+    name: '',
+    text: '',
+    work: props.id
+});
+const chapter = ref();
+
+onMounted( async () => {
+    chapter.value = await getChapter(props.id, props.itemId);
+    Object.keys(formData)
+        .forEach(k => formData[k] = chapter.value[k]);
+    console.log(formData);
+})
+
 </script>
 
 <style scoped>

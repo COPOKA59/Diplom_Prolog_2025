@@ -6,7 +6,8 @@
             <h2>Главы</h2>
             <v-row >
                 <v-col class="default-button">
-                    <Button severity="primary" icon="pi pi-plus" label="Создать"/>
+                    <Button severity="primary" icon="pi pi-plus" label="Создать"
+                        @click="createChapter"/>
                 </v-col>
             </v-row>
 
@@ -14,7 +15,7 @@
                 <v-col>
                     <ItemCardMain :id="chapter.id" :title="chapter.name" :pageName="'Editing Chapter'"
                     :isChapter="true" :number="chapter.number"
-                    :canDelete="true" @delete-item="deleteChapter(chapter.id)"/>
+                    :canDelete="true" @delete-item="deleteCurrentChapter(chapter.id)"/>
                 </v-col>
             </v-row>
 
@@ -30,15 +31,26 @@ import { VContainer, VRow, VCol } from 'vuetify/lib/components/index.mjs';
 import { Panel, Button } from 'primevue';
 import ItemCardMain from '../components/ItemCardMain.vue';
 import { ref, onMounted } from 'vue';
-import { getChapters } from '@/services/api/works/works';
+import { useRoute, useRouter } from 'vue-router';
+// import { getChapters } from '@/services/api/works/works';
+import { getChapters, postChapter, deleteChapter } from '@/services/api/works/chapters';
 
-// const storyChapters = ref(chapters);
+const route = useRoute();
+const router = useRouter();
+
 const storyChapters = ref();
 onMounted( async () => {
-    storyChapters.value = await getChapters();
+    // storyChapters.value = await getChapters();
+    storyChapters.value = await getChapters(route.params.id);
 } )
 
-const deleteChapter = (chapterId) => {
+const createChapter = async () => {
+    let newChapter = await postChapter(route.params.id);
+    router.push({ name: 'Editing Chapter', params: { itemId: newChapter.id } });
+};
+
+const deleteCurrentChapter = async (chapterId) => {
+    await deleteChapter(route.params.id, chapterId);
     storyChapters.value = storyChapters.value.filter(chapter => chapter.id != chapterId);
 };
 </script>

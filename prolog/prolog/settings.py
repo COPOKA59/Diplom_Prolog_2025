@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     #Наши приложения
     'works',
     'meta_data',
+    'users',
 
     # Установленные фреймворки, пакеты и др.
     'rest_framework',
