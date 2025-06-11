@@ -17,9 +17,21 @@ class RegisterView(APIView):
             return Response({"message": "Пользователь зарегистрирован"}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class MeViewSet(ModelViewSet):
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated, IsSelf]
+    http_method_names = ['get', 'put', 'patch', 'delete']
+
+    def get_queryset(self):
+        return User.objects.filter(id=self.request.user.id)
+
+    def get_object(self):
+        return current_user(self.request.user)
+
 class UsersViewSet(ModelViewSet):
     serializer_class = UserSerializer
-    http_method_names = ['get', 'put', 'patch', 'delete']
+    http_method_names = ['get']
+    permission_classes = [AllowAny]
 
     def get_queryset(self):
         return list_users()
@@ -29,10 +41,3 @@ class UsersViewSet(ModelViewSet):
         user = current_user(user_id)
         self.check_object_permissions(self.request, user)
         return user
-
-    def get_permissions(self):
-        if self.action in ['list', 'retrieve']:
-            permission_classes = [AllowAny]
-        else:
-            permission_classes = [IsAuthenticated, IsSelf]
-        return [permission() for permission in permission_classes]
