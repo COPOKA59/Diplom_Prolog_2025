@@ -67,7 +67,7 @@ import { Panel, Button, AutoComplete } from 'primevue';
 import BasicInput from '@/modules/core/components/BasicInput.vue';
 import ItemCardMain from '../components/ItemCardMain.vue';
 import { reactive, onMounted } from 'vue';
-import { getWorks } from '@/services/api/works/works';
+import { getWorks } from '@/services/works/works';
 
 const itemData = reactive({
     chosenInputValue: null,

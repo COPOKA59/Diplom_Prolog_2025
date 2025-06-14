@@ -3,7 +3,7 @@
         <template #header>
             <div class="sidebar-header">
             <Avatar image="\src\assets\img\user_default.jpg" shape="circle" />
-            <span>user_name</span>
+            <span>{{userStore.user.username}}</span>
             </div>
         </template>
 
@@ -48,7 +48,7 @@
                 </li>
 
                 <li>
-                    <RouterLink to="/">
+                    <RouterLink to="/" @click="userStore.logout()">
                     <div style="display: flex; gap: 10px; align-items: center;">
                         <span>Выход</span>
                         <i class="pi pi-sign-out"/>
@@ -60,7 +60,7 @@
 
         </Drawer>
         <Button severity="primary" @click="sidebarVisibility = true">
-            <span>user_name</span>
+            <span>{{userStore.user.username}}</span>
             <i class="pi pi-user"></i>
         </Button>
 </template>
@@ -69,7 +69,9 @@
 import { Button, Drawer, Avatar, Divider } from 'primevue';
 import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
+import { useUserStore } from '@/stores/user';
 
+const userStore = useUserStore();
 const sidebarVisibility = ref(false);
 
 const route = useRoute();

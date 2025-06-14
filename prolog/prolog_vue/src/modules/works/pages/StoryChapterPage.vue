@@ -87,8 +87,8 @@ import { Card, Divider, Button, ButtonGroup } from 'primevue';
 import { ref, onMounted, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 // import { getChapter, getWork } from '@/services/api/works/works';
-import { getWork } from '@/services/api/works/works';
-import { getChapter } from '@/services/api/works/chapters';
+import { getWork } from '@/services/works/works';
+import { getChapter } from '@/services/works/chapters';
 
 const route = useRoute();
 const router = useRouter();

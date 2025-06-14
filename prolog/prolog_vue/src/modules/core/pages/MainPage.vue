@@ -66,7 +66,7 @@ import { VContainer, VRow, VCol } from "vuetify/lib/components/index.mjs";
 import { Divider } from "primevue";
 
 import { onBeforeMount, onBeforeUnmount, onMounted, ref, } from "vue";
-import { getWorks, getPopularWorks, getNewWorks } from "@/services/api/works/works";
+import { getWorks, getPopularWorks, getNewWorks } from "@/services/works/works";
 
 onBeforeMount(() => {
   document.body.style.background = "#222";

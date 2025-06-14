@@ -40,7 +40,7 @@ import Editor from 'primevue/editor';
 import ChapterTextEditor from '../components/ChapterTextEditor.vue';
 import { ref, reactive, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-import { getChapter, putChapter } from '@/services/api/works/chapters';
+import { getChapter, putChapter } from '@/services/works/chapters';
 
 const props = defineProps({
     id: Number,

@@ -71,7 +71,7 @@ import { Paginator, Button, IconField, InputText, InputIcon } from 'primevue';
 import { VContainer, VRow, VCol } from "vuetify/lib/components/index.mjs";
 import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import { getWorks, postWork } from '@/services/api/works/works';
+import { getWorks, postWork } from '@/services/works/works';
 
 const router = useRouter();
 

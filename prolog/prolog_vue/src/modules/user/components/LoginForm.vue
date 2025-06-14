@@ -60,8 +60,10 @@
 import { VContainer, VRow, VCol, VForm } from 'vuetify/lib/components/index.mjs';
 import { Card, InputText, Button, Password, Message } from 'primevue';
 import { ref, reactive } from 'vue';
+import { useRouter } from 'vue-router';
 import { useUserStore } from '@/stores/user';
 
+const router = useRouter();
 const userStore = useUserStore();
 
 const formData = reactive({
@@ -102,6 +104,7 @@ const handleSubmit = async () => {
         });
         // Optionally, redirect or show a success message
         console.log('Login successful');
+        router.push({ name: 'Profile' });
     } catch (error) {
         // Handle login error
         if (error.non_field_errors) {

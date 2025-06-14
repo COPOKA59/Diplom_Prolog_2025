@@ -6,7 +6,7 @@
       </RouterLink>
     </template>
 
-    <template v-if="isLoggedIn" #end>
+    <template v-if="userStore.isAuthenticated" #end>
           <TheSidebar/>
     </template>
     <template v-else #end>
@@ -22,10 +22,10 @@
 import TheSidebar from './TheSidebar.vue';
 import { Toolbar, Button } from 'primevue';
 import { useRouter } from 'vue-router';
-import { ref } from 'vue';
+import { useUserStore } from '@/stores/user';
 
 const router = useRouter();
-const isLoggedIn = ref(true);
+const userStore = useUserStore();
 
 const goToLogin = (isNewUser) => {
   localStorage.setItem('isNewUser', isNewUser);

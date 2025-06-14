@@ -162,8 +162,8 @@ import { VContainer, VCol, VRow, VForm } from "vuetify/lib/components/index.mjs"
 import defaultCover from '@/assets/img/default_cover.svg';
 import { ref, reactive, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-import { getWork, putWork } from '@/services/api/works/works';
-import { getMetaData } from '@/services/api/works/meta';
+import { getWork, putWork } from '@/services/works/works';
+import { getMetaData } from '@/services/works/meta';
 
 const formData = reactive({
     name: '',

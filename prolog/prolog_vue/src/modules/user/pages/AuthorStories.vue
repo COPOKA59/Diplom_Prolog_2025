@@ -29,7 +29,7 @@ import UserLayout from '@/layouts/UserLayout.vue';
 import { VContainer, VRow, VCol } from 'vuetify/lib/components/index.mjs';
 import StoryCard from '@/modules/works/components/StoryCard.vue';
 // import { works } from '@/services/stories';
-import { getWorks } from '@/services/api/works/works';
+import { getWorks } from '@/services/works/works';
 import { ref, onMounted } from 'vue';
 
 const works = ref();

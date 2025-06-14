@@ -8,7 +8,9 @@
                     </RouterLink>
                 </li> -->
                 <li v-for="route in routes">
-                    <RouterLink :to="{ name: route.name, params: { id: workId } }" active-class="active"
+                    <RouterLink :to=" requiresId ?
+                        { name: route.name, params: { id: workId } } : { name: route.name } " 
+                    active-class="active"
                     :class="{ active: route.extended && $route.path.startsWith(route.path) }">
                     {{ route.title }}
                     </RouterLink>
@@ -20,10 +22,13 @@
 <script setup>
 import { RouterLink, useRoute } from 'vue-router';
 const props = defineProps({
-    routes: Object
+    routes: Object,
+    requiresId: Boolean
 });
 const route = useRoute();
-const workId = route.params.id;
+// const workId = route.params.id ? route.params.id : null;
+let workId = null;
+if (props.requiresId) workId = route.params.id;
 </script>
 
 <style scoped>

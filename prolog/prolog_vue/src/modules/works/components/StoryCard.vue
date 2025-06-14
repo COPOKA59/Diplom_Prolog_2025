@@ -120,7 +120,7 @@
 import { Card, Divider, Tag, Chip, Button} from 'primevue';
 import { VContainer, VRow, VCol } from 'vuetify/lib/components/index.mjs';
 import { ref } from 'vue';
-import { deleteWork } from '@/services/api/works/works';
+import { deleteWork } from '@/services/works/works';
 import { useRouter } from 'vue-router'
 const router = useRouter()
 

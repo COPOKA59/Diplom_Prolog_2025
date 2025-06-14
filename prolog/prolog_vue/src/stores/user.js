@@ -1,9 +1,10 @@
-import { defineStore } from 'pinia'
-import axios from 'axios'
+import { defineStore } from 'pinia';
+// import axios from 'axios';
+import api from '@/services/api'; // axios. -> api.
 
 export const useUserStore = defineStore('user', {
   state: () => ({
-    user: null,
+    user: JSON.parse(localStorage.getItem('user')) || null,
     accessToken: localStorage.getItem('access') || null,
     refreshToken: localStorage.getItem('refresh') || null,
   }),
@@ -15,7 +16,7 @@ export const useUserStore = defineStore('user', {
   actions: {
     async register({ username, email, password }) {
       try {
-        await axios.post('users/register/', {
+        await api.post('users/register/', {
           username,
           email,
           password,
@@ -27,7 +28,7 @@ export const useUserStore = defineStore('user', {
 
     async login({ username, password }) {
         try {
-          const response = await axios.post('users/login/', {
+          const response = await api.post('users/login/', {
             username,
             password,
           });
@@ -38,36 +39,68 @@ export const useUserStore = defineStore('user', {
           localStorage.setItem('access', this.accessToken);
           localStorage.setItem('refresh', this.refreshToken);
 
-          console.log('response.data: ', JSON.stringify(response.data));
-  
-          // Fetch the current user by ID after login
-          await this.fetchCurrentUser(response.data.userId); // Assuming userId is returned in the login response
-        } catch (error) {
-          throw error.response?.data || error;
-        }
+          await this.fetchCurrentUser();
+      } catch (error) {
+        throw error.response?.data || error
+      }
     },
 
-    async fetchCurrentUser(userId) {
-    if (!this.accessToken) return;
+    async fetchCurrentUser() {
+      /* if (!this.accessToken) return;
 
-    try {
-        const response = await axios.get(`users/`, {
-        headers: {
+      try {
+        const response = await api.get('/users/me/', {
+          headers: {
             Authorization: `Bearer ${this.accessToken}`,
-        },
-        });
-        this.user = response.data;
-    } catch (error) {
+          },
+        })
+        this.user = response.data[0];
+        localStorage.setItem('user', JSON.stringify(this.user));
+      } catch (error) {
+        if (error.response?.status === 401) {
+          const refreshed = await this.refreshAccessToken();
+          if (refreshed) {
+            console.log('refreshed');
+            return this.fetchCurrentUser();
+          } else {
+            this.logout();
+          }
+        }
         this.logout();
-    }
+      } */
+        if (!this.accessToken) return;
+        const response = await api.get('/users/me/', {
+          headers: {
+            Authorization: `Bearer ${this.accessToken}`,
+          },
+        })
+        this.user = response.data[0];
+        localStorage.setItem('user', JSON.stringify(this.user));
+    },
+
+    async refreshAccessToken() {
+      if (!this.refreshToken) return false;
+
+      try {
+        const response = await api.post('/users/token/refresh/', {
+          refresh: this.refreshToken,
+        });
+        this.accessToken = response.data.access;
+        localStorage.setItem('access', this.accessToken);
+        return true;
+      } catch (error) {
+        this.logout();
+        return false;
+      }
     },
 
     logout() {
-      this.user = null
-      this.accessToken = null
-      this.refreshToken = null
-      localStorage.removeItem('access')
-      localStorage.removeItem('refresh')
+      this.user = null;
+      this.accessToken = null;
+      this.refreshToken = null;
+      localStorage.removeItem('user');
+      localStorage.removeItem('access');
+      localStorage.removeItem('refresh');
     },
   },
 })

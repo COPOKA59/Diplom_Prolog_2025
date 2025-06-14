@@ -1,7 +1,7 @@
 <template>
   <MainLayout :layout_container="true">
     <template v-slot:navbar>
-        <TheNavBar :routes="routes"/>
+        <TheNavBar :routes="routes" :requiresId="true"/>
     </template>
     <slot></slot>
   </MainLayout>

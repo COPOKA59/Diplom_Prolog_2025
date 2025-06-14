@@ -7,7 +7,7 @@
                         <div style="text-align: center;">
                             <!-- <img class="user-profile-img" src="@/assets/img/user_default.jpg"/> -->
                             <img class="user-profile-img" src="https://images.unsplash.com/photo-1543270122-f7a11ad44f3a?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
-                            <h1>User_name</h1>
+                            <h1>{{ userStore?.user?.username || 'User_name' }}</h1>
                         </div>
                     </v-col>
                     <v-col class="user-stats" cols="12" lg="9" md="9" sm="12">
@@ -52,6 +52,10 @@
 <script setup>
 import { VContainer, VRow, VCol } from 'vuetify/lib/components/index.mjs';
 import { Card, Divider } from 'primevue';
+import { useUserStore } from '@/stores/user';
+import { onBeforeMount } from 'vue';
+
+const userStore = useUserStore();
 </script>
 
 <style scoped>

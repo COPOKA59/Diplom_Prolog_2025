@@ -33,7 +33,7 @@ import ItemCardMain from '../components/ItemCardMain.vue';
 import { ref, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 // import { getChapters } from '@/services/api/works/works';
-import { getChapters, postChapter, deleteChapter } from '@/services/api/works/chapters';
+import { getChapters, postChapter, deleteChapter } from '@/services/works/chapters';
 
 const route = useRoute();
 const router = useRouter();

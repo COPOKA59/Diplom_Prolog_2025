@@ -50,8 +50,8 @@ import { Paginator } from 'primevue';
 import { ref, onMounted, computed } from 'vue';
 import { useRoute } from 'vue-router';
 // import { getWork, getChapters } from '@/services/api/works/works';
-import { getWork } from '@/services/api/works/works';
-import { getChapters } from '@/services/api/works/chapters';
+import { getWork } from '@/services/works/works';
+import { getChapters } from '@/services/works/chapters';
 
 const route = useRoute(); 
 const work = ref(null);

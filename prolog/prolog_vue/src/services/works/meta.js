@@ -1,13 +1,14 @@
-import axios from 'axios';
+// import axios from 'axios';
+import api from "../api";
 
 export const getMetaData = () => {
   return Promise.all([
-    axios.get('/meta/fandom/'),
-    axios.get('/meta/genres/'),
-    axios.get('/meta/orientation/'),
-    axios.get('/meta/rating/'),
-    axios.get('/meta/size/'),
-    axios.get('/meta/status/')
+    api.get('/meta/fandom/'),
+    api.get('/meta/genres/'),
+    api.get('/meta/orientation/'),
+    api.get('/meta/rating/'),
+    api.get('/meta/size/'),
+    api.get('/meta/status/')
   ])
   .then(([fandomResponse, genresResponse, orientationResponse, ratingResponse, sizeResponse, statusResponse]) => {
     return {
@@ -25,7 +26,7 @@ export const getMetaData = () => {
 };
 
 export const getQuestions = () => {
-  return axios.get('/meta/questions/')
+  return api.get('/meta/questions/')
     .then(response => response.data)
     .catch(error => {
       console.error('Error fetching data:', error);
@@ -33,7 +34,7 @@ export const getQuestions = () => {
 };
 
 export const getWorkQuestions = (workId) => {
-  return axios.get(`{/works/${workId}/questions/}`)
+  return api.get(`{/works/${workId}/questions/}`)
     .then(response => response.data)
     .catch(error => {
       console.error('Error fetching data:', error);
