@@ -11,39 +11,9 @@
 
         <div class="sidebar">
             <ul>
-                <li>
-                    <RouterLink to="/profile">
-                    <span>Мой профиль</span>
-                    </RouterLink>
-                </li>
-
-                <li>
-                    <RouterLink to="/collections">
-                    <span>Сборники</span>
-                    </RouterLink>
-                </li>
-
-                <li>
-                    <RouterLink to="/works">
-                    <span>Произведения</span>
-                    </RouterLink>
-                </li>
-
-                <li>
-                    <RouterLink to="/worlds">
-                    <span>Миры</span>
-                    </RouterLink>
-                </li>
-
-                <li>
-                    <RouterLink to="/characters">
-                    <span>Персонажи</span>
-                    </RouterLink>
-                </li>
-
-                <li>
-                    <RouterLink to="/settings">
-                    <span>Настройки</span>
+                <li v-for="route in routes" :key="route.name">
+                    <RouterLink :to="{ name: route.name }">
+                    <span>{{ route.title }}</span>
                     </RouterLink>
                 </li>
 
@@ -81,7 +51,15 @@ watch(
         sidebarVisibility.value = false;
     }
 );
-// @click="sidebarVisibility = false"
+
+const routes = [
+    { name: 'Profile', title: 'Мой профиль' },
+    { name: 'Collection List Page', title: 'Сборники' },
+    { name: 'Stories', title: 'Произведения' },
+    { name: 'World List Page', title: 'Миры' },
+    { name: 'Character List Page', title: 'Персонажи' },
+    { name: 'Settings', title: 'Настройки' },
+];
 </script>
 
 <style scoped>

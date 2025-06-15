@@ -2,8 +2,8 @@
     <div class="sidebar" id="sidebar-main">
             <ul>
                 <li v-for="route in routes">
-                    <RouterLink :to=" requiresId ?
-                        { name: route.name, params: { workId: workId } } : { name: route.name } " 
+                    <RouterLink :to=" requiresParams ?
+                        { name: route.name, params: { [paramName]: paramValue } } : { name: route.name } " 
                     active-class="active"
                     :class="{ active: route.extended && $route.path.startsWith(route.path) }">
                     {{ route.title }}
@@ -15,15 +15,16 @@
 
 <script setup>
 import { RouterLink, useRoute } from 'vue-router';
+import { ref } from 'vue';
 const props = defineProps({
     routes: Object,
-    requiresId: Boolean
+    requiresParams: Boolean,
+    paramName: String
 });
 const route = useRoute();
-// const workId = route.params.id ? route.params.id : null;
-let workId = null;
-// if (props.requiresId) workId = route.params.id;
-if (props.requiresId) workId = route.params.workId;
+const paramValue = ref();
+
+if (props.requiresParams) paramValue.value = route.params[props.paramName];
 </script>
 
 <style scoped>
