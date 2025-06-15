@@ -13,7 +13,7 @@ import TheNavBar from '@/modules/core/components/TheNavBar.vue';
 
 const routes = [
     { path: 'profile', title: 'Профиль', name: 'Author Profile', extended: false },
-    { path: 'user/series', title: 'Сборники', name: 'Author Series', extended: false },
+    { path: 'series', title: 'Сборники', name: 'Author Series', extended: false },
     { path: 'works', title: 'Произведения', name: 'Author Works', extended: false }
 ];
 </script>

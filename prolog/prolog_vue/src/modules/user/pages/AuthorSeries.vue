@@ -26,9 +26,11 @@ import { Panel } from 'primevue';
 import ItemCardMain from '@/modules/works/components/ItemCardMain.vue';
 import { ref } from 'vue';
 import { onBeforeMount } from 'vue';
+import { useUserStore } from '@/stores/user';
 
 const props = defineProps({
-    userName: String
+    userName: String,
+    userId: Number
 });
 
 const itemsList = ref([]);

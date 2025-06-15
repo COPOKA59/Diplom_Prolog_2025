@@ -107,5 +107,15 @@ export const useUserStore = defineStore('user', {
       this.user = this.accessToken = this.refreshToken = null;
       localStorage.clear();
     },
+
+    async getUserById(userId) {
+      try {
+        const response = await api.get(`/users/${userId}/`);
+        console.log('response.data user: ', response.data);
+        return response.data;
+      } catch (error) {
+        throw error.response?.data || error
+      }
+    }
   },
 })

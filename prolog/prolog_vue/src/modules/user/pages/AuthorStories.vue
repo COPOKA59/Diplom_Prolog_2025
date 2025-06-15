@@ -21,6 +21,10 @@ import { getWorks } from '@/services/works/works';
 import { ref, onMounted } from 'vue';
 import { useUserStore } from '@/stores/user';
 
+const props = defineProps({
+    userId: Number
+});
+
 const userStore = useUserStore();
 
 const works = ref();

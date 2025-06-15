@@ -30,16 +30,20 @@ const routes = [
     component: Settings,
   },
   {
-    path: '/user/profile',
+    // path: '/user/profile',
+    path: '/user/:userId/profile',
     name: 'Author Profile',
     component: AuthorProfile,
+    props: true
   },
   {
-    path: '/user',
-    redirect: '/user/profile'
+    path: '/user/:userId',
+    redirect: '/user/profile',
+    props: true
   },
   {
-    path: '/user/series',
+    // path: '/user/series',
+    path: '/user/:userId/series',
     name: 'Author Series',
     component: AuthorSeries,
     props: false
@@ -52,7 +56,8 @@ const routes = [
     props: true
   },
   {
-    path: '/user/works',
+    // path: '/user/works',
+    path: '/user/:userId/works',
     name: 'Author Works',
     component: AuthorStories,
   },
@@ -192,7 +197,7 @@ const router = createRouter({
   },
 });
 
-router.beforeEach(async (to) => {
+/* router.beforeEach(async (to) => {
   const userStore = useUserStore();
   // await userStore.fetchCurrentUser();
   const privatePages = [ 'Profile', 'Settings', 'Collection List Page', 'CollectionPage',
@@ -204,6 +209,6 @@ router.beforeEach(async (to) => {
   if (authRequired && !userStore.isAuthenticated) {
       return { name: 'LoginPage' };
   }
-});
+}); */
 
 export default router;

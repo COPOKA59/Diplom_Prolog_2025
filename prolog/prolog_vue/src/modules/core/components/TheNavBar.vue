@@ -1,14 +1,6 @@
 <template>
     <div class="sidebar" id="sidebar-main">
             <ul>
-                <!-- <li v-for="route in routes">
-                    <RouterLink :to=" requiresId ?
-                        { name: route.name, params: { id: workId } } : { name: route.name } " 
-                    active-class="active"
-                    :class="{ active: route.extended && $route.path.startsWith(route.path) }">
-                    {{ route.title }}
-                    </RouterLink>
-                </li> -->
                 <li v-for="route in routes">
                     <RouterLink :to=" requiresId ?
                         { name: route.name, params: { workId: workId } } : { name: route.name } " 
@@ -78,5 +70,33 @@ if (props.requiresId) workId = route.params.workId;
         flex: 1 1 auto; /* Элементы будут расти и сжиматься */
     }
 
+}
+
+
+
+.sidebar ul {
+/* Удаляем дефолтные стили для спсика */
+list-style-type: none;
+padding: 0;
+margin: 0;
+}
+
+.sidebar li {
+/* Расстояние между элементами списка */
+/* margin: 15px 0; */
+}
+
+.sidebar a {
+display: flex;
+align-items: center;
+text-decoration: none;
+color: var(--main-light-color);
+padding: 15px;
+border-radius: 4px;
+transition: background-color 0.2s;
+}
+
+.sidebar a:hover {
+background-color: var(--p-surface-600);
 }
 </style>
