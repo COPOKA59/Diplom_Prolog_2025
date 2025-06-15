@@ -110,6 +110,7 @@ const props = defineProps({
 }
 .story-card-v2 {
     /* max-width: 960px; */
+    max-width: 920px;
     width: 100%;
     border-radius: 10px;
     font-size: 17px;
@@ -240,4 +241,9 @@ const props = defineProps({
         padding: 10px;
     }
   }
+@media (min-width: 1080px) {
+  .story-card-v2 {
+    width: 920px;
+  }
+}
 </style>

@@ -240,4 +240,9 @@ const props = defineProps({
         padding: 10px;
     }
   }
+@media (min-width: 1080px) {
+  .story-card-v2 {
+    width: 920px;
+  }
+}
 </style>

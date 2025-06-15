@@ -11,6 +11,11 @@
 
             <BasicInput input-type="input" label="Название главы" v-model="formData.name"/>
 
+            <br/><br/>
+
+            <BasicInput input-type="input" label="Примечание автора перед главой" v-model="formData.first_comment"/>
+            <BasicInput input-type="input" label="Примечание автора после главы" v-model="formData.end_comment"/>
+
             
             <v-row >
                 <v-col>
@@ -35,7 +40,7 @@
 <script setup>
 import CreateStoryLayout from '@/layouts/CreateStoryLayout.vue';
 import BasicInput from '@/modules/core/components/BasicInput.vue';
-import { VContainer, VRow, VCol, VForm } from 'vuetify/lib/components/index.mjs';
+import { VContainer, VRow, VCol, VForm, VSpacer } from 'vuetify/lib/components/index.mjs';
 import { Panel, Button } from 'primevue';
 import Editor from 'primevue/editor';
 import ChapterTextEditor from '../components/ChapterTextEditor.vue';
@@ -52,6 +57,8 @@ const props = defineProps({
 const formData = reactive({
     name: '',
     text: '',
+    first_comment: '',
+    end_comment: '',
     work: props.id
 });
 const chapter = ref();
