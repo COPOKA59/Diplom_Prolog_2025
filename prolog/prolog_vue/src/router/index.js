@@ -201,7 +201,6 @@ router.beforeEach(async (to) => {
     'Editing Characters', 'Editing Contents', 'Editing Chapter' ];
   const authRequired = privatePages.includes(to.name);
 
-  // if (authRequired && !userStore.user)
   if (authRequired && !userStore.isAuthenticated) {
       return { name: 'LoginPage' };
   }

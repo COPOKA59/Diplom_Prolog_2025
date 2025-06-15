@@ -4,20 +4,8 @@
         <v-row v-for="work in works">
             <v-col>
             <StoryCard
-                    :id="work.id"
-                    :title="work.name"
-                    :author="work.author"
-                    :fandom="work.fandom_details.map(fandom => fandom.name)"
-                    :last_update="(new Date(work.date_of_editing)).toLocaleDateString('ru-RU')"
-                    :rating="work.rating_details.name"
-                    :direction="work.orientation_details.name"
-                    :size="work.size_details.name"
-                    :genres="work.genres_details.map(genre => genre.name)"
-                    :relationships="work.relationships"
-                    :tags="work.tags"
-                    :description="work.description"
-                    :img_url="work.img_url"
-                    :read="work.read"/>
+                    :work="work"
+                    :isAuthor="userStore.isAuthor()"/>
             </v-col>
         </v-row>
     </v-container>
@@ -31,6 +19,9 @@ import StoryCard from '@/modules/works/components/StoryCard.vue';
 // import { works } from '@/services/stories';
 import { getWorks } from '@/services/works/works';
 import { ref, onMounted } from 'vue';
+import { useUserStore } from '@/stores/user';
+
+const userStore = useUserStore();
 
 const works = ref();
 onMounted( async () => {
