@@ -52,11 +52,11 @@
 
             <v-row v-if="isAuthor">
                 <v-col class="edit-button">
-                    <Button severity="primary">
+                    <Button severity="primary" @click="$router.push({ name: 'Editing Header', params: { workId: props.id } })">
                         <i class="pi pi-pencil"></i>
                         <span>Изменить</span>
                     </Button>
-                    <Button severity="danger">
+                    <Button severity="danger" @click="async () => { await deleteWork(id); $router.push({ name: 'Stories' }); }">
                         <i class="pi pi-trash"></i>
                         <span>Удалить</span>
                     </Button>
@@ -105,6 +105,7 @@
 <script setup>
 import { Card, Divider, Tag, Chip, Button} from 'primevue';
 import { VContainer, VRow, VCol } from 'vuetify/lib/components/index.mjs';
+import { deleteWork } from '@/services/works/works';
 
 const props = defineProps({
     id: Number,
@@ -122,6 +123,8 @@ const props = defineProps({
     img_url: String,
     read: Boolean
 })
+const isAuthor = true;
+console.log('props.id: ', props.id);
 </script>
 
 <style scoped>

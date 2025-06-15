@@ -4,7 +4,7 @@
       <div class="top-story-info">
         <h1>{{ work.name }}</h1>
         <StoryCardReading
-              :key="work.id"
+              :id="work.id"
               :title="work.name"
               :author="work.author"
               :fandom="work.fandom_details.map(fandom => fandom.name)"

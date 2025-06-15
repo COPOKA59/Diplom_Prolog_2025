@@ -99,11 +99,11 @@
 
             <v-row v-if="isAuthor">
                 <v-col class="edit-button">
-                    <Button severity="primary" @click="$router.push({ name: 'Editing Header', params: { workId: id } })"><!-- params: { id: id } -->  
+                    <Button severity="primary" @click="$router.push({ name: 'Editing Header', params: { workId: id } })">  
                         <i class="pi pi-pencil"></i>
                         <span>Изменить</span>
                     </Button>
-                    <Button severity="danger" @click="deleteWork(id); reloadRouter();">
+                    <Button severity="danger" @click="async () => { await deleteWork(id); reloadRouter(); }">
                         <i class="pi pi-trash"></i>
                         <span>Удалить</span>
                     </Button>
@@ -145,7 +145,7 @@ const props = defineProps({
     img_url: String,
     read: Boolean
 })
-const isAuthor = ref(true);
+const isAuthor = true;
 </script>
 
 <style scoped>
