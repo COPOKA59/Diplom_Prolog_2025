@@ -2,14 +2,16 @@
     <div class="sidebar" id="sidebar-main">
             <ul>
                 <!-- <li v-for="route in routes">
-                    <RouterLink :to="route.path" active-class="active"
+                    <RouterLink :to=" requiresId ?
+                        { name: route.name, params: { id: workId } } : { name: route.name } " 
+                    active-class="active"
                     :class="{ active: route.extended && $route.path.startsWith(route.path) }">
-                    {{ route.name }}
+                    {{ route.title }}
                     </RouterLink>
                 </li> -->
                 <li v-for="route in routes">
                     <RouterLink :to=" requiresId ?
-                        { name: route.name, params: { id: workId } } : { name: route.name } " 
+                        { name: route.name, params: { workId: workId } } : { name: route.name } " 
                     active-class="active"
                     :class="{ active: route.extended && $route.path.startsWith(route.path) }">
                     {{ route.title }}
@@ -28,7 +30,8 @@ const props = defineProps({
 const route = useRoute();
 // const workId = route.params.id ? route.params.id : null;
 let workId = null;
-if (props.requiresId) workId = route.params.id;
+// if (props.requiresId) workId = route.params.id;
+if (props.requiresId) workId = route.params.workId;
 </script>
 
 <style scoped>

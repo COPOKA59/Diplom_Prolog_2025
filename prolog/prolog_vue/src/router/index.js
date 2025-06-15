@@ -92,6 +92,7 @@ const routes = [
   },
   {
     path: '/collections/:itemId',
+    // path: '/collections/:id',
     name: 'CollectionPage',
     component: CollectionPage,
     props: true,
@@ -108,6 +109,7 @@ const routes = [
   },
   {
     path: '/worlds/:itemId',
+    // path: '/worlds/:id',
     name: 'WorldPage',
     component: WorldbuildingPage,
     meta: { formType: 'world' },
@@ -125,6 +127,7 @@ const routes = [
   },
   {
     path: '/characters/:itemId',
+    // path: '/characters/:id',
     name: 'CharacterPage',
     component: WorldbuildingPage,
     meta: { formType: 'character' },
@@ -138,43 +141,43 @@ const routes = [
     component: StoryHeader,
   },
   {
-    path: '/editing/:id/header',
+    path: '/editing/:workId/header',
     name: 'Editing Header',
     component: StoryHeader,
     props: true,
   },
   {
-    path: '/editing/:id/structure',
+    path: '/editing/:workId/structure',
     name: 'Editing Structure',
     component: StoryStructure,
     props: true,
   },
   {
-    path: '/editing/:id/characteristics',
+    path: '/editing/:workId/characteristics',
     name: 'Editing Characteristics',
     component: StoryCharacteristics,
     props: true,
   },
   {
-    path: '/editing/:id/world',
+    path: '/editing/:workId/world',
     name: 'Editing World',
     component: StoryWorld,
     props: true,
   },
   {
-    path: '/editing/:id/characters',
+    path: '/editing/:workId/characters',
     name: 'Editing Characters',
     component: StoryCharacters,
     props: true,
   },
   {
-    path: '/editing/:id/contents',
+    path: '/editing/:workId/contents',
     name: 'Editing Contents',
     component: StoryContents,
     props: true,
   },
   {
-    path: '/editing/:id/contents/chapter/:itemId',
+    path: '/editing/:workId/contents/chapter/:itemId',
     name: 'Editing Chapter',
     component: ChapterEditingPage,
     props: true,
@@ -192,7 +195,10 @@ const router = createRouter({
 router.beforeEach(async (to) => {
   const userStore = useUserStore();
   // await userStore.fetchCurrentUser();
-  const privatePages = ['Profile', 'Settings'];
+  const privatePages = [ 'Profile', 'Settings', 'Collection List Page', 'CollectionPage',
+    'World List Page', 'WorldPage', 'Character List Page', 'CharacterPage', 
+    'Editing Header', 'Editing Structure', 'Editing Characteristics', 'Editing World', 
+    'Editing Characters', 'Editing Contents', 'Editing Chapter' ];
   const authRequired = privatePages.includes(to.name);
 
   // if (authRequired && !userStore.user)

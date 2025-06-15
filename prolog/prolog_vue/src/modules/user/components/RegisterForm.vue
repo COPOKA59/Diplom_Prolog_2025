@@ -81,8 +81,7 @@ import { ref, reactive, toRaw } from 'vue';
 import { useUserStore } from '@/stores/user';
 
 const userStore = useUserStore();
-
-
+const emit = defineEmits(['switch-form']);
 
 const formData = reactive({
     username: '',
@@ -132,34 +131,31 @@ const handleSubmit = async () => {
    // if any field errors, abort
     const hasFieldErrors = Object.entries(errors)
         .filter(([k]) => k !== 'other')
-        .some(([, v]) => v.invalid)
+        .some(([, v]) => v.invalid);
 
     if (hasFieldErrors) {
-        return
+        return;
     }
 
-    // call registration
     try {
         await userStore.register({
         username: formData.username,
         email: formData.email,
         password: formData.password,
-        })
-        // on success, you might redirect or emit an event:
-        // e.g. $emit('registered')
+        });
+
+        emit('switch-form');
     } catch (err) {
-        // generic/server-side error
-        errors.other.invalid = true
-        // try to display something meaningful
+        console.log('error after register:', err);
+        errors.other.invalid = true;
         if (err.response?.data) {
-        // if backend gave a message string or list
-        const data = err.response.data
+        const data = err.response.data;
         errors.other.message =
             typeof data.detail === 'string'
             ? data.detail
-            : JSON.stringify(data)
+            : JSON.stringify(data);
         } else {
-        errors.other.message = 'Что-то пошло не так.'
+        errors.other.message = 'Что-то пошло не так.';
         }
     }
 };

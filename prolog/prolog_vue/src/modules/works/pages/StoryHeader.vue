@@ -186,7 +186,8 @@ const formData = reactive({
 const metaData = ref();
 
 const route = useRoute();
-const workId = route.params.id;
+// const workId = route.params.id;
+const workId = route.params.workId;
 const work = ref();
 
 onMounted( async () => {

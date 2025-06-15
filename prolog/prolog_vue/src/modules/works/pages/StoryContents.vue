@@ -37,20 +37,25 @@ import { getChapters, postChapter, deleteChapter } from '@/services/works/chapte
 
 const route = useRoute();
 const router = useRouter();
+const workId = route.params.workId;
 
 const storyChapters = ref();
 onMounted( async () => {
-    // storyChapters.value = await getChapters();
-    storyChapters.value = await getChapters(route.params.id);
+    // storyChapters.value = await getChapters(route.params.id);
+    storyChapters.value = await getChapters(workId);
 } )
 
 const createChapter = async () => {
-    let newChapter = await postChapter(route.params.id);
+    /* let newChapter = await postChapter(route.params.id);
+    router.push({ name: 'Editing Chapter', params: { itemId: newChapter.id } }); */
+    let newChapter = await postChapter(workId);
     router.push({ name: 'Editing Chapter', params: { itemId: newChapter.id } });
 };
 
 const deleteCurrentChapter = async (chapterId) => {
-    await deleteChapter(route.params.id, chapterId);
+    // await deleteChapter(route.params.id, chapterId);
+    // storyChapters.value = storyChapters.value.filter(chapter => chapter.id != chapterId);
+    await deleteChapter(workId, chapterId);
     storyChapters.value = storyChapters.value.filter(chapter => chapter.id != chapterId);
 };
 </script>

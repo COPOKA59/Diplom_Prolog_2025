@@ -95,12 +95,14 @@ export const useUserStore = defineStore('user', {
     },
 
     logout() {
-      this.user = null;
+      /* this.user = null;
       this.accessToken = null;
       this.refreshToken = null;
       localStorage.removeItem('user');
       localStorage.removeItem('access');
-      localStorage.removeItem('refresh');
+      localStorage.removeItem('refresh'); */
+      this.user = this.accessToken = this.refreshToken = null;
+      localStorage.clear();
     },
   },
 })

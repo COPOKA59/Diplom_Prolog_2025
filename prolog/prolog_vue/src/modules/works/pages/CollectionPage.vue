@@ -38,7 +38,7 @@
                 <v-row v-if="itemData.chosenItems.length > 0" v-for="work in itemData.chosenItems">
                     <v-col>
                         <ItemCardMain :id="work.id" :title="work.name" 
-                        :pageName="'StoryPage'"
+                        :pageName="'StoryPage'" :paramName="'id'"
                         :canDelete="true" @delete-item="deleteItem(work.id)"/>
                     </v-col>
                 </v-row>

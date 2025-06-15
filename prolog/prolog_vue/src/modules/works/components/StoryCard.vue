@@ -99,7 +99,7 @@
 
             <v-row v-if="isAuthor">
                 <v-col class="edit-button">
-                    <Button severity="primary" @click="$router.push({ name: 'Editing Header', params: { id: id } })">
+                    <Button severity="primary" @click="$router.push({ name: 'Editing Header', params: { workId: id } })"><!-- params: { id: id } -->  
                         <i class="pi pi-pencil"></i>
                         <span>Изменить</span>
                     </Button>

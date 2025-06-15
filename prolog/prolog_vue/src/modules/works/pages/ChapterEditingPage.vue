@@ -22,7 +22,8 @@
             <v-row >
                 <v-col class="default-button">
                     <Button severity="primary"> Опубликовать </Button>
-                    <Button severity="primary" @click="putChapter(id, itemId, formData)"> Сохранить </Button>
+                    <!-- <Button severity="primary" @click="putChapter(id, itemId, formData)"> Сохранить </Button> -->
+                    <Button severity="primary" @click="putChapter(workId, itemId, formData)"> Сохранить </Button>
                 </v-col>
             </v-row>
         </v-form>
@@ -44,6 +45,7 @@ import { getChapter, putChapter } from '@/services/works/chapters';
 
 const props = defineProps({
     id: Number,
+    workId: Number,
     itemId: Number
 });
 
@@ -55,7 +57,10 @@ const formData = reactive({
 const chapter = ref();
 
 onMounted( async () => {
-    chapter.value = await getChapter(props.id, props.itemId);
+    /* chapter.value = await getChapter(props.id, props.itemId);
+    Object.keys(formData)
+        .forEach(k => formData[k] = chapter.value[k]); */
+    chapter.value = await getChapter(props.workId, props.itemId);
     Object.keys(formData)
         .forEach(k => formData[k] = chapter.value[k]);
     console.log(formData);

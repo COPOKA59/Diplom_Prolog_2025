@@ -2,11 +2,7 @@
     <Card :key="id">
         <template #title>
             <div class="item-container">
-                <RouterLink :to="{ name: pageName, params: { itemId: id } }">
-                <!-- <div class="item-text">
-                    {{ title }} Quisque vulputate vulputate enim quis pretium. Nullam malesuada semper ornare. Etiam tincidunt massa sed 
-                    turpis rutrum, vel eleifend lorem tincidunt
-                </div> -->
+                <RouterLink :to="{ name: pageName, params: { [paramName]: id } }">
                 <div class="item-text">
                     {{ title }}
                 </div>
@@ -32,7 +28,8 @@ const props = defineProps({
     isChapter: { type: Boolean, default: false },
     number: Number,
     canDelete: { type: Boolean, default: false },
-    pageName: String
+    pageName: String,
+    paramName: { type: String, default: 'itemId' }
 });
 
 </script>

@@ -98,7 +98,8 @@ function onPageChange(event) {
 
 const createWork = async () => {
   let newWork = await postWork();
-  router.push({ name: 'Editing Header', params: { id: newWork.id } });
+  // router.push({ name: 'Editing Header', params: { id: newWork.id } });
+  router.push({ name: 'Editing Header', params: { workId: newWork.id } });
 }
 
 </script>
