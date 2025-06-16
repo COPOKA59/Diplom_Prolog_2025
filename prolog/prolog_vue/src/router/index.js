@@ -197,7 +197,7 @@ const router = createRouter({
   },
 });
 
-/* router.beforeEach(async (to) => {
+router.beforeEach(async (to) => {
   const userStore = useUserStore();
   // await userStore.fetchCurrentUser();
   const privatePages = [ 'Profile', 'Settings', 'Collection List Page', 'CollectionPage',
@@ -209,6 +209,6 @@ const router = createRouter({
   if (authRequired && !userStore.isAuthenticated) {
       return { name: 'LoginPage' };
   }
-}); */
+});
 
 export default router;

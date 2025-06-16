@@ -4,8 +4,7 @@
                 <li v-for="route in routes">
                     <RouterLink :to=" requiresParams ?
                         { name: route.name, params: { [paramName]: paramValue } } : { name: route.name } " 
-                    active-class="active"
-                    :class="{ active: route.extended && $route.path.startsWith(route.path) }">
+                    active-class="active">
                     {{ route.title }}
                     </RouterLink>
                 </li>

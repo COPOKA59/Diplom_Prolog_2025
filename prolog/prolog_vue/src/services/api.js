@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { useUserStore } from '@/stores/user';
-// import { router } from '@/router';  // optional if you want to redirect on logout
 
 const api = axios.create({
   baseURL: 'http://localhost:8000/api/v1',

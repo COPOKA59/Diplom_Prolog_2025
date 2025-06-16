@@ -3,7 +3,7 @@
         <template #title>
             <div class="item-container">
                 <div class="item-name">
-                    Название: {{ name }}. Quisque vulputate vulputate enim quis pretium. Nullam malesuada semper ornare. Etiam tincidunt massa sed turpis rutrum, vel eleifend lorem tincidunt
+                    {{ name }}. Quisque vulputate vulputate enim quis pretium. Nullam malesuada semper ornare. Etiam tincidunt massa sed turpis rutrum, vel eleifend lorem tincidunt
                 </div>
 
                 <div class="delete-item">
