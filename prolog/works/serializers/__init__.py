@@ -1,0 +1,3 @@
+from .CSerializerWorks import WorksSerializer, WorksQuestionsSerializer
+from .CSerializerChapters import ChaptersSerializer, ChapterDetailSerializer
+from .CSerializerWorksUsers import AuthorSerializer, ReaderSerializer

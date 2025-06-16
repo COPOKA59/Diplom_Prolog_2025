@@ -25,6 +25,8 @@ class RegisterSerializer(serializers.ModelSerializer):
         )
 
 class UserSerializer(serializers.ModelSerializer):
+    date_of_creation = serializers.DateTimeField(source='date_joined', read_only=True)
+
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'description']
+        fields = ['id', 'username', 'email', 'description', 'date_of_creation']

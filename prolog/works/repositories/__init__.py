@@ -1,0 +1,3 @@
+from .CRepositoryWorks import WorksRepository, WorksQuestionsRepository
+from .CRepositoryChapters import ChaptersRepository
+from .CRepositoryWorksUsers import WorksUsersRepository
