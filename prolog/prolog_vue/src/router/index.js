@@ -3,7 +3,7 @@ import { MainPage, AdvancedSearchPage } from '@/modules/core/pages';
 import { LoginPage, Profile, Settings, AuthorProfile, AuthorSeries, AuthorStories } from '@/modules/user/pages';
 import { StoryCardsPage, StoryPage, StoryChapterPage, StoryHeader, StoryStructure,
   StoryCharacteristics, StoryWorld, StoryCharacters, StoryContents, ChapterEditingPage,
-  WorldbuildingPage, ItemsListPage, CollectionPage, SeriesStoriesPage } from '@/modules/works/pages';
+  WorldbuildingPage, ItemsListPage, SeriesPage, SeriesStoriesPage } from '@/modules/works/pages';
 
 import { useUserStore } from '@/stores/user';
 
@@ -30,7 +30,6 @@ const routes = [
     component: Settings,
   },
   {
-    // path: '/user/profile',
     path: '/user/:userId/profile',
     name: 'Author Profile',
     component: AuthorProfile,
@@ -42,21 +41,18 @@ const routes = [
     props: true
   },
   {
-    // path: '/user/series',
     path: '/user/:userId/series',
     name: 'Author Series',
     component: AuthorSeries,
     props: false
   },
   {
-    // path: '/series/:id',
     path: '/series/:itemId',
     name: 'Series',
     component: SeriesStoriesPage,
     props: true
   },
   {
-    // path: '/user/works',
     path: '/user/:userId/works',
     name: 'Author Works',
     component: AuthorStories,
@@ -87,19 +83,20 @@ const routes = [
   },
 
   {
-    path: '/collections',
-    name: 'Collection List Page',
+    // path: '/collections',
+    path: '/series',
+    name: 'Series List Page',
     component: ItemsListPage,
     meta: { itemData: {
         title: 'Сборники',
-        pageName: 'CollectionPage'
+        pageName: 'Series Editing Page'
     } }
   },
   {
-    path: '/collections/:itemId',
-    // path: '/collections/:id',
-    name: 'CollectionPage',
-    component: CollectionPage,
+    // path: '/collections/:itemId',
+    path: '/series/editing/:itemId',
+    name: 'Series Editing Page',
+    component: SeriesPage,
     props: true,
   },
 
@@ -114,7 +111,6 @@ const routes = [
   },
   {
     path: '/worlds/:itemId',
-    // path: '/worlds/:id',
     name: 'WorldPage',
     component: WorldbuildingPage,
     meta: { formType: 'world' },
@@ -132,7 +128,6 @@ const routes = [
   },
   {
     path: '/characters/:itemId',
-    // path: '/characters/:id',
     name: 'CharacterPage',
     component: WorldbuildingPage,
     meta: { formType: 'character' },
@@ -199,8 +194,7 @@ const router = createRouter({
 
 router.beforeEach(async (to) => {
   const userStore = useUserStore();
-  // await userStore.fetchCurrentUser();
-  const privatePages = [ 'Profile', 'Settings', 'Collection List Page', 'CollectionPage',
+  const privatePages = [ 'Profile', 'Settings', 'Series List Page', 'Series Editing Page',
     'World List Page', 'WorldPage', 'Character List Page', 'CharacterPage', 
     'Editing Header', 'Editing Structure', 'Editing Characteristics', 'Editing World', 
     'Editing Characters', 'Editing Contents', 'Editing Chapter' ];

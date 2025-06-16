@@ -12,8 +12,8 @@ import MainLayout from './MainLayout.vue';
 import TheNavBar from '@/modules/core/components/TheNavBar.vue';
 
 const routes = [
-    { path: 'profile', title: 'Профиль', name: 'Author Profile', extended: false },
-    { path: 'series', title: 'Сборники', name: 'Author Series', extended: false },
-    { path: 'works', title: 'Произведения', name: 'Author Works', extended: false }
+    { title: 'Профиль', name: 'Author Profile' },
+    { title: 'Сборники', name: 'Author Series' },
+    { title: 'Произведения', name: 'Author Works' }
 ];
 </script>

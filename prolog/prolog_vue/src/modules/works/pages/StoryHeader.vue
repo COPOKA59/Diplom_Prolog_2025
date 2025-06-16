@@ -83,19 +83,6 @@
                     </v-col>
                 </v-row>
 
-                <!-- <v-row>
-                    <v-col cols="12" lg="2" md="2" sm="12" class="input-label">
-                        <label>Теги</label>
-                    </v-col>
-                    <v-col cols="12" lg="10" md="10" sm="12" class="default-form-input">
-                        <MultiSelect :options="workProps.workData.workTags.options"
-                        optionLabel="name" optionValue="id"
-                        filter
-                        v-model="formData.tags"
-                        />
-                    </v-col>
-                </v-row> -->
-
                 <Divider/>
 
                 <BasicInput :inputType="'radiobutton'"
@@ -158,7 +145,6 @@ import BasicInput from '@/modules/core/components/BasicInput.vue';
 import { Panel, Divider, Button, InputText, Textarea, MultiSelect,
         RadioButton, RadioButtonGroup, FileUpload } from "primevue";
 import { VContainer, VCol, VRow, VForm } from "vuetify/lib/components/index.mjs";
-// import workProps from '@/services/work_properties';
 import defaultCover from '@/assets/img/default_cover.svg';
 import { ref, reactive, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
@@ -175,7 +161,6 @@ const formData = reactive({
     orientation: 1,
     rating: 1,
     genres: [],
-    tags: [],
 
     size: 1,
     status: 1,
@@ -186,7 +171,6 @@ const formData = reactive({
 const metaData = ref();
 
 const route = useRoute();
-// const workId = route.params.id;
 const workId = route.params.workId;
 const work = ref();
 
@@ -195,7 +179,7 @@ onMounted( async () => {
     Object.keys(formData)
         .forEach(k => formData[k] = work.value[k]);
     metaData.value = await getMetaData();
-})
+});
 
 
 const image = ref(defaultCover);

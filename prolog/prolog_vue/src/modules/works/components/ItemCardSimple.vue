@@ -3,7 +3,8 @@
         <template #title>
             <div class="item-container">
                 <div class="item-name">
-                    {{ name }}. Quisque vulputate vulputate enim quis pretium. Nullam malesuada semper ornare. Etiam tincidunt massa sed turpis rutrum, vel eleifend lorem tincidunt
+                    <!-- {{ name }}. Quisque vulputate vulputate enim quis pretium. Nullam malesuada semper ornare. Etiam tincidunt massa sed turpis rutrum, vel eleifend lorem tincidunt -->
+                    {{ name }}
                 </div>
 
                 <div class="delete-item">
@@ -16,7 +17,6 @@
 </template>
 
 <script setup>
-import { VContainer, VRow, VCol } from 'vuetify/lib/components/index.mjs';
 import { Card, Button } from 'primevue';
 
 const props = defineProps({

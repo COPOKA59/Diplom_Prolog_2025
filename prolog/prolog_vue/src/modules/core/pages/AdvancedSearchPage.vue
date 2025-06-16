@@ -59,10 +59,10 @@
 
                                     <div v-if="formData.type === 2">
                                         <label class="input-label">Фандомы</label>
-                                        <MultiSelect :options="workProps.workData.fandoms.options"
+                                        <MultiSelect :options="metaData?.fandoms"
                                         optionLabel="name" optionValue="id"
                                         filter
-                                        v-model="formData.fandoms"
+                                        v-model="formData.fandom"
                                         />
                                     </div>
                                 </RadioButtonGroup>
@@ -71,12 +71,12 @@
 
 
                         <BasicInput :inputType="'checkbox'"
-                            :label="workProps.workData.workDirection.label"
-                            :options="workProps.workData.workDirection.options"
+                            :label="'Направление'"
+                            :options="metaData?.orientation"
                             v-model="formData.orientation"/>
                         <BasicInput :inputType="'checkbox'"
-                            :label="workProps.workData.workRating.label"
-                            :options="workProps.workData.workRating.options"
+                            :label="'Рейтинг'"
+                            :options="metaData?.rating"
                             v-model="formData.rating"/>
 
 
@@ -86,7 +86,7 @@
                                 <label>Жанры</label>
                             </v-col>
                             <v-col cols="12" lg="10" md="10" sm="12" class="default-form-input">
-                                <MultiSelect :options="workProps.workData.workGenres.options"
+                                <MultiSelect :options="metaData?.genres"
                                 optionLabel="name" optionValue="id"
                                 filter
                                 v-model="formData.genres"
@@ -94,30 +94,16 @@
                             </v-col>
                         </v-row>
 
-                        <!-- <v-row>
-                            <v-col cols="12" lg="2" md="2" sm="12" class="input-label">
-                                <label>Теги</label>
-                            </v-col>
-                            <v-col cols="12" lg="10" md="10" sm="12" class="default-form-input">
-                                <MultiSelect :options="workProps.workData.workTags.options"
-                                optionLabel="name" optionValue="id"
-                                filter
-                                v-model="formData.tags"
-                                />
-                            </v-col>
-                        </v-row> -->
-
-
                         <Divider/>
 
 
                         <BasicInput :inputType="'checkbox'"
-                            :label="workProps.workData.workSize.label"
-                            :options="workProps.workData.workSize.options"
+                            :label="'Размер'"
+                            :options="metaData?.size"
                             v-model="formData.size"/>
                         <BasicInput :inputType="'checkbox'"
-                            :label="workProps.workData.workStatus.label"
-                            :options="workProps.workData.workStatus.options"
+                            :label="'Статус'"
+                            :options="metaData?.status"
                             v-model="formData.status"/>
 
                         <v-row >
@@ -148,8 +134,8 @@ import { Panel, Divider, Button, InputText, DatePicker,
         RadioButton, RadioButtonGroup, Checkbox, CheckboxGroup,
         MultiSelect } from "primevue";
 import { VContainer, VCol, VRow, VForm } from "vuetify/lib/components/index.mjs";
-import workProps from '@/services/work_properties';
-import { reactive, onMounted } from "vue";
+import { reactive, ref, onMounted } from "vue";
+import { getMetaData } from '@/services/works/meta';
 
 const formData = reactive({
     name: '',
@@ -162,11 +148,15 @@ const formData = reactive({
     orientation: [],
     rating: [],
     genres: [],
-    tags: [],
+
     size: [],
     status: [],
 });
 const minDate = new Date('2000-01-01');
 const maxDate = new Date();
 
+const metaData = ref();
+onMounted( async () => {
+    metaData.value = await getMetaData();
+});
 </script>

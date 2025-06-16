@@ -107,7 +107,7 @@ const handleSubmit = async () => {
     }
     if (formData.email === '') {
         errors.email.invalid = true;
-        errors.email.message = 'Укажите логин.';
+        errors.email.message = 'Укажите почту.';
     }
     if (formData.password === '') {
         errors.password.invalid = true;

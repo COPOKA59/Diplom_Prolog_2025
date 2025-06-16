@@ -54,7 +54,7 @@
 
             <v-row v-else class="reading-buttons">
 
-                <Button label="Сохранить" rounded severity="secondary">
+                <!-- <Button label="Сохранить" rounded severity="secondary">
                     <template #icon>
                     <img src="@/assets/icons/bookmark_24px_weight_2.5.svg"/>
                     </template>
@@ -76,12 +76,12 @@
                     <template #icon>
                     <img src="@/assets/icons/task_alt_24dp_D9D9D9.svg"/>
                     </template>
-                </Button>
+                </Button> -->
 
-                <!-- <Button label="Сохранить" rounded severity="secondary" icon="pi pi-bookmark" />
+                <Button label="Сохранить" rounded severity="secondary" icon="pi pi-bookmark" />
                 <Button label="Нравится" rounded severity="secondary" icon="pi pi-thumbs-up" />
                 <Button label="Комментарии" rounded severity="secondary" icon="pi pi-comment" />
-                <Button label="Прочитано" rounded severity="secondary" icon="pi pi-check-circle" /> -->
+                <Button label="Прочитано" rounded severity="secondary" icon="pi pi-check-circle" />
                 
             </v-row>
                 

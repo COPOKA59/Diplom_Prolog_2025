@@ -1,7 +1,6 @@
 <template>
     <RouterLink class="chapter-link" :to="{ name: 'StoryChapterPage', params: { chapter_id: id } }">
     <Card :key="id">
-        <!-- <template #title>Глава {{ chapter_number }}. {{ chapter_title }}</template> -->
         <template #title>{{ chapter_title }} </template>
         <template #subtitle>{{ (new Date(published)).toLocaleDateString('ru-RU') }}</template>
     </Card>
@@ -13,12 +12,9 @@ import { Card } from 'primevue';
 
 const props = defineProps({
     id: Number,
-    chapter_number: Number,
     chapter_title: String,
     published: String,
-    text: String,
-})
-
+});
 </script>
 
 <style scoped>

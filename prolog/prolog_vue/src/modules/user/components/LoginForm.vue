@@ -31,13 +31,6 @@
                     </v-col>
                 </v-row>
 
-                <!-- <v-row v-if="errors.length > 0" >
-                    <v-col>
-                        <Message v-for="error in errors" severity="error" variant="simple">{{ error }}</Message>
-                    </v-col>
-                </v-row> -->
-
-
                 <v-row style="margin-top: 20px;">
                     <Button severity="primary" style="margin: auto;" type="submit">
                         Войти

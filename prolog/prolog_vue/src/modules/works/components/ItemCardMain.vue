@@ -25,8 +25,6 @@ import { RouterLink } from 'vue-router';
 const props = defineProps({
     id: Number,
     title: String,
-    isChapter: { type: Boolean, default: false },
-    number: Number,
     canDelete: { type: Boolean, default: false },
     pageName: String,
     paramName: { type: String, default: 'itemId' }

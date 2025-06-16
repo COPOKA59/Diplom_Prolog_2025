@@ -56,7 +56,7 @@ import { VContainer, VRow, VCol, VForm } from 'vuetify/lib/components/index.mjs'
 import { Panel, Button, AutoComplete, ScrollPanel } from 'primevue';
 import ItemCardSimple from '../components/ItemCardSimple.vue';
 import { reactive } from 'vue';
-import options_list from '@/services/search_options';
+import options_list from '@/services/mocks/search_options';
 
 const characterData = reactive({
     chosenInputValue: null,

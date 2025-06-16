@@ -54,7 +54,8 @@ watch(
 
 const routes = [
     { name: 'Profile', title: 'Мой профиль' },
-    { name: 'Collection List Page', title: 'Сборники' },
+    // { name: 'Collection List Page', title: 'Сборники' },
+    { name: 'Series List Page', title: 'Сборники' },
     { name: 'Stories', title: 'Произведения' },
     { name: 'World List Page', title: 'Миры' },
     { name: 'Character List Page', title: 'Персонажи' },

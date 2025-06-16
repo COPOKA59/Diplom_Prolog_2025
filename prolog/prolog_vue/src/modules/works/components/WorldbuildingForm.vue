@@ -9,7 +9,6 @@
                 <StepPanel v-slot="{ activateCallback }" value="1">
                     <v-container>
                         <v-row class="step-buttons">
-                            <v-col cols="auto"></v-col>
                             <v-col> <span>{{ formData[formType][0].title }}</span> </v-col>
                             <v-col cols="auto">
                                 <Button icon="pi pi-arrow-right" iconPos="right" severity="primary"
@@ -201,7 +200,7 @@ const formData = {
 
 //-----------| AutoComplete |-----------
 
-import options_list from '@/services/search_options';
+import options_list from '@/services/mocks/search_options';
 
 const itemCategories = reactive({
   category1: {
