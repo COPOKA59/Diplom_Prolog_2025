@@ -9,6 +9,7 @@ class Chapters(OrderedModel):
     end_comment = models.CharField('Примечание автора', max_length=250, blank=True, default='')
     date_of_creation = models.DateTimeField('Дата создания', auto_now_add=True)
     date_of_editing = models.DateTimeField('Дата редактирования', auto_now=True)
+    publish = models.BooleanField('Публикация', default=False)
 
     work = models.ForeignKey(Works, verbose_name='Произведение', on_delete=models.CASCADE, related_name='chapters')
     order_with_respect_to = 'work'

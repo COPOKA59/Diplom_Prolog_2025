@@ -14,6 +14,10 @@ class WorksUsersRepository:
         work = Works.objects.get(pk=work_id)
         return Authors.objects.create(user=user, work=work, role=role)
 
+    @staticmethod
+    def post_first_author(user, work, role='author'):
+        return Authors.objects.create(user=user, work=work, role=role)
+
 #
 
     @staticmethod
@@ -27,10 +31,6 @@ class WorksUsersRepository:
     @staticmethod
     def get_author_entry(user, work):
         return Authors.objects.filter(user=user, work=work).first()
-
-    # @staticmethod
-    # def post_author(user, work, role):
-    #     return Authors.objects.create(user=user, work=work, role=role)
 
     @staticmethod
     def get_reader_entry(user, work):

@@ -28,15 +28,10 @@ class AuthorViewSet(ModelViewSet):
         serializer.instance = new_author
         return serializer.save()
 
+# 
 class ReaderViewSet(ModelViewSet):
     serializer_class = ReaderSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated(), IsAuthorOfWorkOrReadOnly()]
 
     def get_queryset(self):
         return Readers.objects.filter(user=self.request.user)
-
-    @action(detail=False, methods=['get'])
-    def my_read_works(self, request):
-        works = WorksUsersServices.list_readed_works(request.user)
-        data = [{'id': w.id, 'name': w.name} for w in works]
-        return Response(data)

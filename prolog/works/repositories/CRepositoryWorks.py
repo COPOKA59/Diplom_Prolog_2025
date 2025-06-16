@@ -2,8 +2,8 @@ from works.models import *
 
 class WorksRepository:
     @staticmethod
-    def get_all_works():
-        return Works.objects.all().select_related(
+    def get_all_works_publish():
+        return Works.objects.filter(publish=True).select_related(
             'size', 'orientation', 'rating', 'type', 'status'
         ).prefetch_related(
             'genres', 'fandom', 'questions'
@@ -15,7 +15,19 @@ class WorksRepository:
             'size', 'orientation', 'rating', 'type', 'status'
         ).prefetch_related(
             'genres', 'fandom', 'questions'
-        ).filter(id=work_id).first()
+        ).get(id=work_id)
+
+    @staticmethod
+    def get_user_works(user_id):
+        return Works.objects.filter(authors__id=user_id).select_related(
+            'size', 'orientation', 'rating', 'type', 'status'
+        ).prefetch_related('genres', 'fandom', 'questions')
+
+    @staticmethod
+    def get_user_works_published(user_id):
+        return Works.objects.filter(authors__id=user_id, publish=True).select_related(
+            'size', 'orientation', 'rating', 'type', 'status'
+        ).prefetch_related('genres', 'fandom', 'questions')
 
 class WorksQuestionsRepository:
     @staticmethod

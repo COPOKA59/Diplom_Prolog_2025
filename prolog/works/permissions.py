@@ -21,3 +21,11 @@ class IsAuthorOfWorkOrReadOnly(BasePermission):
             return True
 
         return Authors.objects.filter(user=request.user, work=obj.work).exists()
+
+
+class IsAuthorOrReadOnlyPublished(BasePermission):
+    def has_object_permission(self, request, view, obj):
+        if request.method in SAFE_METHODS:
+            return obj.publish or request.user in obj.authors.all()
+
+        return request.user in obj.authors.all()

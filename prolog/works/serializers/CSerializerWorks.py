@@ -19,7 +19,7 @@ class WorksSerializer(serializers.ModelSerializer):
         model = Works
         fields = [
             'id', 'name', 'authors', 'description', 'date_of_creation', 'date_of_editing',
-            'translation', 'author_original', 'original',
+            'translation', 'author_original', 'original', 'publish',
             'size', 'orientation', 'rating', 'type', 'status',
             'genres', 'questions', 'fandom',
             'size_details', 'orientation_details', 'rating_details', 'type_details', 'status_details',

@@ -12,6 +12,7 @@ class Works(models.Model):
     translation = models.BooleanField('Перевод?', default=False)
     author_original = models.CharField('Автор оригинала', max_length=250, blank=True, default='')
     original = models.CharField('Оригинал', max_length=250, blank=True, default='')
+    publish = models.BooleanField('Публикация', default=False)
 
     size = models.ForeignKey(Size, verbose_name='Размер', on_delete=models.SET_NULL, null=True, blank=False, related_name='works')
     orientation = models.ForeignKey(Orientation, verbose_name='Направление', on_delete=models.SET_NULL, null=True, blank=False, related_name='works')

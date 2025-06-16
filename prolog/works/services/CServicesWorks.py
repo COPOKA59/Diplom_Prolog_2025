@@ -1,17 +1,27 @@
 from works.repositories import WorksRepository, WorksQuestionsRepository
-from rest_framework.exceptions import ValidationError
+from rest_framework.exceptions import ValidationError, PermissionDenied
 
 class WorksServices:
     @staticmethod
-    def list_works():
-        return WorksRepository.get_all_works()
+    def list_works_publish():
+        return WorksRepository.get_all_works_publish()
 
     @staticmethod
-    def retrieve_work(work_id):
+    def retrieve_work(work_id, user):
         work = WorksRepository.get_work_by_id(work_id)
         if not work:
             raise ValidationError('Произведение не найдено')
+
+        if not work.publish and user not in work.authors.all():
+            raise PermissionDenied('Вы не можете просматривать неопубликованное произведение.')
+
         return work
+
+    @staticmethod
+    def get_works_by_user(request_user, target_user_id):
+        if request_user.id == int(target_user_id):
+            return WorksRepository.get_user_works(target_user_id)
+        return WorksRepository.get_user_works_published(target_user_id)
 
     @staticmethod
     def validate_work_data(data):

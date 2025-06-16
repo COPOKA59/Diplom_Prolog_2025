@@ -15,7 +15,7 @@ class ChapterDetailSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'order', 'name', 'first_comment', 'text', 'end_comment',
             'date_of_creation', 'date_of_editing', 'work',
-            'previous_id', 'next_id',
+            'previous_id', 'next_id', 'publish',
         ]
 
     def get_previous_id(self, obj):

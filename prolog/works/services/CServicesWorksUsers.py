@@ -23,6 +23,10 @@ class WorksUsersServices:
 
         return WorksUsersRepository.post_author(user_to_add, work_id, role)
 
+    @staticmethod
+    def first_author(user, work):
+        return WorksUsersRepository.post_first_author(user, work)
+
 #
     @staticmethod
     def list_authors_works(user):
@@ -31,13 +35,6 @@ class WorksUsersServices:
     @staticmethod
     def list_readed_works(user):
         return WorksUsersRepository.get_works_by_reader(user)
-
-    # @staticmethod
-    # def attach_author(user, work, role='soauthor'):
-    #     existing = WorksUsersRepository.get_author_entry(user, work)
-    #     if not existing:
-    #         return WorksUsersRepository.post_author(user, work, role)
-    #     return existing
 
     @staticmethod
     def attach_reader(user, work, marks=None, readed=False):
