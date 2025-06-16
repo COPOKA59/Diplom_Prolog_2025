@@ -5,7 +5,14 @@ from works.services import ChaptersService
 
 class ChaptersViewSet(ModelViewSet):
     def get_queryset(self):
-        return ChaptersService.list_chapters_for_work(self.kwargs['work_pk'])
+        return ChaptersService.list_chapters_for_work(
+            work_id=self.kwargs['work_pk'],
+            user=self.request.user
+        )
+
+    def perform_create(self, serializer):
+        work_id = self.kwargs['work_pk']
+        ChaptersService.create_chapter_for_work(work_id, serializer)
 
     def get_serializer_class(self):
         if self.action == 'retrieve':
@@ -13,7 +20,8 @@ class ChaptersViewSet(ModelViewSet):
         return ChaptersSerializer
 
     def retrieve(self, request, *args, **kwargs):
-        instance = self.get_object()
+        chapter_id = kwargs['pk']
+        instance = ChaptersService.retrieve_chapter(chapter_id, request.user)
 
         nav = ChaptersService.get_chapter_navigation_context(instance)
         serializer = self.get_serializer(instance, context=nav)

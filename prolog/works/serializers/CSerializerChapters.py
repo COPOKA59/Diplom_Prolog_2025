@@ -5,6 +5,7 @@ class ChaptersSerializer(serializers.ModelSerializer):
     class Meta:
         model = Chapters
         fields = '__all__'
+        read_only_fields = ['date_of_creation', 'date_of_editing', 'work']
 
 class ChapterDetailSerializer(serializers.ModelSerializer):
     previous_id = serializers.SerializerMethodField()
@@ -17,6 +18,7 @@ class ChapterDetailSerializer(serializers.ModelSerializer):
             'date_of_creation', 'date_of_editing', 'work',
             'previous_id', 'next_id', 'publish',
         ]
+        read_only_fields = ['date_of_creation', 'date_of_editing', 'work']
 
     def get_previous_id(self, obj):
         return self.context.get('previous_id')
