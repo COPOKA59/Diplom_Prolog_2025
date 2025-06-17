@@ -29,7 +29,7 @@
 import CreateStoryLayout from '@/layouts/CreateStoryLayout.vue';
 import { VContainer, VRow, VCol, VForm } from 'vuetify/lib/components/index.mjs';
 import { Panel, Button, Textarea } from 'primevue';
-import { getQuestions } from '@/services/api/works/meta';
+import { getQuestions } from '@/services/works/meta';
 import { ref, onMounted } from 'vue';
 
 

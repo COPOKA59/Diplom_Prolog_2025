@@ -31,13 +31,6 @@
                     </v-col>
                 </v-row>
 
-                <!-- <v-row v-if="errors.length > 0" >
-                    <v-col>
-                        <Message v-for="error in errors" severity="error" variant="simple">{{ error }}</Message>
-                    </v-col>
-                </v-row> -->
-
-
                 <v-row style="margin-top: 20px;">
                     <Button severity="primary" style="margin: auto;" type="submit">
                         Войти
@@ -60,8 +53,10 @@
 import { VContainer, VRow, VCol, VForm } from 'vuetify/lib/components/index.mjs';
 import { Card, InputText, Button, Password, Message } from 'primevue';
 import { ref, reactive } from 'vue';
+import { useRouter } from 'vue-router';
 import { useUserStore } from '@/stores/user';
 
+const router = useRouter();
 const userStore = useUserStore();
 
 const formData = reactive({
@@ -102,6 +97,7 @@ const handleSubmit = async () => {
         });
         // Optionally, redirect or show a success message
         console.log('Login successful');
+        router.push({ name: 'Profile' });
     } catch (error) {
         // Handle login error
         if (error.non_field_errors) {

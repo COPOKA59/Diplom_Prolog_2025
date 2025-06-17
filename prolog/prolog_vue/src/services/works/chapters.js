@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from "../api";
 
 export const postChapter = (id) => {
   const body = {
@@ -8,7 +8,7 @@ export const postChapter = (id) => {
     end_comment: "...",
     work: id
 };
-  return axios.post(`/works/${id}/chapters/`, body)
+  return api.post(`/works/${id}/chapters/`, body)
     .then(response => response.data)
     .catch(error => {
       console.error('Error fetching data:', error);
@@ -16,7 +16,7 @@ export const postChapter = (id) => {
 };
 
 export const getChapters = (workId) => {
-  return axios.get(`/works/${workId}/chapters/`)
+  return api.get(`/works/${workId}/chapters/`)
     .then(response => response.data)
     .catch(error => {
       console.error('Error fetching data:', error);
@@ -24,7 +24,7 @@ export const getChapters = (workId) => {
 };
 
 export const getChapter = (workId, chapterId) => {
-    return axios.get(`/works/${workId}/chapters/${chapterId}/`)
+    return api.get(`/works/${workId}/chapters/${chapterId}/`)
       .then(response => response.data)
       .catch(error => {
         console.error('Error fetching data:', error);
@@ -32,7 +32,7 @@ export const getChapter = (workId, chapterId) => {
 };
 
 export const putChapter = (workId, chapterId, body) => {
-  return axios.put(`/works/${workId}/chapters/${chapterId}/`, body)
+  return api.put(`/works/${workId}/chapters/${chapterId}/`, body)
     .then(response => console.log(response.data))
     .catch(error => {
       console.error('Error fetching data:', error);
@@ -40,7 +40,7 @@ export const putChapter = (workId, chapterId, body) => {
 };
 
 export const deleteChapter = (workId, chapterId) => {
-    return axios.delete(`/works/${workId}/chapters/${chapterId}`)
+    return api.delete(`/works/${workId}/chapters/${chapterId}`)
       .then(response => console.log(response.data))
       .catch(error => {
         console.error('Error fetching data:', error);

@@ -1,50 +1,39 @@
 <template>
-    <Card class="story-card-v2" :key="id">
+    <Card class="story-card-v2" :key="work.id">
         <template #content>
             <v-container>
             <v-row>
                 <v-col class="img-col" cols="12" lg="3" md="3" sm="12">
-                    <img :src="img_url ? img_url : '/src/assets/img/default_cover.svg'"/>
+                    <img :src="work.img_url ? work.img_url : '/src/assets/img/default_cover.svg'"/>
                 </v-col>
                 
                 <v-col cols="auto">
                     <p>
-                        <b>Автор:</b> <u> {{ author }}</u>
+                        <b>Автор:</b> <u> {{ work.author }}</u>
                     </p>
-                    <p class="comma-sep"> <b>Фандом:</b> <span v-for="fd in fandom"> {{ fd }} </span> </p>
-                    <p> <b>Обновлено:</b> {{ last_update }} </p>
-                    <p> <b>Рейтинг:</b> {{ rating }} </p>
-                    <p> <b>Направленность:</b> {{ direction }} </p>
-                    <p> <b>Размер:</b> {{ size }} </p>
+                    <p class="comma-sep"> 
+                        <b>Фандом:</b> <span v-for="fd in work.fandom_details.map(fandom => fandom.name)"> {{ fd }} </span> 
+                    </p>
+                    <p> <b>Обновлено:</b> {{ (new Date(work.date_of_editing)).toLocaleDateString('ru-RU') }} </p>
+                    <p> <b>Рейтинг:</b> {{ work.rating_details.name }} </p>
+                    <p> <b>Направленность:</b> {{ work.orientation_details.name }} </p>
+                    <p> <b>Размер:</b> {{ work.size_details.name }} </p>
                 </v-col>
             </v-row>
             
 
             <v-row>
                 <v-col>
-                <!-- <p class="comma-sep">
-                    <b>Жанры:</b> <span v-for="genre in genres"> {{ genre }}</span>
-                </p>
-                <p class="comma-sep">
-                    <b>Отношения:</b> <span v-for="ship in relationships"> {{ ship }}</span>
-                </p>
-                <p class="tag-list">
-                    <span class="tags">
-                        <b>Теги: </b>
-                        <Tag severity="secondary"
-                            v-for="tag in tags" :value="tag"/>
-                    </span>
-                </p> -->
                 <p class="tag-list">
                     <span class="tags">
                         <b>Жанры: </b>
                         <Tag severity="secondary"
-                            v-for="genre in genres" :value="genre"/>
+                            v-for="genre in work.genres_details" :value="genre.name"/>
                     </span>
                 </p>
                 <Divider class="inner-card-divider"/>
                 <p>
-                    {{ description }}
+                    {{ work.description }}
                 </p>
                 </v-col>
             </v-row>
@@ -52,11 +41,11 @@
 
             <v-row v-if="isAuthor">
                 <v-col class="edit-button">
-                    <Button severity="primary">
+                    <Button severity="primary" @click="$router.push({ name: 'Editing Header', params: { workId: work.id } })">
                         <i class="pi pi-pencil"></i>
                         <span>Изменить</span>
                     </Button>
-                    <Button severity="danger">
+                    <Button severity="danger" @click="async () => { await deleteWork(work.id); $router.push({ name: 'Stories' }); }">
                         <i class="pi pi-trash"></i>
                         <span>Удалить</span>
                     </Button>
@@ -65,7 +54,7 @@
 
             <v-row v-else class="reading-buttons">
 
-                <Button label="Сохранить" rounded severity="secondary">
+                <!-- <Button label="Сохранить" rounded severity="secondary">
                     <template #icon>
                     <img src="@/assets/icons/bookmark_24px_weight_2.5.svg"/>
                     </template>
@@ -87,12 +76,12 @@
                     <template #icon>
                     <img src="@/assets/icons/task_alt_24dp_D9D9D9.svg"/>
                     </template>
-                </Button>
+                </Button> -->
 
-                <!-- <Button label="Сохранить" rounded severity="secondary" icon="pi pi-bookmark" />
+                <Button label="Сохранить" rounded severity="secondary" icon="pi pi-bookmark" />
                 <Button label="Нравится" rounded severity="secondary" icon="pi pi-thumbs-up" />
                 <Button label="Комментарии" rounded severity="secondary" icon="pi pi-comment" />
-                <Button label="Прочитано" rounded severity="secondary" icon="pi pi-check-circle" /> -->
+                <Button label="Прочитано" rounded severity="secondary" icon="pi pi-check-circle" />
                 
             </v-row>
                 
@@ -105,22 +94,11 @@
 <script setup>
 import { Card, Divider, Tag, Chip, Button} from 'primevue';
 import { VContainer, VRow, VCol } from 'vuetify/lib/components/index.mjs';
+import { deleteWork } from '@/services/works/works';
 
 const props = defineProps({
-    id: Number,
-    title: String,
-    author: String,
-    fandom: Array,
-    last_update: String,
-    rating: String,
-    direction: String,
-    size: String,
-    genres: String,
-    relationships: String,
-    tags: String,
-    description: String,
-    img_url: String,
-    read: Boolean
+    work: Object,
+    isAuthor: { type: Boolean, default: false }
 })
 </script>
 
@@ -132,6 +110,7 @@ const props = defineProps({
 }
 .story-card-v2 {
     /* max-width: 960px; */
+    max-width: 920px;
     width: 100%;
     border-radius: 10px;
     font-size: 17px;
@@ -262,4 +241,9 @@ const props = defineProps({
         padding: 10px;
     }
   }
+@media (min-width: 1200px) {
+  .story-card-v2 {
+    width: 920px;
+  }
+}
 </style>

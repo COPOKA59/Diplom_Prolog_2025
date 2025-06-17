@@ -11,7 +11,6 @@
           align="start"
           :spacing="4"
         >
-        <!-- v-for="work in works.slice(0, 8)" -->
           <v-col
             v-for="work in popularWorks"
             :key="work.id"
@@ -58,7 +57,6 @@
 </template>
 
 <script setup>
-// import MainLayout from "@/layouts/MainLayout.vue";
 import MainLayout from "@/layouts/MainLayout.vue";
 import SearchPanel from "@/modules/core/components/SearchPanel.vue";
 import StoryCardSmall from "@/modules/works/components/StoryCardSmall.vue";
@@ -66,7 +64,7 @@ import { VContainer, VRow, VCol } from "vuetify/lib/components/index.mjs";
 import { Divider } from "primevue";
 
 import { onBeforeMount, onBeforeUnmount, onMounted, ref, } from "vue";
-import { getWorks, getPopularWorks, getNewWorks } from "@/services/api/works/works";
+import { getWorks, getPopularWorks, getNewWorks } from "@/services/works/works";
 
 onBeforeMount(() => {
   document.body.style.background = "#222";

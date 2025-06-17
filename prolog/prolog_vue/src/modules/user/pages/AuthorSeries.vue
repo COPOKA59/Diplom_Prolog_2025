@@ -10,7 +10,7 @@
             <v-container>
             <v-row v-for="item in itemsList">
                 <v-col>
-                    <ItemCardMain :id="item.id" :title="item.title" 
+                    <ItemCardMain :id="item?.id" :title="item?.title" 
                     :pageName="'Series'" :canDelete="false"/>
                 </v-col>
             </v-row>
@@ -25,9 +25,12 @@ import { VContainer, VRow, VCol } from 'vuetify/lib/components/index.mjs';
 import { Panel } from 'primevue';
 import ItemCardMain from '@/modules/works/components/ItemCardMain.vue';
 import { ref } from 'vue';
+import { onBeforeMount } from 'vue';
+import { useUserStore } from '@/stores/user';
 
 const props = defineProps({
-    userName: String
+    userName: String,
+    userId: Number
 });
 
 const itemsList = ref([]);
@@ -39,5 +42,8 @@ const loadData = () => {
         );
     }
 };
-loadData();
+onBeforeMount( () => {
+    loadData();
+});
+// loadData();
 </script>

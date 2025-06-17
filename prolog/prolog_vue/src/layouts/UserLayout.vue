@@ -1,7 +1,7 @@
 <template>
   <MainLayout :layout_container="true">
     <template v-slot:navbar>
-        <TheNavBar :routes="routes"/>
+        <TheNavBar :routes="routes" :requiresParams="false"/>
     </template>
     <slot></slot>
   </MainLayout>
@@ -12,8 +12,8 @@ import MainLayout from './MainLayout.vue';
 import TheNavBar from '@/modules/core/components/TheNavBar.vue';
 
 const routes = [
-    { path: 'profile', name: 'Профиль', extended: false },
-    { path: 'series', name: 'Сборники', extended: false },
-    { path: 'works', name: 'Произведения', extended: false }
+    { title: 'Профиль', name: 'Author Profile' },
+    { title: 'Сборники', name: 'Author Series' },
+    { title: 'Произведения', name: 'Author Works' }
 ];
 </script>

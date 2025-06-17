@@ -4,20 +4,8 @@
       <div class="top-story-info">
         <h1>{{ work.name }}</h1>
         <StoryCardReading
-              :key="work.id"
-              :title="work.name"
-              :author="work.author"
-              :fandom="work.fandom_details.map(fandom => fandom.name)"
-              :last_update="(new Date(work.date_of_editing)).toLocaleDateString('ru-RU')"
-              :rating="work.rating_details.name"
-              :direction="work.orientation_details.name"
-              :size="work.size_details.name"
-              :genres="work.genres_details.map(genre => genre.name)"
-              :relationships="work.relationships"
-              :tags="work.tags"
-              :description="work.description"
-              :img_url="work.img_url"
-              :read="work.read"/>
+              :work="work"
+              :isAuthor="userStore.isAuthor()"/>
       </div>
       
       <div class="work-contents">
@@ -41,7 +29,6 @@
 </template>
 
 <script setup>
-// import MainLayout from '@/layouts/MainLayout.vue';
 import MainLayout from '@/layouts/MainLayout.vue';
 import StoryCardReading from '../components/StoryCardReading.vue';
 import ChapterCard from '@/modules/works/components/ChapterCard.vue';
@@ -49,11 +36,13 @@ import { Paginator } from 'primevue';
 
 import { ref, onMounted, computed } from 'vue';
 import { useRoute } from 'vue-router';
-// import { getWork, getChapters } from '@/services/api/works/works';
-import { getWork } from '@/services/api/works/works';
-import { getChapters } from '@/services/api/works/chapters';
+import { getWork } from '@/services/works/works';
+import { getChapters } from '@/services/works/chapters';
+import { useUserStore } from '@/stores/user';
 
-const route = useRoute(); 
+const userStore = useUserStore();
+const route = useRoute();
+
 const work = ref(null);
 const chapters = ref(null);
 

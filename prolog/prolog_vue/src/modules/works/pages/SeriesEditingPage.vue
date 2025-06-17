@@ -38,7 +38,7 @@
                 <v-row v-if="itemData.chosenItems.length > 0" v-for="work in itemData.chosenItems">
                     <v-col>
                         <ItemCardMain :id="work.id" :title="work.name" 
-                        :pageName="'StoryPage'"
+                        :pageName="'StoryPage'" :paramName="'id'"
                         :canDelete="true" @delete-item="deleteItem(work.id)"/>
                     </v-col>
                 </v-row>
@@ -67,7 +67,7 @@ import { Panel, Button, AutoComplete } from 'primevue';
 import BasicInput from '@/modules/core/components/BasicInput.vue';
 import ItemCardMain from '../components/ItemCardMain.vue';
 import { reactive, onMounted } from 'vue';
-import { getWorks } from '@/services/api/works/works';
+import { getWorks } from '@/services/works/works';
 
 const itemData = reactive({
     chosenInputValue: null,

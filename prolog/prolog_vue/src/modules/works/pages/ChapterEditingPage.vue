@@ -11,6 +11,11 @@
 
             <BasicInput input-type="input" label="Название главы" v-model="formData.name"/>
 
+            <br/><br/>
+
+            <BasicInput input-type="input" label="Примечание автора перед главой" v-model="formData.first_comment"/>
+            <BasicInput input-type="input" label="Примечание автора после главы" v-model="formData.end_comment"/>
+
             
             <v-row >
                 <v-col>
@@ -22,7 +27,7 @@
             <v-row >
                 <v-col class="default-button">
                     <Button severity="primary"> Опубликовать </Button>
-                    <Button severity="primary" @click="putChapter(id, itemId, formData)"> Сохранить </Button>
+                    <Button severity="primary" @click="putChapter(workId, itemId, formData)"> Сохранить </Button>
                 </v-col>
             </v-row>
         </v-form>
@@ -34,28 +39,34 @@
 <script setup>
 import CreateStoryLayout from '@/layouts/CreateStoryLayout.vue';
 import BasicInput from '@/modules/core/components/BasicInput.vue';
-import { VContainer, VRow, VCol, VForm } from 'vuetify/lib/components/index.mjs';
+import { VContainer, VRow, VCol, VForm, VSpacer } from 'vuetify/lib/components/index.mjs';
 import { Panel, Button } from 'primevue';
 import Editor from 'primevue/editor';
 import ChapterTextEditor from '../components/ChapterTextEditor.vue';
 import { ref, reactive, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-import { getChapter, putChapter } from '@/services/api/works/chapters';
+import { getChapter, putChapter } from '@/services/works/chapters';
 
 const props = defineProps({
     id: Number,
+    workId: Number,
     itemId: Number
 });
 
 const formData = reactive({
     name: '',
     text: '',
+    first_comment: '',
+    end_comment: '',
     work: props.id
 });
 const chapter = ref();
 
 onMounted( async () => {
-    chapter.value = await getChapter(props.id, props.itemId);
+    /* chapter.value = await getChapter(props.id, props.itemId);
+    Object.keys(formData)
+        .forEach(k => formData[k] = chapter.value[k]); */
+    chapter.value = await getChapter(props.workId, props.itemId);
     Object.keys(formData)
         .forEach(k => formData[k] = chapter.value[k]);
     console.log(formData);

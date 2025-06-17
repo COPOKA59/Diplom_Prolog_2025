@@ -1,15 +1,10 @@
 <template>
     <div class="sidebar" id="sidebar-main">
             <ul>
-                <!-- <li v-for="route in routes">
-                    <RouterLink :to="route.path" active-class="active"
-                    :class="{ active: route.extended && $route.path.startsWith(route.path) }">
-                    {{ route.name }}
-                    </RouterLink>
-                </li> -->
                 <li v-for="route in routes">
-                    <RouterLink :to="{ name: route.name, params: { id: workId } }" active-class="active"
-                    :class="{ active: route.extended && $route.path.startsWith(route.path) }">
+                    <RouterLink :to=" requiresParams ?
+                        { name: route.name, params: { [paramName]: paramValue } } : { name: route.name } " 
+                    active-class="active">
                     {{ route.title }}
                     </RouterLink>
                 </li>
@@ -19,11 +14,16 @@
 
 <script setup>
 import { RouterLink, useRoute } from 'vue-router';
+import { ref } from 'vue';
 const props = defineProps({
-    routes: Object
+    routes: Object,
+    requiresParams: Boolean,
+    paramName: String
 });
 const route = useRoute();
-const workId = route.params.id;
+const paramValue = ref();
+
+if (props.requiresParams) paramValue.value = route.params[props.paramName];
 </script>
 
 <style scoped>
@@ -70,5 +70,33 @@ const workId = route.params.id;
         flex: 1 1 auto; /* Элементы будут расти и сжиматься */
     }
 
+}
+
+
+
+.sidebar ul {
+/* Удаляем дефолтные стили для спсика */
+list-style-type: none;
+padding: 0;
+margin: 0;
+}
+
+.sidebar li {
+/* Расстояние между элементами списка */
+/* margin: 15px 0; */
+}
+
+.sidebar a {
+display: flex;
+align-items: center;
+text-decoration: none;
+color: var(--main-light-color);
+padding: 15px;
+border-radius: 4px;
+transition: background-color 0.2s;
+}
+
+.sidebar a:hover {
+background-color: var(--p-surface-600);
 }
 </style>

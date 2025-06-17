@@ -1,27 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import MainPage from '@/modules/core/pages/MainPage.vue';
-import AdvancedSearchPage from '@/modules/core/pages/AdvancedSearchPage.vue';
-import LoginPage from '@/modules/user/pages/LoginPage.vue';
-import Profile from '@/modules/user/pages/Profile.vue';
-import Settings from '@/modules/user/pages/Settings.vue';
-import AuthorProfile from '@/modules/user/pages/AuthorProfile.vue';
-import AuthorSeries from '@/modules/user/pages/AuthorSeries.vue';
-import AuthorStories from '@/modules/user/pages/AuthorStories.vue';
+import { MainPage, AdvancedSearchPage } from '@/modules/core/pages';
+import { LoginPage, Profile, Settings, AuthorProfile, AuthorSeries, AuthorStories } from '@/modules/user/pages';
+import { StoryCardsPage, StoryPage, StoryChapterPage, StoryHeader, StoryStructure,
+  StoryCharacteristics, StoryWorld, StoryCharacters, StoryContents, ChapterEditingPage,
+  WorldbuildingPage, ItemsListPage, SeriesEditingPage, SeriesStoriesPage } from '@/modules/works/pages';
 
-import StoryCardsPage from '@/modules/works/pages/StoryCardsPage.vue';
-import StoryPage from '@/modules/works/pages/StoryPage.vue';
-import StoryChapterPage from '@/modules/works/pages/StoryChapterPage.vue';
-import StoryHeader from '@/modules/works/pages/StoryHeader.vue';
-import StoryStructure from '@/modules/works/pages/StoryStructure.vue';
-import StoryCharacteristics from '@/modules/works/pages/StoryCharacteristics.vue';
-import StoryWorld from '@/modules/works/pages/StoryWorld.vue';
-import StoryCharacters from '@/modules/works/pages/StoryCharacters.vue';
-import StoryContents from '@/modules/works/pages/StoryContents.vue';
-import ChapterEditingPage from '@/modules/works/pages/ChapterEditingPage.vue';
-import WorldbuildingPage from '@/modules/works/pages/WorldbuildingPage.vue';
-import ItemsListPage from '@/modules/works/pages/ItemsListPage.vue';
-import CollectionPage from '@/modules/works/pages/CollectionPage.vue';
-import SeriesStoriesPage from '@/modules/works/pages/SeriesStoriesPage.vue';
+import { useUserStore } from '@/stores/user';
 
 const routes = [
   {
@@ -46,27 +30,30 @@ const routes = [
     component: Settings,
   },
   {
-    path: '/user/profile',
+    path: '/user/:userId/profile',
     name: 'Author Profile',
     component: AuthorProfile,
+    props: true
   },
   {
-    path: '/user',
-    redirect: '/user/profile'
+    path: '/user/:userId',
+    redirect: '/user/profile',
+    props: true
   },
   {
-    path: '/user/series',
+    path: '/user/:userId/series',
     name: 'Author Series',
     component: AuthorSeries,
+    props: false
   },
   {
-    path: '/series/:id',
+    path: '/series/:itemId',
     name: 'Series',
     component: SeriesStoriesPage,
     props: true
   },
   {
-    path: '/user/works',
+    path: '/user/:userId/works',
     name: 'Author Works',
     component: AuthorStories,
   },
@@ -96,18 +83,20 @@ const routes = [
   },
 
   {
-    path: '/collections',
-    name: 'Collection List Page',
+    // path: '/collections',
+    path: '/series',
+    name: 'Series List Page',
     component: ItemsListPage,
     meta: { itemData: {
         title: 'Сборники',
-        pageName: 'CollectionPage'
+        pageName: 'Series Editing Page'
     } }
   },
   {
-    path: '/collections/:itemId',
-    name: 'CollectionPage',
-    component: CollectionPage,
+    // path: '/collections/:itemId',
+    path: '/series/editing/:itemId',
+    name: 'Series Editing Page',
+    component: SeriesEditingPage,
     props: true,
   },
 
@@ -146,54 +135,49 @@ const routes = [
   },
 
   /* --------| Editing Works |-------- */
-  /* {
+  {
     path: '/editing',
     name: 'Editing',
     component: StoryHeader,
-  }, */
+  },
   {
-    path: '/editing/:id/header',
+    path: '/editing/:workId/header',
     name: 'Editing Header',
     component: StoryHeader,
     props: true,
   },
-  /* {
-    path: '/editing/header',
-    name: 'Editing Header',
-    component: StoryHeader,
-  }, */
   {
-    path: '/editing/:id/structure',
+    path: '/editing/:workId/structure',
     name: 'Editing Structure',
     component: StoryStructure,
     props: true,
   },
   {
-    path: '/editing/:id/characteristics',
+    path: '/editing/:workId/characteristics',
     name: 'Editing Characteristics',
     component: StoryCharacteristics,
     props: true,
   },
   {
-    path: '/editing/:id/world',
+    path: '/editing/:workId/world',
     name: 'Editing World',
     component: StoryWorld,
     props: true,
   },
   {
-    path: '/editing/:id/characters',
+    path: '/editing/:workId/characters',
     name: 'Editing Characters',
     component: StoryCharacters,
     props: true,
   },
   {
-    path: '/editing/:id/contents',
+    path: '/editing/:workId/contents',
     name: 'Editing Contents',
     component: StoryContents,
     props: true,
   },
   {
-    path: '/editing/:id/contents/chapter/:itemId',
+    path: '/editing/:workId/contents/chapter/:itemId',
     name: 'Editing Chapter',
     component: ChapterEditingPage,
     props: true,
@@ -206,6 +190,19 @@ const router = createRouter({
   scrollBehavior() {
     return { top: 0 };
   },
+});
+
+router.beforeEach(async (to) => {
+  const userStore = useUserStore();
+  const privatePages = [ 'Profile', 'Settings', 'Series List Page', 'Series Editing Page',
+    'World List Page', 'WorldPage', 'Character List Page', 'CharacterPage', 
+    'Editing Header', 'Editing Structure', 'Editing Characteristics', 'Editing World', 
+    'Editing Characters', 'Editing Contents', 'Editing Chapter' ];
+  const authRequired = privatePages.includes(to.name);
+
+  if (authRequired && !userStore.isAuthenticated) {
+      return { name: 'LoginPage' };
+  }
 });
 
 export default router;

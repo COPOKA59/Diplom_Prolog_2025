@@ -10,10 +10,6 @@
 
         <v-col v-else-if="inputType === 'checkbox'" cols="12" lg="10" md="10" sm="12" class="default-form-btns"> 
             <CheckboxGroup v-model="modelValue">
-                <!-- <div v-for="option of options" :key="option.value">
-                    <Checkbox :value="option.value"/>
-                    <label> {{option.label}} </label>
-                </div> -->
                 <div v-for="option of options" :key="option.id">
                     <Checkbox :value="option.id"/>
                     <label> {{option.name}} </label>
@@ -23,10 +19,6 @@
 
         <v-col v-else-if="inputType === 'radiobutton'" cols="12" lg="10" md="10" sm="12" class="default-form-btns"> 
             <RadioButtonGroup v-model="modelValue">
-                <!-- <div v-for="option of options" :key="option.value">
-                    <RadioButton :value="option.value"/>
-                    <label> {{option.label}} </label>
-                </div> -->
                 <div v-for="option of options" :key="option.id">
                     <RadioButton :value="option.id"/>
                     <label> {{option.name}} </label>
@@ -42,10 +34,8 @@ import { InputText, CheckboxGroup, Checkbox, RadioButtonGroup, RadioButton } fro
 
 const props = defineProps({
     label: String,
-    // inputId: String,
     inputType: String,
     options: Array,
-    // modelValue: String
 });
 const modelValue = defineModel();
 </script>

@@ -1,47 +1,37 @@
 <template>
-    <Card class="story-card-v2" :key="id">
+    <Card class="story-card-v2" :key="work.id">
         <template #title>
             <v-container>
                 <v-row>
                     <v-col class="story-name" cols="12">
-                        <RouterLink :to="{ name: 'StoryPage', params: { id: id } }">
-                            {{ title }}
+                        <RouterLink :to="{ name: 'StoryPage', params: { id: work.id } }">
+                            {{ work.name }}
                         </RouterLink>
                     </v-col>
-                    <!-- <v-col class="edit-button" cols="3" lg="3" md="3" v-if="isAuthor" gutter="4">
-                        <Button severity="primary">
-                            <i class="pi pi-pencil"></i>
-                            <span>Изменить</span>
-                        </Button>
-                        <Button severity="danger">
-                            <i class="pi pi-trash"></i>
-                            <span>Удалить</span>
-                        </Button>
-                    </v-col> -->
                 </v-row>
             </v-container>
         </template>
         <template #content>
           <v-container>
             <v-row>
-                <!-- class="img-col" cols="12" lg="3" md="3" -->
                 <v-col class="img-col" cols="12" lg="3" md="3" sm="12">
                     <img :src="img_url ? img_url : '/src/assets/img/default_cover.svg'"/>
                 </v-col>
                 
                 <v-col class="col-1">
                     <p>
-                        <b>Автор:</b> <u> {{ author }}</u>
+                        <b>Автор:</b> <u> {{ work.author }}</u>
                     </p>
-                    <!-- <p> <b>Фандом:</b> оригинальная работа </p> -->
-                    <p class="comma-sep"> <b>Фандом:</b> <span v-for="fd in fandom"> {{ fd }} </span> </p>
-                    <p> <b>Обновлено:</b> {{ last_update }} </p>
-                    <p> <b>Рейтинг:</b> {{ rating }} </p>
-                    <p> <b>Направленность:</b> {{ direction }} </p>
-                    <p> <b>Размер:</b> {{ size }} </p>
+                    <p class="comma-sep"> 
+                        <b>Фандом:</b> <span v-for="fd in work.fandom_details.map(fandom => fandom.name)"> {{ fd }} </span> 
+                    </p>
+                    <p> <b>Обновлено:</b> {{ (new Date(work.date_of_editing)).toLocaleDateString('ru-RU') }} </p>
+                    <p> <b>Рейтинг:</b> {{ work.rating_details.name }} </p>
+                    <p> <b>Направленность:</b> {{ work.orientation_details.name }} </p>
+                    <p> <b>Размер:</b> {{ work.size_details.name }} </p>
                 </v-col>
 
-                <v-col class="col-2">
+                <!-- <v-col class="col-2">
                     <div class="row-1" v-if="read && !isAuthor">
                         <Chip class="read-work-label" label="Прочитано">
                         <template #icon>
@@ -50,60 +40,34 @@
                         </Chip>
                     </div>
 
-                    <!-- <div class="row-2">
-                        <div>
-                            0 <Divider class="counter-divider" layout="vertical"/>
-                            <img src="@/assets/icons/bookmark_24px_weight_2.5.svg"/>
-                        </div>
-                        <div>
-                            0 <Divider class="counter-divider" layout="vertical"/>
-                            <img src="@/assets/icons/thumbs-up_24px_weight_2.5.svg"/>
-                        </div>
-                        <div>
-                            0 <Divider class="counter-divider" layout="vertical"/>
-                            <img src="@/assets/icons/message-circle_24px_weight_2.5.svg"/>
-                        </div>
-                    </div> -->
-                </v-col>
+                </v-col> -->
             </v-row>
             
 
             <v-row>
                 <v-col>
-                <!-- <p class="comma-sep">
-                    <b>Жанры:</b> <span v-for="genre in genres"> {{ genre }}</span>
-                </p>
-                <p class="comma-sep">
-                    <b>Отношения:</b> <span v-for="ship in relationships"> {{ ship }}</span>
-                </p>
-                <p class="tag-list">
-                    <span class="tags">
-                        <b>Теги: </b>
-                        <Tag severity="secondary"
-                            v-for="tag in tags" :value="tag"/>
-                    </span>
-                </p> -->
+                
                 <p class="tag-list">
                     <span class="tags">
                         <b>Жанры: </b>
                         <Tag severity="secondary"
-                            v-for="genre in genres" :value="genre"/>
+                            v-for="genre in work.genres_details" :value="genre.name"/>
                     </span>
                 </p>
                 <Divider class="inner-card-divider"/>
                 <p>
-                    {{ description }}
+                    {{ work.description }}
                 </p>
                 </v-col>
             </v-row>
 
             <v-row v-if="isAuthor">
                 <v-col class="edit-button">
-                    <Button severity="primary" @click="$router.push({ name: 'Editing Header', params: { id: id } })">
+                    <Button severity="primary" @click="$router.push({ name: 'Editing Header', params: { workId: work.id } })">  
                         <i class="pi pi-pencil"></i>
                         <span>Изменить</span>
                     </Button>
-                    <Button severity="danger" @click="deleteWork(id); reloadRouter();">
+                    <Button severity="danger" @click="async () => { await deleteWork(work.id); reloadRouter(); }">
                         <i class="pi pi-trash"></i>
                         <span>Удалить</span>
                     </Button>
@@ -120,32 +84,20 @@
 import { Card, Divider, Tag, Chip, Button} from 'primevue';
 import { VContainer, VRow, VCol } from 'vuetify/lib/components/index.mjs';
 import { ref } from 'vue';
-import { deleteWork } from '@/services/api/works/works';
-import { useRouter } from 'vue-router'
-const router = useRouter()
+import { deleteWork } from '@/services/works/works';
+import { useRouter } from 'vue-router';
+const router = useRouter();
 
 function reloadRouter() {
   // 0 means “reload the current URL”
-  router.go(0)
+  router.go(0);
 }
 
 const props = defineProps({
-    id: Number,
-    title: String,
-    author: String,
-    fandom: Array,
-    last_update: String,
-    rating: String,
-    direction: String,
-    size: String,
-    genres: String,
-    relationships: String,
-    tags: String,
-    description: String,
-    img_url: String,
-    read: Boolean
+    work: Object,
+    isAuthor: { type: Boolean, default: false }
 })
-const isAuthor = ref(true);
+// const isAuthor = true;
 </script>
 
 <style scoped>
@@ -288,4 +240,9 @@ const isAuthor = ref(true);
         padding: 10px;
     }
   }
+@media (min-width: 1200px) {
+  .story-card-v2 {
+    width: 920px;
+  }
+}
 </style>

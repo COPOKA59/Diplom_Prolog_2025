@@ -4,20 +4,8 @@
         <div class="top-story-info">
           <h1>{{ work.name }}</h1>
           <StoryCardReading
-                :key="work.id"
-                :title="work.name"
-                :author="work.author"
-                :fandom="work.fandom_details.map(fandom => fandom.name)"
-                :last_update="(new Date(work.date_of_editing)).toLocaleDateString('ru-RU')"
-                :rating="work.rating_details.name"
-                :direction="work.orientation_details.name"
-                :size="work.size_details.name"
-                :genres="work.genres_details.map(genre => genre.name)"
-                :relationships="work.relationships"
-                :tags="work.tags"
-                :description="work.description"
-                :img_url="work.img_url"
-                :read="work.read"/>
+                :work="work"
+                :isAuthor="userStore.isAuthor()"/>
         </div>
         <ButtonGroup>
             <Button label="<" 
@@ -86,9 +74,11 @@ import { Card, Divider, Button, ButtonGroup } from 'primevue';
 
 import { ref, onMounted, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-// import { getChapter, getWork } from '@/services/api/works/works';
-import { getWork } from '@/services/api/works/works';
-import { getChapter } from '@/services/api/works/chapters';
+import { getWork } from '@/services/works/works';
+import { getChapter } from '@/services/works/chapters';
+import { useUserStore } from '@/stores/user';
+
+const userStore = useUserStore();
 
 const route = useRoute();
 const router = useRouter();
@@ -100,22 +90,18 @@ const isPrev = ref(false);
 const isNext = ref(true);
 
 const loadChapter = async () => {
-  /* const chapterId = parseInt(route.params.chapter_id);
-  chapter.value = await getChapter(chapterId);
-  isNext.value = !! await getChapter(chapter.value.number + 1);
-  isPrev.value = !! await getChapter(chapter.value.number - 1); */
   const chapterId = parseInt(route.params.chapter_id);
   const workId = parseInt(route.params.id);
   chapter.value = await getChapter(workId, chapterId);
-  isNext.value = !! await getChapter(workId, chapter.value.id + 1); //chapter.value.id
-  isPrev.value = !! await getChapter(workId, chapter.value.id - 1); //chapter.value.id
+  isNext.value = chapter.value.next_id;
+  isPrev.value = chapter.value.previous_id;
 }
 
 const nextChapter = () => {
-  router.push({ name: 'StoryChapterPage', params: { chapter_id: chapter.value.id + 1 } }); //chapter.value.id
+  router.push({ name: 'StoryChapterPage', params: { chapter_id: chapter.value.next_id } });
 }
 const previousChapter = () => {
-  router.push({ name: 'StoryChapterPage', params: { chapter_id: chapter.value.id - 1 } }); //chapter.value.id
+  router.push({ name: 'StoryChapterPage', params: { chapter_id: chapter.value.previous_id } });
 }
 
 

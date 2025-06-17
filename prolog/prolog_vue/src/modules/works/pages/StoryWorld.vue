@@ -34,7 +34,7 @@ import CreateStoryLayout from '@/layouts/CreateStoryLayout.vue';
 import { VContainer, VRow, VCol, VForm } from 'vuetify/lib/components/index.mjs';
 import { Panel, Button, Select } from 'primevue';
 import { ref } from 'vue';
-import options_list from '@/services/search_options';
+import options_list from '@/services/mocks/search_options';
 
 const chosenInputValue = ref(null);
 const items = options_list;
