@@ -3,7 +3,7 @@ import { MainPage, AdvancedSearchPage } from '@/modules/core/pages';
 import { LoginPage, Profile, Settings, AuthorProfile, AuthorSeries, AuthorStories } from '@/modules/user/pages';
 import { StoryCardsPage, StoryPage, StoryChapterPage, StoryHeader, StoryStructure,
   StoryCharacteristics, StoryWorld, StoryCharacters, StoryContents, ChapterEditingPage,
-  WorldbuildingPage, ItemsListPage, SeriesPage, SeriesStoriesPage } from '@/modules/works/pages';
+  WorldbuildingPage, ItemsListPage, SeriesEditingPage, SeriesStoriesPage } from '@/modules/works/pages';
 
 import { useUserStore } from '@/stores/user';
 
@@ -96,7 +96,7 @@ const routes = [
     // path: '/collections/:itemId',
     path: '/series/editing/:itemId',
     name: 'Series Editing Page',
-    component: SeriesPage,
+    component: SeriesEditingPage,
     props: true,
   },
 

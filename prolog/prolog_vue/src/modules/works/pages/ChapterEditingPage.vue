@@ -27,7 +27,6 @@
             <v-row >
                 <v-col class="default-button">
                     <Button severity="primary"> Опубликовать </Button>
-                    <!-- <Button severity="primary" @click="putChapter(id, itemId, formData)"> Сохранить </Button> -->
                     <Button severity="primary" @click="putChapter(workId, itemId, formData)"> Сохранить </Button>
                 </v-col>
             </v-row>

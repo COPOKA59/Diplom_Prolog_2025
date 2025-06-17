@@ -10,5 +10,5 @@ export { default as StoryContents } from './StoryContents.vue';
 export { default as ChapterEditingPage } from './ChapterEditingPage.vue';
 export { default as WorldbuildingPage } from './WorldbuildingPage.vue';
 export { default as ItemsListPage } from './ItemsListPage.vue';
-export { default as SeriesPage } from './SeriesPage.vue';
+export { default as SeriesEditingPage } from './SeriesEditingPage.vue';
 export { default as SeriesStoriesPage } from './SeriesStoriesPage.vue';

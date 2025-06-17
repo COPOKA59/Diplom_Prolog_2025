@@ -42,7 +42,7 @@
                             Mauris dictum libero sit amet condimentum luctus. Nulla accumsan leo efficitur, interdum libero in, fringilla purus.
                         </p> -->
                         <p>
-                            {{ user?.desription }}
+                            {{ user?.description }}
                         </p>
                     </v-col>
                     
