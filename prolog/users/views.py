@@ -30,8 +30,8 @@ class MeViewSet(ModelViewSet):
 
 class UsersViewSet(ModelViewSet):
     serializer_class = UserSerializer
-    http_method_names = ['get']
     permission_classes = [AllowAny]
+    http_method_names = ['get']
 
     def get_queryset(self):
         return list_users()
