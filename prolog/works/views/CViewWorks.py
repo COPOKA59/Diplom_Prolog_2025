@@ -1,6 +1,6 @@
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
-from works.permissions import IsAuthorOrReadOnlyPublished
+from works.permissions import IsAuthenticated, IsAuthorOrReadOnlyPublished
 from works.serializers import WorksSerializer, WorksQuestionsSerializer
 from works.services import WorksServices, WorksUsersServices, WorksQuestionsServices
 
@@ -8,6 +8,11 @@ class WorksViewSet(ModelViewSet):
     serializer_class = WorksSerializer
     permission_classes = [IsAuthorOrReadOnlyPublished]
     http_method_names = ['get', 'post', 'put', 'patch', 'delete']
+
+    def get_permissions(self):
+        if self.action == 'create':
+            return [IsAuthenticated()]
+        return [permission() for permission in self.permission_classes]
 
     def get_queryset(self):
         return WorksServices.list_works_publish()
