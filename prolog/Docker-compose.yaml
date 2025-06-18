@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ../prolog_vue
+      dockerfile: Dockerfile-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - prolog-network
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    depends_on:
+      - db
+    restart: on-failure
+    networks:
+      - prolog-network
+
+  db:
+    image: postgres:13
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+    networks:
+      - prolog-network
+
+volumes:
+  postgres_data:
+
+networks:
+  prolog-network:
+    driver: bridge
