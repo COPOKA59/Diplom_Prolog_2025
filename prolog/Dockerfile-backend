@@ -25,14 +25,13 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Копирование проекта
 COPY . .
 
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 # Создание директории для статических файлов
 RUN mkdir -p /app/static
 
 # Открытие порта
 EXPOSE 8000
 
-# Запуск Django
-CMD ["sh", "-c", "sleep 5 && python manage.py runserver 0.0.0.0:8000"]
-#CMD ["bash", "/wait-for-it.sh", "db:5432", "--", "python", "manage.py", "runserver", "0.0.0.0:8000"]
-# CMD ["/wait-for-it.sh", "db:5432", "--", "python", "manage.py", "runserver", "0.0.0.0:8000"]
-# CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["/entrypoint.sh"]

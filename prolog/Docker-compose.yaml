@@ -23,7 +23,8 @@ services:
     env_file:
       - .env
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     restart: on-failure
     networks:
       - prolog-network
@@ -38,6 +39,11 @@ services:
       - "5432:5432"
     networks:
       - prolog-network
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "postgres" ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
 
 volumes:
   postgres_data:
