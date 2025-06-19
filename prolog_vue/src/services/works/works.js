@@ -24,7 +24,7 @@ export const postWork = () => {
     translation: false,
     author_original: "",
     original: "",
-    publish: false,
+    publish: true,
     size: 1,
     orientation: 1,
     rating: 1,
